@@ -818,6 +818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 1
+  icon: {fileID: 973430269}
+  text: {fileID: 1347149618}
 --- !u!114 &973430272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +967,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 2
+  icon: {fileID: 1035375799}
+  text: {fileID: 1370800725}
 --- !u!114 &1035375802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,7 +1012,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1035375799}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1035375801}
+        m_TargetAssemblyTypeName: Zone, Assembly-CSharp
+        m_MethodName: CreateMapObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1235378878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,6 +1116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 0
+  icon: {fileID: 1235378880}
+  text: {fileID: 1723404585}
 --- !u!114 &1235378883
 MonoBehaviour:
   m_ObjectHideFlags: 0
