@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iron Stockpile
   m_EditorClassIdentifier: 
   Name: Iron Stockpile
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
-  ZoneRequired: 2
-  ActionRequired: 8
+  RequiredMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
+  RequiredZone: 2
+  RequiredAction: 0

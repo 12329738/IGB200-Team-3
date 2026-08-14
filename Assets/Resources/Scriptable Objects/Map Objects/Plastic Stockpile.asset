@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Stockpile
   m_EditorClassIdentifier: 
   Name: Plastic Stockpile
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
-  ZoneRequired: 2
-  ActionRequired: 8
+  RequiredMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
+  RequiredZone: 2
+  RequiredAction: 0

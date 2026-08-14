@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Bridge
+  m_Name: Forged Iron
   m_EditorClassIdentifier: 
-  Name: Bridge
-  RequiredMapObject: {fileID: 0}
+  Name: Forged Iron
+  RequiredMapObject: {fileID: 11400000, guid: b7ccfde2dcfe75e4d89235b07a486bff, type: 2}
   RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
-  RequiredZone: 1
+  RequiredZone: 3
   RequiredAction: 0

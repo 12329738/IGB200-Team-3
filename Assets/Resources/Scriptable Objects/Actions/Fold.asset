@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Bridge
+  m_Script: {fileID: 11500000, guid: 5b8d1a960887bdd41a80445be5cdf954, type: 3}
+  m_Name: Fold
   m_EditorClassIdentifier: 
-  Name: Bridge
-  RequiredMapObject: {fileID: 0}
-  RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
-  RequiredZone: 1
-  RequiredAction: 0
+  Name: Fold
+  Icon: {fileID: 0}

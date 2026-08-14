@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scrap Iron
   m_EditorClassIdentifier: 
   Name: Scrap Iron
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
+  TargetMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
   ZoneRequired: 0
   ActionRequired: 8

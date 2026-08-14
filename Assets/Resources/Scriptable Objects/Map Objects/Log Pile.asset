@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Log Pile
   m_EditorClassIdentifier: 
   Name: Log Pile
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  TargetMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
   ZoneRequired: 0
   ActionRequired: 8

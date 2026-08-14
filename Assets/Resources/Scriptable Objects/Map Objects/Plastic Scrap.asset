@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Scrap
   m_EditorClassIdentifier: 
   Name: Plastic Scrap
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
+  TargetMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
   ZoneRequired: 0
   ActionRequired: 8

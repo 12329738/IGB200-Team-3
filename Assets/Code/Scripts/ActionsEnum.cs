@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum ActionsEnum 
 {
+    None,
     Cut,
     Fold,
     Evaporate,
@@ -10,6 +11,4 @@ public enum ActionsEnum
     Smith,
     Melt,
     Mould,
-    None
-
 }

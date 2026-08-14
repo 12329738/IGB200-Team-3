@@ -8,7 +8,7 @@ public class MapObjectDatabase : MonoBehaviour
     public static MapObjectDatabase instance;
     public Dictionary<string, MapObject> MapObjectDictionary;
     public Dictionary<(string, string), MapObject> CombinationDictionary;
-    public Dictionary<(ActionsEnum, string), MapObject> ActionsDictionary;
+    public Dictionary<(string, string), MapObject> ActionsDictionary;
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
 
     void Awake()
@@ -56,7 +56,7 @@ public class MapObjectDatabase : MonoBehaviour
         CombinationDictionary = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.TargetMapObject != null && obj.CombinedMaterial != null) CombinationDictionary.Add((obj.CombinedMaterial.Name, obj.TargetMapObject.Name), obj);
+            if (obj.RequiredMapObject != null && obj.RequiredMaterial != null) CombinationDictionary.Add((obj.RequiredMaterial.Name, obj.RequiredMapObject.Name), obj);
         }
 
     }
@@ -66,7 +66,7 @@ public class MapObjectDatabase : MonoBehaviour
         ActionsDictionary = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.TargetMapObject != null) ActionsDictionary.Add((obj.ActionRequired, obj.TargetMapObject.Name), obj);
+            if (obj.RequiredMapObject != null && obj.RequiredAction != null) ActionsDictionary.Add((obj.RequiredAction.Name, obj.RequiredMapObject.Name), obj);
         }
     }
 
@@ -75,9 +75,9 @@ public class MapObjectDatabase : MonoBehaviour
         ZoneDictionary = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.CombinedMaterial != null)
+            if (obj.RequiredZone != ZoneEnum.Any)
             {
-                ZoneDictionary.Add((obj.ZoneRequired, obj.CombinedMaterial.Name), obj);
+                ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
             }
         }
     }
