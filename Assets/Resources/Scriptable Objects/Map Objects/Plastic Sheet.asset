@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Sheet
   m_EditorClassIdentifier: 
   Name: Plastic Sheet
-  TargetObject: {fileID: 0}
-  CombinedMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
-  ZoneRequired: 1
-  ActionRequired: 8
+  RequiredMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
+  RequiredZone: 1
+  RequiredAction: 0

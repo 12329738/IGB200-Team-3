@@ -6,10 +6,10 @@ using UnityEngine;
 public class MapObjectSO : ScriptableObject
 {
     public string Name;
-    public MapObjectSO TargetMapObject;
-    public MaterialSO CombinedMaterial;
-    public ZoneEnum ZoneRequired;
-    public ActionsEnum ActionRequired;
+    public MapObjectSO RequiredMapObject;
+    public MaterialSO RequiredMaterial;
+    public ZoneEnum RequiredZone;
+    public ActionSO RequiredAction;
     
     
 }
