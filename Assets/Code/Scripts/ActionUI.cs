@@ -7,6 +7,7 @@ public class ActionUI : MonoBehaviour
     public GameObject ActionUi;
     public GameObject ActionButtonPrefab;
 
+
     void Awake()
     {
         ActionSO[] actionSO = Resources.LoadAll<ActionSO>("Scriptable Objects/Actions");

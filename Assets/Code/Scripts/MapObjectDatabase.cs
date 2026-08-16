@@ -8,7 +8,7 @@ public class MapObjectDatabase : MonoBehaviour
     public static MapObjectDatabase instance;
     public Dictionary<string, MapObject> MapObjectDictionary;
     public Dictionary<(string, string), MapObject> CombinationDictionary;
-    public Dictionary<(string, string), MapObject> ActionsDictionary;
+    public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
 
     void Awake()
@@ -64,9 +64,16 @@ public class MapObjectDatabase : MonoBehaviour
     public void CreateActionsDictionary(MapObject[] mapObjects)
     {
         ActionsDictionary = new();
+        List<MapObject> objects = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.RequiredMapObject != null && obj.RequiredAction != null) ActionsDictionary.Add((obj.RequiredAction.Name, obj.RequiredMapObject.Name), obj);
+            if (obj.RequiredMapObject != null && obj.RequiredAction != null)
+            {
+                objects.Add(obj);
+                ActionsDictionary.TryAdd((obj.RequiredAction.Name, obj.RequiredMapObject.Name), objects);
+
+            }
+                
         }
     }
 
@@ -81,5 +88,7 @@ public class MapObjectDatabase : MonoBehaviour
             }
         }
     }
+
+ 
 
 }

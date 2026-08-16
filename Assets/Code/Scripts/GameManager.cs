@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,8 @@ public class GameManager : MonoBehaviour
     public Material CurrentMaterial;
     [HideInInspector]
     public Action CurrentAction;
-    public 
+    public Dictionary<string, int> materialCounts;
+    public StorageUI storageUi;
     void Awake()
     {
 
@@ -19,7 +21,6 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
-
 
     }
 
@@ -37,5 +38,19 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public bool HasRequiredMatierals(MapObject mapObject)
+    {
+        if (materialCounts[mapObject.RequiredStoredMaterial.Name] >= mapObject.RequiredStoredMaterialAmount)
+            return true;
+        else
+            return false;
+    }
+
+    public void ChangeStoredMaterialAmount(Material material, int amount)
+    {
+        materialCounts[material.Name] += amount;
+        storageUi.ChangeStorageAmount(material.Name);
     }
 }
