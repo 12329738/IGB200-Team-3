@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
-    public List<Zone> MapZones;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public HistoryWindow historyWindow;
 
-    // Update is called once per frame
-    void Update()
+    public void DisplayHistoryWindow(MapObject mapObject)
     {
-        
+        HistoryWindow window = Instantiate(historyWindow, this.transform);
+        window.CreateHistory(mapObject);
     }
 }

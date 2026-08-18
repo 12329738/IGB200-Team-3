@@ -1,14 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Material 
+public class Material : HistoryItem
 {
-    public string Name;
-    public Image Icon;
-
     public Material (MaterialSO SO)
     {
         Name = SO.Name;
-        Icon = SO.Icon;
+        Image = SO.Image;
     }
 }

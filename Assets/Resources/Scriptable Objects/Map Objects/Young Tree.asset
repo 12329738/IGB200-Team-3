@@ -20,4 +20,4 @@ MonoBehaviour:
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  AddsToStorage: 0
+  HarvestedMaterial: {fileID: 0}

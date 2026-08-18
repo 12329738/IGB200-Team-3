@@ -8,12 +8,11 @@ public class Zone : MonoBehaviour
 {
     public ZoneEnum zone;
     public MapObject currentObject;
-    public GameObject zoneWorld;
     public GameObject currentMapImage;
-    public Image icon;
     public TextMeshProUGUI text;
+    public MapUI MapUi;
 
-    public void OnClick()
+    private void OnMouseDown()
     {
         if (currentObject == null)
         {
@@ -31,10 +30,14 @@ public class Zone : MonoBehaviour
             {
                 PerformActionOnMapObject();
             }
+
+            else
+            {
+                MapUi.DisplayHistoryWindow(currentObject);
+            }
         }
     }
 
-    
 
     private void CreateMapObject()
     {
@@ -63,6 +66,7 @@ public class Zone : MonoBehaviour
                     {
                         ChangeMapObject(mapObject);
                         GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                        GameManager.instance.SetCurrentAction(null);
                         return;
                     }
 
@@ -71,6 +75,7 @@ public class Zone : MonoBehaviour
                 else if (mapObject.HarvestedMaterial != null)
                 {
                     HarvestMapObject(mapObject);
+                    GameManager.instance.SetCurrentAction(null);
                 }
             }        
         }      
@@ -88,9 +93,10 @@ public class Zone : MonoBehaviour
         if (mapObject != null)
         {
             Destroy(currentMapImage);
-            if (mapObject.Image != null) currentMapImage = Instantiate(mapObject.Image, zoneWorld.transform);
+            if (mapObject.Image != null) currentMapImage = Instantiate(mapObject.Image, transform);
             currentObject = mapObject;
             text.text = mapObject.Name;
+            GameManager.instance.SetCurrentMaterial(null);
         }
     }
 

@@ -26,14 +26,15 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentMaterial(Material material)
     {
-        CurrentMaterial = material;
         CurrentAction = null;
+        CurrentMaterial = material;
+        
     }
 
     public void SetCurrentAction(Action action)
     {
-        CurrentAction = action;
         CurrentMaterial = null;
+        CurrentAction = action; 
     }
     public void ResetScene()
     {
