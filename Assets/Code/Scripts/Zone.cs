@@ -8,6 +8,8 @@ public class Zone : MonoBehaviour
 {
     public ZoneEnum zone;
     public MapObject currentObject;
+    public GameObject zoneWorld;
+    public GameObject currentMapImage;
     public Image icon;
     public TextMeshProUGUI text;
 
@@ -70,17 +72,14 @@ public class Zone : MonoBehaviour
                 {
                     HarvestMapObject(mapObject);
                 }
-
-            }
-
-            
-        }
-        
+            }        
+        }      
     }
 
     private void HarvestMapObject(MapObject mapObject)
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        Destroy(currentMapImage);
         currentObject = null;
         text.text = "";
     }
@@ -88,6 +87,8 @@ public class Zone : MonoBehaviour
     {
         if (mapObject != null)
         {
+            Destroy(currentMapImage);
+            if (mapObject.Image != null) currentMapImage = Instantiate(mapObject.Image, zoneWorld.transform);
             currentObject = mapObject;
             text.text = mapObject.Name;
         }
@@ -95,6 +96,7 @@ public class Zone : MonoBehaviour
 
     public void ResetZone()
     {
+        Destroy(currentMapImage);
         currentObject = null;
         text.text = "";
     }
