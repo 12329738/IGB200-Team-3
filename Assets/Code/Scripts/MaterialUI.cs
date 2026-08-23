@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MaterialUI : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class MaterialUI : MonoBehaviour
             text.text = material.Name;
             MaterialButton materialButton = button.GetComponentInChildren<MaterialButton>();
             materialButton.material = material;
+            Image image = button.GetComponentInChildren<Image>();
+            image.sprite = material.Image.GetComponent<Image>().sprite;
+            Debug.Log(image);
         }                
     }
 }

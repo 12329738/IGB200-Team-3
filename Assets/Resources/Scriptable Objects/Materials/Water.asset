@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   Name: Water
+  Image: {fileID: 8343812575612950306, guid: 3f5493cac6e20ff49960b129e27cede7, type: 3}

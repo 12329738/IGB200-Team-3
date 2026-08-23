@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: 
   Name: Iron
+  Image: {fileID: 1451018616169466465, guid: fbebfcdd3180b344fb766ce675ae921c, type: 3}

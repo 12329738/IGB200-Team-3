@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Plastic
   m_EditorClassIdentifier: 
   Name: Plastic
+  Image: {fileID: 1541487156273691934, guid: 28e43ba20b104904daee840bc89f3219, type: 3}
