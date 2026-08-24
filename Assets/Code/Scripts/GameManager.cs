@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
     public Material CurrentMaterial;
     [HideInInspector]
     public Action CurrentAction;
+
     public Dictionary<string, int> materialCounts;
     public StorageUI storageUi;
     public InputTracker inputTracker;
-    public MapObject lastChangedObject;
-    public Zone lastChangedObjectZone;
+    public Stack<(MapObject, Zone)> objectHistory = new();
     void Awake()
     {
 
