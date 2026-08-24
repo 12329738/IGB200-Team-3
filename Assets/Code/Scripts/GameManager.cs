@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Action CurrentAction;
     public Dictionary<string, int> materialCounts;
     public StorageUI storageUi;
+    public InputTracker inputTracker;
+    public MapObject lastChangedObject;
+    public Zone lastChangedObjectZone;
     void Awake()
     {
 
@@ -23,7 +26,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
     }
-
+    void Update()
+    {
+        if (inputTracker.TimeSinceLastInput > inputTracker.ResetTimer)
+        {
+            ResetScene();
+        }
+    }
     public void SetCurrentMaterial(Material material)
     {
         CurrentAction = null;

@@ -79,13 +79,7 @@ public class Zone : MonoBehaviour
                         GameManager.instance.SetCurrentAction(null);
                         return;
                     }
-                    
-
-                    
-
-                    
-                }
-                 
+                }             
             }        
         }      
     }
@@ -93,6 +87,8 @@ public class Zone : MonoBehaviour
     private void HarvestMapObject(MapObject mapObject)
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        GameManager.instance.lastChangedObject = currentObject;
+        GameManager.instance.lastChangedObjectZone = this;
         Destroy(currentMapImage);
         currentObject = null;
         text.text = "";
@@ -103,16 +99,32 @@ public class Zone : MonoBehaviour
         {
             Destroy(currentMapImage);
             if (mapObject.Image != null) currentMapImage = Instantiate(mapObject.Image, transform);
+            GameManager.instance.lastChangedObject = currentObject;
+            GameManager.instance.lastChangedObjectZone = this;
             currentObject = mapObject;
             text.text = mapObject.Name;
             GameManager.instance.SetCurrentMaterial(null);
         }
     }
 
-    public void ResetZone()
+    public void Undo(MapObject mapObject)
     {
-        Destroy(currentMapImage);
-        currentObject = null;
-        text.text = "";
+        if (mapObject == null)
+        {
+            Destroy(currentMapImage);
+            currentObject = null;
+            text.text = "";
+        }
+        else
+        {
+            Destroy(currentMapImage);
+            currentMapImage = Instantiate(mapObject.Image, transform);
+            currentObject = mapObject;
+            text.text = mapObject.Name;
+
+        }
+        GameManager.instance.lastChangedObject = null;
+        GameManager.instance.lastChangedObjectZone = null;
+        
     }
 }
