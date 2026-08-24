@@ -58,25 +58,34 @@ public class Zone : MonoBehaviour
     {
         if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
         {
+            Debug.Log(mapObjects);
             foreach (MapObject mapObject in mapObjects)
             {
-                if (mapObject.RequiredStoredMaterial != null)
+                if (mapObject.RequiredMapObject.Name == currentObject.Name)
                 {
-                    if (GameManager.instance.HasRequiredMatierals(mapObject))
+                    if (mapObject.HarvestedMaterial != null)
                     {
-                        ChangeMapObject(mapObject);
-                        GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                        HarvestMapObject(mapObject);
                         GameManager.instance.SetCurrentAction(null);
                         return;
                     }
+                    else
+                    {
+                        if (mapObject.RequiredStoredMaterial != null && GameManager.instance.HasRequiredMatierals(mapObject))
+                        {
+                            GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                        }
+                        ChangeMapObject(mapObject);
+                        GameManager.instance.SetCurrentAction(null);
+                        return;
+                    }
+                    
 
-                }
+                    
 
-                else if (mapObject.HarvestedMaterial != null)
-                {
-                    HarvestMapObject(mapObject);
-                    GameManager.instance.SetCurrentAction(null);
+                    
                 }
+                 
             }        
         }      
     }
