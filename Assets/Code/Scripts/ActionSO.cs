@@ -7,5 +7,5 @@ using UnityEngine.UI;
 public class ActionSO : ScriptableObject
 {
     public string Name;
-    public Image Icon;
+    public Sprite image;
 }

@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HistoryWindow : MonoBehaviour
 {
@@ -26,13 +27,16 @@ public class HistoryWindow : MonoBehaviour
 
         TextMeshProUGUI text = icon.GetComponentInChildren<TextMeshProUGUI>();
         text.text = historyItem.Name;
-
-        if (historyItem.Image != null)
-            Instantiate(historyItem.Image, icon.transform);
+        Instantiate(arrow, parent);
+        if (historyItem.image != null)
+            icon.GetComponent<Image>().sprite = historyItem.image;
 
         if (historyItem is MapObject mapObject)
         {
-            
+            if (mapObject.RequiredAction != null)
+            {
+                CreatePreviousHistory(mapObject.RequiredAction, parent);
+            }
 
             if (mapObject.createdFrom.Count >1)
             {
@@ -40,14 +44,14 @@ public class HistoryWindow : MonoBehaviour
                 foreach (HistoryItem previousHistory in mapObject.createdFrom)
                 {
                     GameObject row = Instantiate(historyRow, branch.transform);
-                    Instantiate(arrow, row.transform);
+                    
                     CreatePreviousHistory(previousHistory, row.transform);
                 }
             }
 
             else
             {
-                Instantiate(arrow, parent);
+
                 CreatePreviousHistory(mapObject.createdFrom[0],parent);
             }
         }

@@ -7,5 +7,5 @@ using UnityEngine.UI;
 public class MaterialSO : ScriptableObject
 {
     public string Name;
-    public GameObject Image;
+    public Sprite image;
 }

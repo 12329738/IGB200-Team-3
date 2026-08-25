@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         CurrentAction = null;
         CurrentMaterial = material;
         currentAction.image.enabled = true;
-        currentAction.image.sprite = CurrentMaterial.Image.GetComponent<Image>().sprite;
+        currentAction.image.sprite = CurrentMaterial.image;
         
     }
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         CurrentMaterial = null;
         CurrentAction = action;
         currentAction.image.enabled = true;
-        currentAction.image.sprite = currentAction.image.sprite;
+        currentAction.image.sprite = CurrentAction.image;
         
 
     }

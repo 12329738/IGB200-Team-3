@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Action
+public class Action : HistoryItem
 {
-    public string Name;
-    public Image Icon;
 
     public Action(ActionSO SO)
     {
         Name = SO.Name;
-        Icon = SO.Icon;
+        image = SO.image;
     }
 }
