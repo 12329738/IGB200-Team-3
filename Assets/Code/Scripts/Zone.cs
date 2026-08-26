@@ -10,6 +10,7 @@ public class Zone : MonoBehaviour
     public MapObject currentObject;
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObject;
+    public SpriteScript selection;
     public MapUI MapUi;
 
     private void OnMouseDown()
@@ -89,6 +90,7 @@ public class Zone : MonoBehaviour
         Destroy(currentMapObject);
         currentObject = null;
         GameManager.instance.ResetCurrentAction();
+        UnHighlightObject();
     }
     private void ChangeMapObject(MapObject mapObject)
     {
@@ -131,24 +133,31 @@ public class Zone : MonoBehaviour
 
     internal void HighlightObject(Material material, Action action)
     {
+        if (material != null && currentMapObject == null)
+        {
+            selection.GetComponent<SpriteScript>().SetHighlight(true);
+        }
 
         if (currentObject != null)
         {
-            currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(false);
+            currentMapObject.GetComponent<SpriteScript>().SetHighlight(false);
             if (material != null && MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
             {
-                currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(true);
+                currentMapObject.GetComponent<SpriteScript>().SetHighlight(true);
+                selection.GetComponent<SpriteScript>().SetHighlight(true);
             }
             else if (action != null && MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
             {
-                currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(true);
+                currentMapObject.GetComponent<SpriteScript>().SetHighlight(true);
+                selection.GetComponent<SpriteScript>().SetHighlight(true);
             }
         }                  
     }
 
     public void UnHighlightObject()
     {
+        selection.GetComponent<SpriteScript>().SetHighlight(false);
         if (currentObject != null)
-            currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(false);
+            currentMapObject.GetComponent<SpriteScript>().SetHighlight(false);           
     }
 }

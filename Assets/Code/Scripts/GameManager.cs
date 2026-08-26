@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetCurrentMaterial(Material material)
     {
+        ZoneManager.instance.UnHighlightObject();
         CurrentAction = null;
         CurrentMaterial = material;
         currentAction.image.enabled = true;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCurrentAction(Action action)
     {
+        ZoneManager.instance.UnHighlightObject();
         CurrentMaterial = null;
         CurrentAction = action;
         currentAction.image.enabled = true;
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
         CurrentAction = null;
         currentAction.image.sprite = null;
         currentAction.image.enabled = false;
+        ZoneManager.instance.UnHighlightObject();
     }
     public void ResetScene()
     {

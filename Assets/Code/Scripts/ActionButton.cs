@@ -8,6 +8,7 @@ public class ActionButton : MonoBehaviour
     public void SetActiveAction()
     {
         GameManager.instance.SetCurrentAction(action);
+        ZoneManager.instance.UnHighlightObject();
         ZoneManager.instance.HighlightObject(action: action);
     }
 }
