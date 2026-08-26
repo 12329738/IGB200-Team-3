@@ -6,7 +6,7 @@ Shader "Custom/SpriteOutlineURP"
         [MainColor] _Color ("Color", Color) = (1,1,1,1)
 
         _OutlineColor ("Outline Color", Color) = (1,1,0,1)
-        _OutlineWidth ("Outline Width", Range(0,10)) = 2
+        _OutlineWidth ("Outline Width", Range(0,10)) = 3
     }
 
     SubShader
@@ -133,9 +133,10 @@ Shader "Custom/SpriteOutlineURP"
 
                 // Outline
                 if (surroundingAlpha > 0.01)
-                {
-                    return _OutlineColor;
-                }
+                    {
+                        return _OutlineColor * input.color;
+                    }
+
 
                 return half4(0, 0, 0, 0);
             }

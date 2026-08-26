@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class Zone : MonoBehaviour
     public ZoneEnum zone;
     public MapObject currentObject;
     public SpriteScript mapObjectPrefab;
-    public SpriteScript currentMapObject;
+    public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
     public MapUI MapUi;
 
@@ -57,9 +58,10 @@ public class Zone : MonoBehaviour
 
     private void PerformActionOnMapObject()
     {
-        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+        if (GameManager.instance.CurrentAction.Name == "Recycle")
+            RecycleMapObject(currentObject);
+        else if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
         {
-            Debug.Log(mapObjects);
             foreach (MapObject mapObject in mapObjects)
             {
                 if (mapObject.RequiredMapObject.Name == currentObject.Name)
@@ -83,11 +85,20 @@ public class Zone : MonoBehaviour
         }      
     }
 
+    private void RecycleMapObject(MapObject mapObject)
+    {
+        GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        Destroy(currentMapObjectSprite.gameObject);
+        currentObject = null;
+        GameManager.instance.ResetCurrentAction();
+        UnHighlightObject();
+    }
+
     private void HarvestMapObject(MapObject mapObject)
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
         GameManager.instance.objectHistory.Push((currentObject, this));
-        Destroy(currentMapObject);
+        Destroy(currentMapObjectSprite.gameObject);
         currentObject = null;
         GameManager.instance.ResetCurrentAction();
         UnHighlightObject();
@@ -96,17 +107,17 @@ public class Zone : MonoBehaviour
     {
         if (mapObject != null)
         {
-            if (currentMapObject == null)
-                currentMapObject = Instantiate(mapObjectPrefab, transform);
+            if (currentObject == null)
+                currentMapObjectSprite = Instantiate(mapObjectPrefab, transform);
 
             if (mapObject.image != null)
             {
                 
-                currentMapObject.image.sprite = mapObject.image;
+                currentMapObjectSprite.image.sprite = mapObject.image;
             }
             else
             {
-                currentMapObject.image.sprite = null;
+                currentMapObjectSprite.image.sprite = null;
             }
             GameManager.instance.objectHistory.Push((currentObject, this));
             currentObject = mapObject;
@@ -119,12 +130,12 @@ public class Zone : MonoBehaviour
     {
         if (mapObject == null)
         {
-            Destroy(currentMapObject);
+            Destroy(currentMapObjectSprite);
             currentObject = null;
         }
         else
         {
-            currentMapObject.image.sprite = mapObject.image;
+            currentMapObjectSprite.image.sprite = mapObject.image;
             currentObject = mapObject;
 
         }
@@ -133,23 +144,39 @@ public class Zone : MonoBehaviour
 
     internal void HighlightObject(Material material, Action action)
     {
-        if (material != null && currentMapObject == null)
+        
+        if (material != null && currentObject == null)
         {
+            selection.SetVisible(true);
             selection.GetComponent<SpriteScript>().SetHighlight(true);
+            return;
         }
 
         if (currentObject != null)
         {
-            currentMapObject.GetComponent<SpriteScript>().SetHighlight(false);
+            currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
+            if (action != null && action.Name == "Recycle")
+            {
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
+                selection.SetVisible(true);
+                selection.GetComponent<SpriteScript>().SetHighlight(true);                
+                return;
+            }
+
+            
             if (material != null && MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
             {
-                currentMapObject.GetComponent<SpriteScript>().SetHighlight(true);
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
+                selection.SetVisible(true);
                 selection.GetComponent<SpriteScript>().SetHighlight(true);
+                
             }
             else if (action != null && MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
             {
-                currentMapObject.GetComponent<SpriteScript>().SetHighlight(true);
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
+                selection.SetVisible(true);
                 selection.GetComponent<SpriteScript>().SetHighlight(true);
+                
             }
         }                  
     }
@@ -157,7 +184,8 @@ public class Zone : MonoBehaviour
     public void UnHighlightObject()
     {
         selection.GetComponent<SpriteScript>().SetHighlight(false);
+        selection.SetVisible(false);
         if (currentObject != null)
-            currentMapObject.GetComponent<SpriteScript>().SetHighlight(false);           
+            currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);           
     }
 }
