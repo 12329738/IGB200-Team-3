@@ -23,16 +23,19 @@ public class HistoryWindow : MonoBehaviour
 
     internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent)
     {
+        
         GameObject icon = Instantiate(objectIcon, parent);
 
         TextMeshProUGUI text = icon.GetComponentInChildren<TextMeshProUGUI>();
         text.text = historyItem.Name;
-        Instantiate(arrow, parent);
+        
         if (historyItem.image != null)
             icon.GetComponent<Image>().sprite = historyItem.image;
-
+        if (historyItem is not Material)
+            Instantiate(arrow, parent);
         if (historyItem is MapObject mapObject)
         {
+            
             if (mapObject.RequiredAction != null)
             {
                 CreatePreviousHistory(mapObject.RequiredAction, parent);
