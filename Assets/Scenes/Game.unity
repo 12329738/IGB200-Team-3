@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 0
-  currentMapImage: {fileID: 1439726782}
+  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  currentMapObject: {fileID: 0}
   text: {fileID: 1723404585}
   MapUi: {fileID: 1859272410}
 --- !u!61 &22253380
@@ -771,7 +772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 2
-  currentMapImage: {fileID: 225543458}
+  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  currentMapObject: {fileID: 0}
   text: {fileID: 1370800725}
   MapUi: {fileID: 1859272410}
 --- !u!61 &321350418
@@ -2230,6 +2232,54 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1227900921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227900923}
+  - component: {fileID: 1227900922}
+  m_Layer: 0
+  m_Name: ZoneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1227900922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227900921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9498b41e25acae147b1bfa41499de417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ZoneManager
+  zones:
+  - {fileID: 22253379}
+  - {fileID: 1359855218}
+  - {fileID: 321350417}
+--- !u!4 &1227900923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227900921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 305.91754, y: 600.86115, z: -1238.0677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235378878
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,7 +2516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 1
-  currentMapImage: {fileID: 729679569}
+  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  currentMapObject: {fileID: 0}
   text: {fileID: 1347149618}
   MapUi: {fileID: 1859272410}
 --- !u!61 &1359855219
@@ -4126,3 +4177,4 @@ SceneRoots:
   - {fileID: 801849662}
   - {fileID: 432769868}
   - {fileID: 1867996482}
+  - {fileID: 1227900923}

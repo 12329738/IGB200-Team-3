@@ -8,7 +8,8 @@ public class Zone : MonoBehaviour
 {
     public ZoneEnum zone;
     public MapObject currentObject;
-    public GameObject currentMapImage;
+    public SpriteScript mapObjectPrefab;
+    public SpriteScript currentMapObject;
     public TextMeshProUGUI text;
     public MapUI MapUi;
 
@@ -86,7 +87,7 @@ public class Zone : MonoBehaviour
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
         GameManager.instance.objectHistory.Push((currentObject, this));
-        Destroy(currentMapImage);
+        Destroy(currentMapObject);
         currentObject = null;
         text.text = "";
         GameManager.instance.ResetCurrentAction();
@@ -95,12 +96,23 @@ public class Zone : MonoBehaviour
     {
         if (mapObject != null)
         {
-            Destroy(currentMapImage);
-            if (mapObject.Image != null) currentMapImage = Instantiate(mapObject.Image, transform);
+            if (currentMapObject == null)
+                currentMapObject = Instantiate(mapObjectPrefab, transform);
+
+            if (mapObject.image != null)
+            {
+                
+                currentMapObject.image.sprite = mapObject.image;
+            }
+            else
+            {
+                currentMapObject.image.sprite = null;
+            }
             GameManager.instance.objectHistory.Push((currentObject, this));
             currentObject = mapObject;
             text.text = mapObject.Name;
             GameManager.instance.ResetCurrentAction();
+            UnHighlightObject();
         }
     }
 
@@ -108,18 +120,40 @@ public class Zone : MonoBehaviour
     {
         if (mapObject == null)
         {
-            Destroy(currentMapImage);
+            Destroy(currentMapObject);
             currentObject = null;
             text.text = "";
         }
         else
         {
-            Destroy(currentMapImage);
-            currentMapImage = Instantiate(mapObject.Image, transform);
+            currentMapObject.image.sprite = mapObject.image;
             currentObject = mapObject;
             text.text = mapObject.Name;
 
         }
        
+    }
+
+    internal void HighlightObject(Material material, Action action)
+    {
+
+        if (currentObject != null)
+        {
+            currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(false);
+            if (material != null && MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
+            {
+                currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(true);
+            }
+            else if (action != null && MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+            {
+                currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(true);
+            }
+        }                  
+    }
+
+    public void UnHighlightObject()
+    {
+        if (currentObject != null)
+            currentMapObject.GetComponent<SpriteHighlight>().SetHighlight(false);
     }
 }
