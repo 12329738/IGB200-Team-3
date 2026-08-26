@@ -41,7 +41,7 @@ public class SpriteScript : MonoBehaviour
 
     public void SetVisible(bool visible)
     {
-        Color color = image.color;
+        Color color = Color.white;
         color.a = visible ? 1f : 0f;
         image.color = color;
     }

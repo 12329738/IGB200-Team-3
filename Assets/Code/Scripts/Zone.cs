@@ -13,7 +13,8 @@ public class Zone : MonoBehaviour
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
     public MapUI MapUi;
-
+    private bool isHovering;
+    public Color hoverColour;
     private void OnMouseDown()
     {
         if (currentObject == null)
@@ -40,6 +41,32 @@ public class Zone : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+     
+        if ( Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
+        {
+            if (!isHovering)
+            isHovering = true;
+            if (selection.image.color.a == 1)
+                selection.image.color = hoverColour;
+        }
+        else
+        {
+            if (isHovering)
+            {
+                isHovering = false;
+                if (selection.image.color.a == 1)
+                    selection.image.color = Color.white;
+            }
+                
+        }
+        
+
+
+    }
 
     private void CreateMapObject()
     {
