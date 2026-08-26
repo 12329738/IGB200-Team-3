@@ -11,6 +11,7 @@ public class MaterialButton : MonoBehaviour
     public void SetActiveMaterial()
     {
         GameManager.instance.SetCurrentMaterial(material);
+        ZoneManager.instance.UnHighlightObject();
         ZoneManager.instance.HighlightObject(material);
     }
 }

@@ -1,39 +1,48 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpriteScript : MonoBehaviour
 {
     public SpriteRenderer image;
-    private SpriteRenderer spriteRenderer;
 
-    private UnityEngine.Material normalMaterial;
-    private UnityEngine.Material highlightMaterial;
+    private SpriteRenderer spriteRenderer;
+    private MaterialPropertyBlock propertyBlock;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        normalMaterial = spriteRenderer.material;
-
-        Shader shader = Shader.Find("Custom/SpriteOutlineURP");
-
-        highlightMaterial = new UnityEngine.Material(shader);
-
-        highlightMaterial.SetColor(
-            "_OutlineColor",
-            Color.yellow
-        );
-
-        highlightMaterial.SetFloat(
-            "_OutlineWidth",
-            2f
-        );
+        propertyBlock = new MaterialPropertyBlock();
     }
 
     public void SetHighlight(bool highlighted)
     {
-        spriteRenderer.material =
-            highlighted
-                ? highlightMaterial
-                : normalMaterial;
+        spriteRenderer.GetPropertyBlock(propertyBlock);
+
+        if (highlighted)
+        {
+            UnityEngine.Material material = spriteRenderer.sharedMaterial;
+
+            propertyBlock.SetColor(
+                "_OutlineColor",
+                material.GetColor("_OutlineColor")
+            );
+
+            propertyBlock.SetFloat(
+                "_OutlineWidth",
+                material.GetFloat("_OutlineWidth")
+            );
+        }
+        else
+        {
+            propertyBlock.SetFloat("_OutlineWidth", 0f);
+        }
+
+        spriteRenderer.SetPropertyBlock(propertyBlock);
+    }
+
+    public void SetVisible(bool visible)
+    {
+        Color color = Color.white;
+        color.a = visible ? 1f : 0f;
+        image.color = color;
     }
 }
