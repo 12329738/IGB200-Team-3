@@ -21,7 +21,7 @@ public class MaterialUI : MonoBehaviour
             MaterialButton materialButton = button.GetComponentInChildren<MaterialButton>();
             materialButton.material = material;
             Image image = button.GetComponentInChildren<Image>();
-            image.sprite = material.Image.GetComponent<Image>().sprite;
+            image.sprite = material.image;
             Debug.Log(image);
         }                
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     public StorageUI storageUi;
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
+    public CurrentAction currentAction;
     void Awake()
     {
 
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
+
 
     }
     void Update()
@@ -37,13 +40,27 @@ public class GameManager : MonoBehaviour
     {
         CurrentAction = null;
         CurrentMaterial = material;
+        currentAction.image.enabled = true;
+        currentAction.image.sprite = CurrentMaterial.image;
         
     }
 
     public void SetCurrentAction(Action action)
     {
         CurrentMaterial = null;
-        CurrentAction = action; 
+        CurrentAction = action;
+        currentAction.image.enabled = true;
+        currentAction.image.sprite = CurrentAction.image;
+        
+
+    }
+
+    public void ResetCurrentAction()
+    {
+        CurrentMaterial = null;
+        CurrentAction = null;
+        currentAction.image.sprite = null;
+        currentAction.image.enabled = false;
     }
     public void ResetScene()
     {

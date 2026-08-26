@@ -6,6 +6,6 @@ public class Material : HistoryItem
     public Material (MaterialSO SO)
     {
         Name = SO.Name;
-        Image = SO.Image;
+        image = SO.image;
     }
 }
