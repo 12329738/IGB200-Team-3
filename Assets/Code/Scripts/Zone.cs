@@ -10,7 +10,6 @@ public class Zone : MonoBehaviour
     public MapObject currentObject;
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObject;
-    public TextMeshProUGUI text;
     public MapUI MapUi;
 
     private void OnMouseDown()
@@ -51,7 +50,7 @@ public class Zone : MonoBehaviour
 
     private void CombineMapObjectWithMaterial()
     {
-        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject));
+        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
            ChangeMapObject(mapObject);
     }
 
@@ -89,7 +88,6 @@ public class Zone : MonoBehaviour
         GameManager.instance.objectHistory.Push((currentObject, this));
         Destroy(currentMapObject);
         currentObject = null;
-        text.text = "";
         GameManager.instance.ResetCurrentAction();
     }
     private void ChangeMapObject(MapObject mapObject)
@@ -110,7 +108,6 @@ public class Zone : MonoBehaviour
             }
             GameManager.instance.objectHistory.Push((currentObject, this));
             currentObject = mapObject;
-            text.text = mapObject.Name;
             GameManager.instance.ResetCurrentAction();
             UnHighlightObject();
         }
@@ -122,13 +119,11 @@ public class Zone : MonoBehaviour
         {
             Destroy(currentMapObject);
             currentObject = null;
-            text.text = "";
         }
         else
         {
             currentMapObject.image.sprite = mapObject.image;
             currentObject = mapObject;
-            text.text = mapObject.Name;
 
         }
        
