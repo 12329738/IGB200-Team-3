@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paper
   m_EditorClassIdentifier: 
   Name: Paper
-  Image: {fileID: 0}
+  Image: {fileID: 1410548041250086906, guid: acf5bc30c5afcf84b94d6358bd04ad2c, type: 3}
   image: {fileID: 21300000, guid: 66c45e26e5d6b4b4b9c8b20ca7bca8d0, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 68c4f36198dda134c925f575620075d4, type: 2}
   RequiredMaterial: {fileID: 0}

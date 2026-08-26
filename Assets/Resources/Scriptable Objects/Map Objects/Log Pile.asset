@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Log Pile
   m_EditorClassIdentifier: 
   Name: Log Pile
-  Image: {fileID: 0}
+  Image: {fileID: 5046764072278560669, guid: fea8289dbed7bcc4ebecda5907f187eb, type: 3}
   image: {fileID: 21300000, guid: 2e8647c6a9f2c6641931092158e0c3c5, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
