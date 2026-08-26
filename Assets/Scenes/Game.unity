@@ -168,6 +168,7 @@ MonoBehaviour:
   zone: 0
   mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
   currentMapObject: {fileID: 0}
+  selection: {fileID: 1213933172}
   MapUi: {fileID: 1859272410}
 --- !u!61 &22253380
 BoxCollider2D:
@@ -694,6 +695,7 @@ MonoBehaviour:
   zone: 2
   mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
   currentMapObject: {fileID: 0}
+  selection: {fileID: 747137570}
   MapUi: {fileID: 1859272410}
 --- !u!61 &321350418
 BoxCollider2D:
@@ -2216,6 +2218,7 @@ MonoBehaviour:
   zone: 1
   mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
   currentMapObject: {fileID: 0}
+  selection: {fileID: 66229069}
   MapUi: {fileID: 1859272410}
 --- !u!61 &1359855219
 BoxCollider2D:
