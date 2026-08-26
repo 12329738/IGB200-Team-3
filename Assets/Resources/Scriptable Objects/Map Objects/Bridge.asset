@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Bridge
   m_EditorClassIdentifier: 
   Name: Bridge
+  Image: {fileID: 3750869250080632973, guid: df63507ab1d1aa542b9cbeb80d0c0566, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
   RequiredZone: 1
-  RequiredAction: 0
+  RequiredAction: {fileID: 0}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 0}
