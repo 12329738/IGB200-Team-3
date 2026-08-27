@@ -14,6 +14,7 @@ public class MapObject : HistoryItem
     public int RequiredStoredMaterialAmount;
     public Material HarvestedMaterial;
     public List<HistoryItem> createdFrom;
+    public bool isFinalForm;
 
     public MapObject(MapObjectSO SO)
     {
@@ -40,6 +41,7 @@ public class MapObject : HistoryItem
             createdFrom.Add(RequiredStoredMaterial);
         }
         RequiredStoredMaterialAmount = SO.RequiredStoredMaterialAmount;
-        if (SO.HarvestedMaterial != null) HarvestedMaterial = new Material(SO.HarvestedMaterial);    
+        if (SO.HarvestedMaterial != null) HarvestedMaterial = new Material(SO.HarvestedMaterial);
+        isFinalForm = SO.isFinalForm;
     }
 }

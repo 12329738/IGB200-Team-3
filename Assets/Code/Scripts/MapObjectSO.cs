@@ -16,6 +16,7 @@ public class MapObjectSO : ScriptableObject
     public MaterialSO RequiredStoredMaterial;
     public int RequiredStoredMaterialAmount;
     public MaterialSO HarvestedMaterial;
+    public bool isFinalForm = false;
     
     
 }

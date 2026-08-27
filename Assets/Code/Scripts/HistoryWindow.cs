@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Unity.Collections.AllocatorManager;
 
 public class HistoryWindow : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class HistoryWindow : MonoBehaviour
     public void OnClick()
     {
         Destroy(this.gameObject);
+        MapUI.instance.blocker.SetActive(false);
     }
 
     internal void CreateHistory(MapObject mapObject)
