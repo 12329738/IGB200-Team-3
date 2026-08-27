@@ -10,7 +10,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
-    public Dictionary<string, HistoryItem> KnownRecipeDictionary = new();
+    public Dictionary<string, HistoryItem> KnownRecipeDictionary;
 
     void Awake()
     {
@@ -38,9 +38,18 @@ public class MapObjectDatabase : MonoBehaviour
         CreateCombinationDictionary(mapObjects);
         CreateActionsDictionary(mapObjects);
         CreateZoneDictionary(mapObjects);
+        CreateKnownRecipeDictionary(mapObjects);
     }
 
-    
+    private void CreateKnownRecipeDictionary(MapObject[] mapObjects)
+    {
+        KnownRecipeDictionary = new();
+        foreach (MapObject obj in mapObjects)
+        {
+            if (obj.isFinalForm)
+                KnownRecipeDictionary.TryAdd(obj.Name, obj);
+        }
+    }
 
     public void CreateMapObjectDictionary(MapObject[] mapObjects)
     {
