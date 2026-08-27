@@ -19,7 +19,7 @@ MonoBehaviour:
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
   RequiredAction: {fileID: 11400000, guid: 46f58404d1233a749b6e8d9ef40a73b7, type: 2}
-  RequiredStoredMaterial: {fileID: 0}
-  RequiredStoredMaterialAmount: 0
+  RequiredStoredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
+  RequiredStoredMaterialAmount: 1
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 1

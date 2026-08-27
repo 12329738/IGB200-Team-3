@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
   m_Name: Waste
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
-  Name: 
+  Name: Waste
   Image: {fileID: 0}
   image: {fileID: 0}
-  RequiredMapObject: {fileID: 0}
-  RequiredMaterial: {fileID: 0}
-  RequiredZone: 0
+  RequiredMapObject: {fileID: 11400000, guid: b7ccfde2dcfe75e4d89235b07a486bff, type: 2}
+  RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
+  RequiredZone: 3
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
-  isFinalForm: 0
+  isFinalForm: 1
