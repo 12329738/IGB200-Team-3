@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Iron Blank
-  m_EditorClassIdentifier: 
-  Name: Iron Blank
-  Image: {fileID: 5289705659376293346, guid: 6aa289b24de35ed4693240a77b5c713d, type: 3}
-  image: {fileID: 21300000, guid: 09150989a86a44045bac955ed6ff2e21, type: 3}
-  RequiredMapObject: {fileID: 11400000, guid: ad8aa656a40e883448ca9d88794c1384, type: 2}
+  m_Name: Glaze Powder
+  m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
+  Name: Glaze Powder
+  Image: {fileID: 3402567570378883263, guid: e5da2c3d1d3e5f1428db110034f57e80, type: 3}
+  image: {fileID: 21300000, guid: 74a226aae0cd30f4699a5cbd9c6ebc67, type: 3}
+  RequiredMapObject: {fileID: 11400000, guid: 8ab46c6dfaf1da840a23494d67f447cb, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
-  RequiredAction: {fileID: 11400000, guid: 8c72562b3f237c74b97ff47aba8cb1b3, type: 2}
+  RequiredAction: {fileID: 11400000, guid: fde5a2a61fd05a3419da357cfc45fb6e, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
-  isFinalForm: 0
+  isFinalForm: 1

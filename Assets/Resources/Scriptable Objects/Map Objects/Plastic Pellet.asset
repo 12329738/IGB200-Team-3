@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Plastic Pellet
   m_EditorClassIdentifier: 
   Name: Plastic Pellet
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  Image: {fileID: 1572309428277677651, guid: 1cba6b1ef9b5b8b43ae56f524b361a3a, type: 3}
+  image: {fileID: 21300000, guid: 6c8587e6d1acafd4382549a0140c4280, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 0b701f85b40811b43bdc7bd57c668b44, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
