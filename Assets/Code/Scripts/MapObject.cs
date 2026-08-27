@@ -38,7 +38,7 @@ public class MapObject : HistoryItem
         if (SO.RequiredStoredMaterial != null)
         {
             RequiredStoredMaterial = new Material(SO.RequiredStoredMaterial);
-            createdFrom.Add(RequiredStoredMaterial);
+            //createdFrom.Add(RequiredStoredMaterial);
         }
         RequiredStoredMaterialAmount = SO.RequiredStoredMaterialAmount;
         if (SO.HarvestedMaterial != null) HarvestedMaterial = new Material(SO.HarvestedMaterial);
