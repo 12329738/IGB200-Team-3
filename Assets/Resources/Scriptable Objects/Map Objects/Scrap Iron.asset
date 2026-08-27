@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Scrap Iron
   Image: {fileID: 6095383644506186893, guid: b295dadd553b6d14fae49a9e4d048ca2, type: 3}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: c5bf1e6f28e3fe74998b7be94c87b4f6, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
   RequiredZone: 0

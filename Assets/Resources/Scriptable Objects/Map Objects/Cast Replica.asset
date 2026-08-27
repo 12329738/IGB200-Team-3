@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Cast Replica
   Image: {fileID: 3644783791358014982, guid: 70a4b13fb7f03e14e865c357da81270d, type: 3}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 3abf5f67570f3824ba9819a318eea879, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: e38821334cde730489ebddc1e7fc32e9, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3

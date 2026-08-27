@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Plastic Container
   Image: {fileID: 8822427924279806073, guid: 66854aeab35d00943a10d6839e286ad9, type: 3}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 8f7142a74149b6e4797c5704d07e27dc, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 9c665b60cbf0316408cc841bf8d4129c, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
