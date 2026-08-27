@@ -105,16 +105,17 @@ public class Zone : MonoBehaviour
                     }
                     else
                     {
-                        if (mapObject.RequiredStoredMaterial != null && !GameManager.instance.HasRequiredMatierals(mapObject))
+                        if (mapObject.RequiredStoredMaterial != null)
                         {
-                            return;
-                            
-                        }
-                        else
-                        {
-                            GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
-                        }
+                            if (!GameManager.instance.HasRequiredMatierals(mapObject))
+                                return;
+                            else
+                            {
+                                GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                            }
 
+                        }
+                        
                         ChangeMapObject(mapObject);
                         return;
                     }

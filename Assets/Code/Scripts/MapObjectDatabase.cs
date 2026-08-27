@@ -74,9 +74,10 @@ public class MapObjectDatabase : MonoBehaviour
     public void CreateActionsDictionary(MapObject[] mapObjects)
     {
         ActionsDictionary = new();
-        List<MapObject> objects = new();
+        
         foreach (MapObject obj in mapObjects)
         {
+            List<MapObject> objects = new();
             if (obj.RequiredMapObject != null && obj.RequiredAction != null)
             {
                 objects.Add(obj);
