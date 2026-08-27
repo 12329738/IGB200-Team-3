@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Zone : MonoBehaviour
@@ -17,6 +18,10 @@ public class Zone : MonoBehaviour
     public Color hoverColour;
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (currentObject == null)
         {
             CreateMapObject();
@@ -43,7 +48,7 @@ public class Zone : MonoBehaviour
 
     private void Update()
     {
-
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
      
         if ( Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
@@ -150,6 +155,14 @@ public class Zone : MonoBehaviour
             currentObject = mapObject;
             GameManager.instance.ResetCurrentAction();
             UnHighlightObject();
+
+            if (!MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(mapObject.Name))
+                MapObjectDatabase.instance.KnownRecipeDictionary.Add(mapObject.Name, mapObject);
+            foreach (var historyItem in mapObject.createdFrom)
+            {
+                if (!MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(historyItem.Name))
+                    MapObjectDatabase.instance.KnownRecipeDictionary.Add(historyItem.Name, historyItem);
+            }
         }
     }
 

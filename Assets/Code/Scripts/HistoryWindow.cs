@@ -29,10 +29,18 @@ public class HistoryWindow : MonoBehaviour
         GameObject icon = Instantiate(objectIcon, parent);
 
         TextMeshProUGUI text = icon.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = historyItem.Name;
+        if (MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(historyItem.Name))
+        {
+            text.text = historyItem.Name;
+
+            if (historyItem.image != null)
+                icon.GetComponent<Image>().sprite = historyItem.image;
+        }
+        else
+        {
+            text.text = "???";
+        }
         
-        if (historyItem.image != null)
-            icon.GetComponent<Image>().sprite = historyItem.image;
         if (historyItem is not Material)
             Instantiate(arrow, parent);
         if (historyItem is MapObject mapObject)

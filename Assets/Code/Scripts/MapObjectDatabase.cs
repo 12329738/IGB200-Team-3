@@ -10,6 +10,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
+    public Dictionary<string, HistoryItem> KnownRecipeDictionary = new();
 
     void Awake()
     {
