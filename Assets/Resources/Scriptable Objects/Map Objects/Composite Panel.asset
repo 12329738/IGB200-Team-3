@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Composite Panel
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Composite Panel
-  Image: {fileID: 0}
+  Image: {fileID: 892101788088278495, guid: 74201c889651ffc4c81615eb1d68d2d8, type: 3}
   image: {fileID: 0}
   RequiredMapObject: {fileID: 11400000, guid: 9c665b60cbf0316408cc841bf8d4129c, type: 2}
   RequiredMaterial: {fileID: 0}

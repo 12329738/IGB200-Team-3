@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glaze Powder
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Glaze Powder
-  Image: {fileID: 0}
+  Image: {fileID: 3402567570378883263, guid: e5da2c3d1d3e5f1428db110034f57e80, type: 3}
   image: {fileID: 0}
   RequiredMapObject: {fileID: 11400000, guid: 8ab46c6dfaf1da840a23494d67f447cb, type: 2}
   RequiredMaterial: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Nail Set
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Nail Set
-  Image: {fileID: 0}
+  Image: {fileID: 4400378408528824022, guid: a467a8dc6304ba6408af77b745777632, type: 3}
   image: {fileID: 0}
   RequiredMapObject: {fileID: 11400000, guid: e38821334cde730489ebddc1e7fc32e9, type: 2}
   RequiredMaterial: {fileID: 0}
