@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Scrap Iron
   m_EditorClassIdentifier: 
   Name: Scrap Iron
-  TargetMapObject: {fileID: 0}
+  Image: {fileID: 6095383644506186893, guid: b295dadd553b6d14fae49a9e4d048ca2, type: 3}
+  image: {fileID: 0}
+  RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
-  ZoneRequired: 0
-  ActionRequired: 8
+  RequiredZone: 0
+  RequiredAction: {fileID: 0}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 0}
+  isFinalForm: 0

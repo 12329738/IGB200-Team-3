@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Mineral Salt
   m_EditorClassIdentifier: 
   Name: Mineral Salt
+  Image: {fileID: 2585348938985432436, guid: 75afb73dfab793f49a81b0214fb28763, type: 3}
+  image: {fileID: 0}
   RequiredMapObject: {fileID: 11400000, guid: 2f2f1c39f9824ec46a9fc732741f548b, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
   RequiredAction: {fileID: 11400000, guid: daf3a370e3d3e064c9871653a8ec7424, type: 2}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 0}
+  isFinalForm: 0

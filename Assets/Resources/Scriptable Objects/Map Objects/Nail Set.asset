@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Plastic Pellet
-  m_EditorClassIdentifier: 
-  Name: Plastic Pellet
-  Image: {fileID: 1572309428277677651, guid: 1cba6b1ef9b5b8b43ae56f524b361a3a, type: 3}
+  m_Name: Nail Set
+  m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
+  Name: Nail Set
+  Image: {fileID: 0}
   image: {fileID: 0}
-  RequiredMapObject: {fileID: 11400000, guid: 0b701f85b40811b43bdc7bd57c668b44, type: 2}
+  RequiredMapObject: {fileID: 11400000, guid: e38821334cde730489ebddc1e7fc32e9, type: 2}
   RequiredMaterial: {fileID: 0}
-  RequiredZone: 3
-  RequiredAction: {fileID: 11400000, guid: c98df68223c5f1246a718fcd8b0c20a9, type: 2}
+  RequiredZone: 0
+  RequiredAction: {fileID: 11400000, guid: c9e01db734bf7704bb2bd947f2e60f77, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}

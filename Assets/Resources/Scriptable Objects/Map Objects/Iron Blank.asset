@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Iron Blank
   m_EditorClassIdentifier: 
   Name: Iron Blank
+  Image: {fileID: 5289705659376293346, guid: 6aa289b24de35ed4693240a77b5c713d, type: 3}
+  image: {fileID: 0}
   RequiredMapObject: {fileID: 11400000, guid: ad8aa656a40e883448ca9d88794c1384, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3
   RequiredAction: {fileID: 11400000, guid: 8c72562b3f237c74b97ff47aba8cb1b3, type: 2}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 0}
+  isFinalForm: 0
