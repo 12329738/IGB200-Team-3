@@ -156,12 +156,12 @@ public class Zone : MonoBehaviour
             GameManager.instance.ResetCurrentAction();
             UnHighlightObject();
 
-            if (!MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(mapObject.Name))
-                MapObjectDatabase.instance.KnownRecipeDictionary.Add(mapObject.Name, mapObject);
+            MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+            if (mapObject.RequiredAction != null)
+                MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name, mapObject.RequiredAction);
             foreach (var historyItem in mapObject.createdFrom)
             {
-                if (!MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(historyItem.Name))
-                    MapObjectDatabase.instance.KnownRecipeDictionary.Add(historyItem.Name, historyItem);
+                MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
             }
         }
     }
