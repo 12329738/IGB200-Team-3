@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ActionButton : MonoBehaviour
 {
-    [HideInInspector]
     public Action action;
 
     public void SetActiveAction()

@@ -84,6 +84,12 @@ public class MapObjectDatabase : MonoBehaviour
                 ActionsDictionary.TryAdd((obj.RequiredAction.Name, obj.RequiredMapObject.Name), objects);
 
             }
+            if (obj.HarvestedMaterial != null)
+            {
+                objects = new();
+                objects.Add(obj);
+                ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
+            }
                 
         }
     }

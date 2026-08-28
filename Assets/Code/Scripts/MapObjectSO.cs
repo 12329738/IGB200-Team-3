@@ -7,7 +7,6 @@ using UnityEngine;
 public class MapObjectSO : ScriptableObject
 {
     public string Name;
-    public GameObject Image;
     public Sprite image;
     public MapObjectSO RequiredMapObject;
     public MaterialSO RequiredMaterial;

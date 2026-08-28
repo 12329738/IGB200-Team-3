@@ -90,35 +90,33 @@ public class Zone : MonoBehaviour
 
     private void PerformActionOnMapObject()
     {
-        if (GameManager.instance.CurrentAction.Name == "Recycle")
-            RecycleMapObject(currentObject);
-        else if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+
+        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
         {
             foreach (MapObject mapObject in mapObjects)
             {
+                if (mapObject.HarvestedMaterial != null)
+                {
+                    HarvestMapObject(mapObject);
+                    return;
+                }
                 if (mapObject.RequiredMapObject.Name == currentObject.Name)
                 {
-                    if (mapObject.HarvestedMaterial != null)
+                    
+                    if (mapObject.RequiredStoredMaterial != null)
                     {
-                        HarvestMapObject(mapObject);
-                        return;
-                    }
-                    else
-                    {
-                        if (mapObject.RequiredStoredMaterial != null)
+                        if (!GameManager.instance.HasRequiredMatierals(mapObject))
+                            return;
+                        else
                         {
-                            if (!GameManager.instance.HasRequiredMatierals(mapObject))
-                                return;
-                            else
-                            {
-                                GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
-                            }
-
+                            GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
                         }
-                        
-                        ChangeMapObject(mapObject);
-                        return;
+
                     }
+                        
+                    ChangeMapObject(mapObject);
+                    return;
+                    
                 }             
             }        
         }      
@@ -202,13 +200,13 @@ public class Zone : MonoBehaviour
         if (currentObject != null)
         {
             currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
-            if (action != null && action.Name == "Recycle")
-            {
-                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-                selection.SetVisible(true);
-                selection.GetComponent<SpriteScript>().SetHighlight(true);                
-                return;
-            }
+            //if (action != null && action.Name == "Recycle")
+            //{
+            //    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
+            //    selection.SetVisible(true);
+            //    selection.GetComponent<SpriteScript>().SetHighlight(true);                
+            //    return;
+            //}
 
             
             if (material != null && MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))

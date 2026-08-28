@@ -22,4 +22,4 @@ MonoBehaviour:
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
-  isFinalForm: 1
+  isFinalForm: 0

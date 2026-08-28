@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class HistoryWindow : MonoBehaviour
         if (MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(historyItem.Name))
         {
             text.text = historyItem.Name;
+            
 
             if (historyItem.image != null)
                 icon.GetComponent<Image>().sprite = historyItem.image;
@@ -45,7 +47,7 @@ public class HistoryWindow : MonoBehaviour
             Instantiate(arrow, parent);
         if (historyItem is MapObject mapObject)
         {
-            
+
             if (mapObject.RequiredAction != null)
             {
                 CreatePreviousHistory(mapObject.RequiredAction, parent);

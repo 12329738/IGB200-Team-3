@@ -19,7 +19,6 @@ public class MapObject : HistoryItem
     public MapObject(MapObjectSO SO)
     {
         Name = SO.name;
-        Image = SO.Image;
         image = SO.image;
         createdFrom = new();
         if (SO.RequiredMapObject != null)
