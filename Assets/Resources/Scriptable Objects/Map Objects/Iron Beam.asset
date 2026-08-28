@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Iron Beam
   m_EditorClassIdentifier: 
   Name: Iron Beam
+  Image: {fileID: 0}
+  image: {fileID: 0}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
   RequiredZone: 1
-  RequiredAction: 0
+  RequiredAction: {fileID: 0}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
+  isFinalForm: 0

@@ -21,5 +21,5 @@ MonoBehaviour:
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 0}
+  HarvestedMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
   isFinalForm: 1
