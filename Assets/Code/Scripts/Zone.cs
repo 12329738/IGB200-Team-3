@@ -106,7 +106,11 @@ public class Zone : MonoBehaviour
                     if (mapObject.RequiredStoredMaterial != null)
                     {
                         if (!GameManager.instance.HasRequiredMatierals(mapObject))
+                        {
+                            GameManager.instance.ResetCurrentAction();
                             return;
+                        }
+                            
                         else
                         {
                             GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
