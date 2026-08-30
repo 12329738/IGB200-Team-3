@@ -93,37 +93,42 @@ public class Zone : MonoBehaviour
 
         if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
         {
-            foreach (MapObject mapObject in mapObjects)
+            if (mapObjects.Count > 1)
             {
-                if (mapObject.HarvestedMaterial != null)
-                {
-                    HarvestMapObject(mapObject);
-                    return;
-                }
-                if (mapObject.RequiredMapObject.Name == currentObject.Name)
-                {
-                    
-                    if (mapObject.RequiredStoredMaterial != null)
-                    {
-                        if (!GameManager.instance.HasRequiredMatierals(mapObject))
-                        {
-                            GameManager.instance.ResetCurrentAction();
-                            return;
-                        }
-                            
-                        else
-                        {
-                            GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
-                        }
-
-                    }
-                        
-                    ChangeMapObject(mapObject);
-                    return;
-                    
-                }             
+                MapUI.instance.DisplayObjectSelectScreen(mapObjects, OnObjectSelected);
+            }
+            else 
+            {
+                OnObjectSelected(mapObjects[0].Name);          
             }        
         }      
+    }
+    private void OnObjectSelected(string objectName)
+    {
+        MapObject mapObject = MapObjectDatabase.instance.MapObjectDictionary[objectName];
+        if (mapObject.HarvestedMaterial != null)
+        {
+            HarvestMapObject(mapObject);
+            return;
+        }
+        if (mapObject.RequiredMapObject.Name == currentObject.Name)
+        {
+
+            if (mapObject.RequiredStoredMaterial != null)
+            {
+                if (!GameManager.instance.HasRequiredMatierals(mapObject))
+                    return;
+                else
+                {
+                    GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                }
+
+            }
+
+            ChangeMapObject(mapObject);
+            return;
+
+        }
     }
 
     private void RecycleMapObject(MapObject mapObject)
