@@ -31,7 +31,7 @@ public class ObjectSelectScreen : MonoBehaviour
     private void SelectObject(string objectName)
     {
         onSelected?.Invoke(objectName);
-
+        MapUI.instance.blocker.SetActive(false);
         Destroy(this.gameObject);
     }
 }

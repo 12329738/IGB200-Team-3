@@ -35,6 +35,7 @@ public class MapUI : MonoBehaviour
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)
     {
+        blocker.SetActive(true);
         ObjectSelectScreen window = Instantiate(objectSelectScreen, canvas.transform);
         window.DisplayObjectChoices(mapObjects, onSelected);
     }
