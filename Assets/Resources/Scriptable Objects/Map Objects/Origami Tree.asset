@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Origami Tree
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Origami Tree
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: a8e8c7de93cc4394f97e2cc3e1400ecd, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 849092affc70b2b418ed5348308860c7, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3

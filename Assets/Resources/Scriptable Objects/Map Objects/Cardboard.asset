@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Cardboard
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Cardboard
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: d7ce2687a1c72094c9eeb239ae2cfd1c, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 849092affc70b2b418ed5348308860c7, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Clear Spring
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Clear Spring
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: e0ca2eb1f424c1849804e690b855b0d2, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 8ab46c6dfaf1da840a23494d67f447cb, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 3

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Stockpile
   m_EditorClassIdentifier: 
   Name: Plastic Stockpile
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 4106df2a781f7904d8aaf5a0e329d849, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
   RequiredZone: 2

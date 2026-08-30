@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Sheet
   m_EditorClassIdentifier: 
   Name: Plastic Sheet
-  Image: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 8644dede42af33c4da2db230af22e421, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
   RequiredZone: 1
