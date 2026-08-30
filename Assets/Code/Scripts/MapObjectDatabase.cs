@@ -80,8 +80,16 @@ public class MapObjectDatabase : MonoBehaviour
             List<MapObject> objects = new();
             if (obj.RequiredMapObject != null && obj.RequiredAction != null)
             {
-                objects.Add(obj);
-                ActionsDictionary.TryAdd((obj.RequiredAction.Name, obj.RequiredMapObject.Name), objects);
+                if (!ActionsDictionary.ContainsKey((obj.RequiredAction.Name, obj.RequiredMapObject.Name)))
+                {
+                    objects.Add(obj);
+                    ActionsDictionary.Add((obj.RequiredAction.Name, obj.RequiredMapObject.Name), objects);
+                }
+                else
+                {
+                    ActionsDictionary[(obj.RequiredAction.Name, obj.RequiredMapObject.Name)].Add(obj);
+                }
+
 
             }
             if (obj.HarvestedMaterial != null)
