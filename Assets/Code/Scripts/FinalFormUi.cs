@@ -11,6 +11,7 @@ public class FinalFormUi : MonoBehaviour
 
     void Start()
     {
+        gameObject.SetActive(false);
 
         foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
