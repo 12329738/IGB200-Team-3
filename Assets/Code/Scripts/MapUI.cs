@@ -1,10 +1,12 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
     public HistoryWindow historyWindow;
+    public ObjectSelectScreen objectSelectScreen;
     public static MapUI instance;
     public GameObject blocker;
     public Canvas canvas;
@@ -27,5 +29,11 @@ public class MapUI : MonoBehaviour
         blocker.SetActive(true);
         HistoryWindow window = Instantiate(historyWindow, canvas.transform);
         window.CreateHistory(mapObject);
+    }
+
+    public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)
+    {
+        ObjectSelectScreen window = Instantiate(objectSelectScreen, canvas.transform);
+        window.DisplayObjectChoices(mapObjects, onSelected);
     }
 }
