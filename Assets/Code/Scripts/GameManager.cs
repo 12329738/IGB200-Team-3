@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
-    AudioSource currentMusic;
+    public AudioSource currentMusic;
     int currentTrack;
     public List<AudioClip> gameMusic;
     void Awake()

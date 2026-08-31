@@ -76,6 +76,8 @@ public class Zone : MonoBehaviour
         {
             if (!isHovering)
             isHovering = true;
+            if (currentObject != null)
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
             if (selection.image.color.a == 1)
                 selection.image.color = hoverColour;
         }
@@ -84,6 +86,8 @@ public class Zone : MonoBehaviour
             if (isHovering)
             {
                 isHovering = false;
+                if (currentObject != null)
+                    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
                 if (selection.image.color.a == 1)
                     selection.image.color = Color.white;
             }
@@ -129,7 +133,7 @@ public class Zone : MonoBehaviour
         MapObject mapObject = MapObjectDatabase.instance.MapObjectDictionary[objectName];
         if (mapObject.HarvestedMaterial != null)
         {
-            HarvestMapObject(mapObject);
+            RecycleMapObject(mapObject);
             return;
         }
         if (mapObject.RequiredMapObject.Name == currentObject.Name)
@@ -152,16 +156,9 @@ public class Zone : MonoBehaviour
         }
     }
 
-    private void RecycleMapObject(MapObject mapObject)
-    {
-        GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
-        Destroy(currentMapObjectSprite.gameObject);
-        currentObject = null;
-        GameManager.instance.ResetCurrentAction();
-        UnHighlightObject();
-    }
+ 
 
-    private void HarvestMapObject(MapObject mapObject)
+    private void RecycleMapObject(MapObject mapObject)
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
         GameManager.instance.objectHistory.Push((currentObject, this));
@@ -169,6 +166,7 @@ public class Zone : MonoBehaviour
         currentObject = null;
         GameManager.instance.ResetCurrentAction();
         UnHighlightObject();
+        currentMapObjectSprite.popup.Disable();
     }
     private void ChangeMapObject(MapObject mapObject)
     {
@@ -198,6 +196,7 @@ public class Zone : MonoBehaviour
             {
                 MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
             }
+            currentMapObjectSprite.popup.Disable();
         }
     }
 
