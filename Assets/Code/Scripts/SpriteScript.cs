@@ -11,6 +11,7 @@ public class SpriteScript : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         propertyBlock = new MaterialPropertyBlock();
+        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
     }
 
     public void SetHighlight(bool highlighted)

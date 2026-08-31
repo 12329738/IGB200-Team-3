@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,11 +14,13 @@ public class Zone : MonoBehaviour
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
+    
     public MapUI MapUi;
     private bool isHovering;
     public Color hoverColour;
     private void OnMouseDown()
     {
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -32,17 +35,30 @@ public class Zone : MonoBehaviour
             if (GameManager.instance.CurrentMaterial != null)
             {
                 CombineMapObjectWithMaterial();
-            }
+                return;
 
-            else if (GameManager.instance.CurrentAction != null)
-            {
-                PerformActionOnMapObject();
             }
-
+            
+            
             else
             {
-                MapUi.DisplayHistoryWindow(currentObject);
+                string action = MapObjectDatabase.instance.ActionsDictionary
+                    .Where(x => x.Key.Item2 == currentObject.Name)
+                    .Select(x => x.Key.Item1)
+                    .FirstOrDefault();
+
+                currentMapObjectSprite.GetComponentInChildren<ObjectPopup>(true).Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
             }
+
+            //else if (GameManager.instance.CurrentAction != null)
+            //{
+            //    PerformActionOnMapObject();
+            //}
+
+            //else
+            //{
+            //    MapUi.DisplayHistoryWindow(currentObject);
+            //}
         }
     }
 
@@ -88,10 +104,10 @@ public class Zone : MonoBehaviour
            ChangeMapObject(mapObject);
     }
 
-    private void PerformActionOnMapObject()
+    private void PerformActionOnMapObject(string action)
     {
 
-        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
         {
             if (mapObjects.Count > 1)
             {

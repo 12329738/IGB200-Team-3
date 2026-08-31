@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 0
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 1213933172}
   MapUi: {fileID: 1859272410}
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 2
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 747137570}
   MapUi: {fileID: 1859272410}
@@ -2029,6 +2029,7 @@ MonoBehaviour:
   storageUi: {fileID: 652811337}
   inputTracker: {fileID: 1867996481}
   currentAction: {fileID: 1447084502}
+  gameMusic: []
 --- !u!4 &804130906
 Transform:
   m_ObjectHideFlags: 0
@@ -2968,7 +2969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 1
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 66229069}
   MapUi: {fileID: 1859272410}
