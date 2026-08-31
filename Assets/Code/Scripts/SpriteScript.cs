@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpriteScript : MonoBehaviour
 {
     public SpriteRenderer image;
-
+    public ObjectPopup popup;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
 

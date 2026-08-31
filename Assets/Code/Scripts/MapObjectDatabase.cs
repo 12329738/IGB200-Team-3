@@ -92,13 +92,13 @@ public class MapObjectDatabase : MonoBehaviour
 
 
             }
-            //if (obj.HarvestedMaterial != null)
-            //{
-            //    objects = new();
-            //    objects.Add(obj);
-            //    ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
-            //}
-                
+            if (obj.HarvestedMaterial != null)
+            {
+                objects = new();
+                objects.Add(obj);
+                ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
+            }
+
         }
     }
 

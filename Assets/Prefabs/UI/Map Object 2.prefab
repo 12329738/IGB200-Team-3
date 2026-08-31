@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
   image: {fileID: 4746859858784275437}
+  popup: {fileID: 1962267432593792244}
 --- !u!212 &4746859858784275437
 SpriteRenderer:
   serializedVersion: 2
@@ -175,7 +176,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3014144300480621733
 MonoBehaviour:
@@ -202,6 +203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8595741832718037504}
     m_Modifications:
+    - target: {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 927939534350239450, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_Name
       value: ObjectPopup

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
-        //PlayMusic();
+        PlayMusic();
 
     }
     void Update()
@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
         {
             ResetCurrentAction();
         }
-        //if (!currentMusic.isPlaying)
-        //{
-        //    currentTrack++;
-        //    if (currentTrack >= gameMusic.Count)
-        //        currentTrack = 0;
-        //    currentMusic.clip = gameMusic[currentTrack];
-        //    currentMusic.Play();
-        //}
+        if (!currentMusic.isPlaying)
+        {
+            currentTrack++;
+            if (currentTrack >= gameMusic.Count)
+                currentTrack = 0;
+            currentMusic.clip = gameMusic[currentTrack];
+            currentMusic.Play();
+        }
     }
     public void PlayMusic()
     {

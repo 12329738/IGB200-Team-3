@@ -42,12 +42,17 @@ public class Zone : MonoBehaviour
             
             else
             {
+                if (currentMapObjectSprite.popup.isActiveAndEnabled)
+                {
+                    currentMapObjectSprite.popup.Disable();
+                    return;
+                }
                 string action = MapObjectDatabase.instance.ActionsDictionary
                     .Where(x => x.Key.Item2 == currentObject.Name)
                     .Select(x => x.Key.Item1)
                     .FirstOrDefault();
 
-                currentMapObjectSprite.GetComponentInChildren<ObjectPopup>(true).Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
+                currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
             }
 
             //else if (GameManager.instance.CurrentAction != null)
