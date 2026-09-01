@@ -115,7 +115,8 @@ public class Zone : MonoBehaviour
 
     private void PerformActionOnMapObject(string action)
     {
-
+        if (action == null)
+            return;
         if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
         {
             if (mapObjects.Count > 1)

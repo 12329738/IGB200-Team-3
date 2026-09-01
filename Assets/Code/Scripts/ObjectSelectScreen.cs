@@ -34,4 +34,10 @@ public class ObjectSelectScreen : MonoBehaviour
         MapUI.instance.blocker.SetActive(false);
         Destroy(this.gameObject);
     }
+
+    public void OnCloseButtonClick()
+    {
+        onSelected?.Invoke(null);
+        Destroy(this.gameObject);
+    }
 }
