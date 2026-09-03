@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
+    public AudioSource currentMusic;
+    int currentTrack;
+    public List<AudioClip> gameMusic;
     void Awake()
     {
 
@@ -26,7 +29,7 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
-
+        PlayMusic();
 
     }
     void Update()
@@ -35,6 +38,25 @@ public class GameManager : MonoBehaviour
         {
             ResetScene();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ResetCurrentAction();
+        }
+        if (!currentMusic.isPlaying)
+        {
+            currentTrack++;
+            if (currentTrack >= gameMusic.Count)
+                currentTrack = 0;
+            currentMusic.clip = gameMusic[currentTrack];
+            currentMusic.Play();
+        }
+    }
+    public void PlayMusic()
+    {
+        currentMusic.clip = gameMusic[0];
+        currentTrack = 0;
+        currentMusic.Play();
     }
     public void SetCurrentMaterial(Material material)
     {

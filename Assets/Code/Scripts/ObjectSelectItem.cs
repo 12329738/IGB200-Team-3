@@ -31,5 +31,10 @@ public class ObjectSelectItem : MonoBehaviour
 
     }
 
+    public void OnCloseButtonClick()
+    {
+        Destroy(gameObject);
+    }
+
 
 }

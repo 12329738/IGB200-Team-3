@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -5}
-  m_SizeDelta: {x: 1200, y: 80}
+  m_AnchoredPosition: {x: 0, y: 3}
+  m_SizeDelta: {x: 1500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &10655633
 CanvasRenderer:
@@ -181,7 +181,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 0
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 1213933172}
   MapUi: {fileID: 1859272410}
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
   image: {fileID: 66229068}
+  popup: {fileID: 0}
 --- !u!1 &81697826
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &126172077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -879,8 +880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 371}
-  m_SizeDelta: {x: 1500, y: 200}
+  m_AnchoredPosition: {x: 61, y: 361}
+  m_SizeDelta: {x: 1600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137932389
 MonoBehaviour:
@@ -1080,7 +1081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 2
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 747137570}
   MapUi: {fileID: 1859272410}
@@ -1918,6 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
   image: {fileID: 747137569}
+  popup: {fileID: 0}
 --- !u!1 &801849659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,6 +2009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 804130906}
   - component: {fileID: 804130905}
+  - component: {fileID: 804130907}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2029,6 +2032,11 @@ MonoBehaviour:
   storageUi: {fileID: 652811337}
   inputTracker: {fileID: 1867996481}
   currentAction: {fileID: 1447084502}
+  currentMusic: {fileID: 804130907}
+  gameMusic:
+  - {fileID: 8300000, guid: 37517f9b50a60ae4b9126b255690d41f, type: 3}
+  - {fileID: 8300000, guid: 703afdf1c101c0e4d972a8a3ba505f85, type: 3}
+  - {fileID: 8300000, guid: f25d374684e09bd4fa080effb54b6a62, type: 3}
 --- !u!4 &804130906
 Transform:
   m_ObjectHideFlags: 0
@@ -2044,6 +2052,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &804130907
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804130904}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.417
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &818206963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,6 +2837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
   image: {fileID: 1213933171}
+  popup: {fileID: 0}
 --- !u!1 &1227900921
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,7 +3074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zone: 1
-  mapObjectPrefab: {fileID: 265402016574890224, guid: 4a3584283443b904ab3fc6909bb61883, type: 3}
+  mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
   selection: {fileID: 66229069}
   MapUi: {fileID: 1859272410}
@@ -3259,7 +3365,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 1500}
+  m_SizeDelta: {x: 200, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1612229434
 MonoBehaviour:

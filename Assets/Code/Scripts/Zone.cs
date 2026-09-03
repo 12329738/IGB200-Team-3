@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,11 +14,13 @@ public class Zone : MonoBehaviour
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
+    
     public MapUI MapUi;
     private bool isHovering;
     public Color hoverColour;
     private void OnMouseDown()
     {
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -32,17 +35,35 @@ public class Zone : MonoBehaviour
             if (GameManager.instance.CurrentMaterial != null)
             {
                 CombineMapObjectWithMaterial();
-            }
+                return;
 
-            else if (GameManager.instance.CurrentAction != null)
-            {
-                PerformActionOnMapObject();
             }
-
+            
+            
             else
             {
-                MapUi.DisplayHistoryWindow(currentObject);
+                if (currentMapObjectSprite.popup.isActiveAndEnabled)
+                {
+                    currentMapObjectSprite.popup.Disable();
+                    return;
+                }
+                string action = MapObjectDatabase.instance.ActionsDictionary
+                    .Where(x => x.Key.Item2 == currentObject.Name)
+                    .Select(x => x.Key.Item1)
+                    .FirstOrDefault();
+
+                currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
             }
+
+            //else if (GameManager.instance.CurrentAction != null)
+            //{
+            //    PerformActionOnMapObject();
+            //}
+
+            //else
+            //{
+            //    MapUi.DisplayHistoryWindow(currentObject);
+            //}
         }
     }
 
@@ -55,6 +76,8 @@ public class Zone : MonoBehaviour
         {
             if (!isHovering)
             isHovering = true;
+            if (currentObject != null)
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
             if (selection.image.color.a == 1)
                 selection.image.color = hoverColour;
         }
@@ -63,6 +86,8 @@ public class Zone : MonoBehaviour
             if (isHovering)
             {
                 isHovering = false;
+                if (currentObject != null)
+                    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
                 if (selection.image.color.a == 1)
                     selection.image.color = Color.white;
             }
@@ -88,10 +113,11 @@ public class Zone : MonoBehaviour
            ChangeMapObject(mapObject);
     }
 
-    private void PerformActionOnMapObject()
+    private void PerformActionOnMapObject(string action)
     {
-
-        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+        if (action == null)
+            return;
+        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
         {
             if (mapObjects.Count > 1)
             {
@@ -108,7 +134,7 @@ public class Zone : MonoBehaviour
         MapObject mapObject = MapObjectDatabase.instance.MapObjectDictionary[objectName];
         if (mapObject.HarvestedMaterial != null)
         {
-            HarvestMapObject(mapObject);
+            RecycleMapObject(mapObject);
             return;
         }
         if (mapObject.RequiredMapObject.Name == currentObject.Name)
@@ -131,16 +157,9 @@ public class Zone : MonoBehaviour
         }
     }
 
-    private void RecycleMapObject(MapObject mapObject)
-    {
-        GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
-        Destroy(currentMapObjectSprite.gameObject);
-        currentObject = null;
-        GameManager.instance.ResetCurrentAction();
-        UnHighlightObject();
-    }
+ 
 
-    private void HarvestMapObject(MapObject mapObject)
+    private void RecycleMapObject(MapObject mapObject)
     {
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
         GameManager.instance.objectHistory.Push((currentObject, this));
@@ -148,6 +167,7 @@ public class Zone : MonoBehaviour
         currentObject = null;
         GameManager.instance.ResetCurrentAction();
         UnHighlightObject();
+        currentMapObjectSprite.popup.Disable();
     }
     private void ChangeMapObject(MapObject mapObject)
     {
@@ -177,6 +197,7 @@ public class Zone : MonoBehaviour
             {
                 MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
             }
+            currentMapObjectSprite.popup.Disable();
         }
     }
 

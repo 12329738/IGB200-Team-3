@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpriteScript : MonoBehaviour
 {
     public SpriteRenderer image;
-
+    public ObjectPopup popup;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
 
@@ -11,6 +11,7 @@ public class SpriteScript : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         propertyBlock = new MaterialPropertyBlock();
+        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
     }
 
     public void SetHighlight(bool highlighted)

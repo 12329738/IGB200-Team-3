@@ -98,7 +98,7 @@ public class MapObjectDatabase : MonoBehaviour
                 objects.Add(obj);
                 ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
             }
-                
+
         }
     }
 
