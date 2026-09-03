@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public AudioSource currentMusic;
     int currentTrack;
     public List<AudioClip> gameMusic;
+    public HashSet<string> goalItems = new();
+    public HashSet<string> completedGoalItems = new();
+    public bool goalItemsFinished = false;
+    public GoalItemUI goalItemUI;
     void Awake()
     {
 
@@ -104,5 +108,20 @@ public class GameManager : MonoBehaviour
     {
         materialCounts[material.Name] += amount;
         storageUi.ChangeStorageAmount(material.Name);
+    }
+
+    internal void AddCompletedItem(string name)
+    {
+        if (!completedGoalItems.Contains(name))
+        {
+            completedGoalItems.Add(name);
+            Destroy(goalItemUI.finalFormButtons[name].gameObject);
+            if (completedGoalItems.Count == goalItems.Count)
+            {
+                goalItemsFinished = true;
+                goalItemUI.CreateFinalItems();
+            }
+                
+        }
     }
 }

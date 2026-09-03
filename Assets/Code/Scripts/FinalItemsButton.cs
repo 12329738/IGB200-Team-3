@@ -7,6 +7,7 @@ public class FinalItemsButton : MonoBehaviour
     void Start()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
+        gameObject.SetActive(false);
     }
     public void OnClick()
     {

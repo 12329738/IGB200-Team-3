@@ -14,10 +14,17 @@ public class Zone : MonoBehaviour
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
-    
+    GameManager gameManager;
+    MapObjectDatabase mapObjectDatabase;
     public MapUI MapUi;
     private bool isHovering;
     public Color hoverColour;
+
+    void Start()
+    {
+        gameManager = GameManager.instance;
+        mapObjectDatabase = MapObjectDatabase.instance;
+    }
     private void OnMouseDown()
     {
 
@@ -32,7 +39,7 @@ public class Zone : MonoBehaviour
 
         else 
         {
-            if (GameManager.instance.CurrentMaterial != null)
+            if (gameManager.CurrentMaterial != null)
             {
                 CombineMapObjectWithMaterial();
                 return;
@@ -47,7 +54,7 @@ public class Zone : MonoBehaviour
                     currentMapObjectSprite.popup.Disable();
                     return;
                 }
-                string action = MapObjectDatabase.instance.ActionsDictionary
+                string action = mapObjectDatabase.ActionsDictionary
                     .Where(x => x.Key.Item2 == currentObject.Name)
                     .Select(x => x.Key.Item1)
                     .FirstOrDefault();
@@ -55,7 +62,7 @@ public class Zone : MonoBehaviour
                 currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
             }
 
-            //else if (GameManager.instance.CurrentAction != null)
+            //else if (gameManager.CurrentAction != null)
             //{
             //    PerformActionOnMapObject();
             //}
@@ -100,16 +107,16 @@ public class Zone : MonoBehaviour
 
     private void CreateMapObject()
     {
-        if (GameManager.instance.CurrentMaterial != null)
+        if (gameManager.CurrentMaterial != null)
         {
-            if (MapObjectDatabase.instance.ZoneDictionary.TryGetValue((zone, GameManager.instance.CurrentMaterial.Name), out MapObject mapObject))
+            if (mapObjectDatabase.ZoneDictionary.TryGetValue((zone, gameManager.CurrentMaterial.Name), out MapObject mapObject))
                 ChangeMapObject(mapObject);
         }        
     }
 
     private void CombineMapObjectWithMaterial()
     {
-        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
+        if (mapObjectDatabase.CombinationDictionary.TryGetValue((gameManager.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
            ChangeMapObject(mapObject);
     }
 
@@ -117,7 +124,7 @@ public class Zone : MonoBehaviour
     {
         if (action == null)
             return;
-        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
+        if (mapObjectDatabase.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
         {
             if (mapObjects.Count > 1)
             {
@@ -131,7 +138,7 @@ public class Zone : MonoBehaviour
     }
     private void OnObjectSelected(string objectName)
     {
-        MapObject mapObject = MapObjectDatabase.instance.MapObjectDictionary[objectName];
+        MapObject mapObject = mapObjectDatabase.MapObjectDictionary[objectName];
         if (mapObject.HarvestedMaterial != null)
         {
             RecycleMapObject(mapObject);
@@ -142,11 +149,11 @@ public class Zone : MonoBehaviour
 
             if (mapObject.RequiredStoredMaterial != null)
             {
-                if (!GameManager.instance.HasRequiredMatierals(mapObject))
+                if (!gameManager.HasRequiredMatierals(mapObject))
                     return;
                 else
                 {
-                    GameManager.instance.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+                    gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
                 }
 
             }
@@ -161,11 +168,11 @@ public class Zone : MonoBehaviour
 
     private void RecycleMapObject(MapObject mapObject)
     {
-        GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
-        GameManager.instance.objectHistory.Push((currentObject, this));
+        gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        gameManager.objectHistory.Push((currentObject, this));
         Destroy(currentMapObjectSprite.gameObject);
         currentObject = null;
-        GameManager.instance.ResetCurrentAction();
+        gameManager.ResetCurrentAction();
         UnHighlightObject();
         currentMapObjectSprite.popup.Disable();
     }
@@ -185,19 +192,27 @@ public class Zone : MonoBehaviour
             {
                 currentMapObjectSprite.image.sprite = null;
             }
-            GameManager.instance.objectHistory.Push((currentObject, this));
+            gameManager.objectHistory.Push((currentObject, this));
             currentObject = mapObject;
-            GameManager.instance.ResetCurrentAction();
+            gameManager.ResetCurrentAction();
             UnHighlightObject();
 
-            MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+            mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
             if (mapObject.RequiredAction != null)
-                MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name, mapObject.RequiredAction);
+                mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name, mapObject.RequiredAction);
             foreach (var historyItem in mapObject.createdFrom)
             {
-                MapObjectDatabase.instance.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
+                mapObjectDatabase.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
             }
             currentMapObjectSprite.popup.Disable();
+
+            if (!gameManager.goalItemsFinished && gameManager.goalItems.Contains(mapObject.Name))
+            {
+                if (!gameManager.completedGoalItems.Contains(mapObject.Name))
+                {
+                    gameManager.AddCompletedItem(mapObject.Name);
+                }          
+            }
         }
     }
 
@@ -230,23 +245,17 @@ public class Zone : MonoBehaviour
         if (currentObject != null)
         {
             currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
-            //if (action != null && action.Name == "Recycle")
-            //{
-            //    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-            //    selection.SetVisible(true);
-            //    selection.GetComponent<SpriteScript>().SetHighlight(true);                
-            //    return;
-            //}
+
 
             
-            if (material != null && MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
+            if (material != null && mapObjectDatabase.CombinationDictionary.TryGetValue((gameManager.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
             {
                 currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
                 selection.SetVisible(true);
                 selection.GetComponent<SpriteScript>().SetHighlight(true);
                 
             }
-            else if (action != null && MapObjectDatabase.instance.ActionsDictionary.TryGetValue((GameManager.instance.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
+            else if (action != null && mapObjectDatabase.ActionsDictionary.TryGetValue((gameManager.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
             {
                 currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
                 selection.SetVisible(true);
