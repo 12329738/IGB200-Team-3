@@ -68,20 +68,41 @@ public class Zone : MonoBehaviour
 
     private void Update()
     {
+        if (IsPointerOverCollider())
+        {
+
+            if (!isHovering)
+            {
+                isHovering = true;
+                if (currentObject != null)
+                    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
+                if (selection.image.color.a == 1)
+                    selection.image.color = hoverColour;
+            }
+
+
+
+            return;
+        }
+
+        else if (isHovering)
+        {
+            isHovering = false;
+            if (currentObject != null)
+                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
+            if (selection.image.color.a == 1)
+                selection.image.color = Color.white;
+        }
+        
+
         if (!Input.GetMouseButtonDown(0))
             return;
-
-        if (IsPointerOverPopup())
-            return;
-
-        if (IsPointerOverCollider())
-            return;
-
-        if (currentMapObjectSprite != null &&
-            currentMapObjectSprite.popup.isActiveAndEnabled)
+        
+        if (currentMapObjectSprite && currentMapObjectSprite.popup.isActiveAndEnabled)
         {
-            currentMapObjectSprite.popup.Disable();
-        }
+            if (!IsPointerOverPopup())
+                currentMapObjectSprite.popup.Disable();
+        }   
     }
 
     private bool IsPointerOverPopup()

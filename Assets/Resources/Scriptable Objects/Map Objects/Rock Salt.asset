@@ -16,7 +16,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: d2702c800db2ff24eae317d825c5e165, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 8ab46c6dfaf1da840a23494d67f447cb, type: 2}
   RequiredMaterial: {fileID: 0}
-  RequiredZone: 3
+  RequiredZone: 0
   RequiredAction: {fileID: 11400000, guid: fde5a2a61fd05a3419da357cfc45fb6e, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0

@@ -107,7 +107,7 @@ public class MapObjectDatabase : MonoBehaviour
         ZoneDictionary = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.RequiredZone != ZoneEnum.Any)
+            if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
             {
                 ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
             }

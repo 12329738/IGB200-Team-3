@@ -28,7 +28,17 @@ public class GoalItemUI : MonoBehaviour
         while (chosenObjects.Count < itemNumber)
         {
             int random = Random.Range(0, finalForms.Count);
+            bool sameZone = false;
+            foreach (var obj in chosenObjects)
+            {
+                
+                if (finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
+                    sameZone = true;
 
+
+            }
+            if (sameZone)
+                continue;
             chosenObjects.Add(random);
         }
         finalFormButtons = new();
@@ -49,6 +59,10 @@ public class GoalItemUI : MonoBehaviour
         }
     }
 
+    void ChooseItems()
+    {
+
+    }
     public void CreateFinalItems()
     {
         text.text = "See what other items you can make!";
