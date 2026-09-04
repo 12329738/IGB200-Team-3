@@ -30,8 +30,14 @@ public class Zone : MonoBehaviour
 
         if (EventSystem.current.IsPointerOverGameObject())
         {
-            return;
+             return;
         }
+
+        if (currentMapObjectSprite != null && currentMapObjectSprite.popup.isActiveAndEnabled)
+        {
+            currentMapObjectSprite.popup.Disable(); return;
+        }
+
         if (currentObject == null)
         {
             CreateMapObject();
@@ -45,15 +51,10 @@ public class Zone : MonoBehaviour
                 return;
 
             }
-            
-            
+                    
             else
             {
-                if (currentMapObjectSprite.popup.isActiveAndEnabled)
-                {
-                    currentMapObjectSprite.popup.Disable();
-                    return;
-                }
+
                 string action = mapObjectDatabase.ActionsDictionary
                     .Where(x => x.Key.Item2 == currentObject.Name)
                     .Select(x => x.Key.Item1)
@@ -61,50 +62,62 @@ public class Zone : MonoBehaviour
 
                 currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
             }
-
-            //else if (gameManager.CurrentAction != null)
-            //{
-            //    PerformActionOnMapObject();
-            //}
-
-            //else
-            //{
-            //    MapUi.DisplayHistoryWindow(currentObject);
-            //}
         }
     }
+
 
     private void Update()
     {
-        
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-     
-        if ( Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
-        {
-            if (!isHovering)
-            isHovering = true;
-            if (currentObject != null)
-                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-            if (selection.image.color.a == 1)
-                selection.image.color = hoverColour;
-        }
-        else
-        {
-            if (isHovering)
-            {
-                isHovering = false;
-                if (currentObject != null)
-                    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
-                if (selection.image.color.a == 1)
-                    selection.image.color = Color.white;
-            }
-                
-        }
-        
+        if (!Input.GetMouseButtonDown(0))
+            return;
 
+        if (IsPointerOverPopup())
+            return;
 
+        if (IsPointerOverCollider())
+            return;
+
+        if (currentMapObjectSprite != null &&
+            currentMapObjectSprite.popup.isActiveAndEnabled)
+        {
+            currentMapObjectSprite.popup.Disable();
+        }
     }
 
+    private bool IsPointerOverPopup()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.transform.IsChildOf(
+                    currentMapObjectSprite.popup.transform))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsPointerOverCollider()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.collider.gameObject == gameObject ||
+                   hit.collider.transform.IsChildOf(transform);
+        }
+
+        return false;
+    }
     private void CreateMapObject()
     {
         if (gameManager.CurrentMaterial != null)
@@ -138,6 +151,8 @@ public class Zone : MonoBehaviour
     }
     private void OnObjectSelected(string objectName)
     {
+        if (objectName == null)
+            return;
         MapObject mapObject = mapObjectDatabase.MapObjectDictionary[objectName];
         if (mapObject.HarvestedMaterial != null)
         {
