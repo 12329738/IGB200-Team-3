@@ -1693,6 +1693,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 739808155}
     m_Modifications:
+    - target: {fileID: 2275190638890101998, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3531520158551266233, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_SizeDelta.x
       value: 400
@@ -1791,7 +1795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_fontSize
-      value: 25
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_margin.z
@@ -1799,7 +1803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_fontSizeBase
-      value: 25
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_enableAutoSizing
