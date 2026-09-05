@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 92b8b6522e361324b80554f247b7af96
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Editor/LoopNode.cs
+  uploadId: 965462

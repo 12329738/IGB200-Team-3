@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9e63b6bf5727d334b93723ed4079693e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Editor/JBGraphViewRouting.cs
+  uploadId: 965462

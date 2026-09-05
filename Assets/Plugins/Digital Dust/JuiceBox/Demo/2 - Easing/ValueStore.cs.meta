@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a7deeba9cbeeac449b03b6d9114c2e42
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Demo/2 - Easing/ValueStore.cs
+  uploadId: 965462

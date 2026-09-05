@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 23c6aaf3ec24dd246867e3c5e5eceb06
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Editor/SequenceBackupManager.cs
+  uploadId: 965462

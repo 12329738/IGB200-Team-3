@@ -1,0 +1,89 @@
+/*
+   SequenceEditorWindow.uss
+   Place in any Editor/ folder alongside SequenceEditorWindow.cs.
+   Located at runtime via AssetDatabase.FindAssets so the path is not hardcoded.
+
+   All --jb-* properties are read by JBGraphView.CustomStylesResolvedEvent and
+   propagated to FilmStripElement, EffectNode and HookNode via JbTheme. Remove any
+   property to fall back to the hardcoded default in JbTheme.Default.
+*/
+
+.jb-seq-view {
+   background-color: #1c1c1c;
+   flex-grow: 1;
+
+   --jb-strip-bg: #232323;
+   --jb-cap-bg: #1c2833;
+   --jb-cap-border: #334c66;
+   --jb-cap-btn: #7fa0bc;
+   --jb-cap-btn-disabled: #4a5866;
+   --jb-cap-label: #6e9dc0;
+   --jb-cap-name: #c6dff5;
+   --jb-h-rule: #334f69;
+   --jb-slot-idle: #3d3d3d;
+   --jb-slot-hi: #599ceb;
+   --jb-slot-bg-hi: #142d47;
+   --jb-slot-denied: #cc5555;
+   --jb-slot-bg-denied: #330f0f;
+   --jb-slot-num: #474747;
+   --jb-arrow: #888888;
+   --jb-run-bg: rgba(26, 62, 178, 0.14);
+   --jb-run-border: rgba(61, 138, 230, 0.80);
+   --jb-pocket-bg: #131d28;
+   --jb-pocket-border: #2a4e71;
+   --jb-strip-speckle: rgba(255, 255, 255, 0.10);
+   --jb-node-bg: #1c2a39;
+   --jb-node-border: #3b5b7b;
+   --jb-node-btn: #7fa0bc;
+   --jb-node-border-drag: #5785b2;
+   --jb-node-border-float: #d04a3c;
+   --jb-node-border-sel: #a89621;
+   --jb-node-border-float-sel: #e05b4b;
+   --jb-node-header: #15212e;
+   --jb-badge-tween-bg: #152415;
+   --jb-badge-tween-text: #5c9e5c;
+   --jb-badge-adv-bg: #241515;
+   --jb-badge-adv-text: #ce6767;
+   --jb-badge-shake-bg: #241c0a;
+   --jb-badge-shake-text: #d1a33b;
+   --jb-badge-type-bg: #1a1a2b;
+   --jb-badge-type-text: #8a8ad9;
+   --jb-field-bg: #111c27;
+   --jb-field-bg-miss: #210d0d;
+   --jb-field-lbl: #7c9bb2;
+   --jb-field-val: #6299bd;
+   --jb-field-miss-val: #e06a6a;
+   --jb-port-action: #4c99e6;
+   --jb-port-label: #99a6b0;
+   --jb-port-divider: #1f3347;
+   --jb-arc: #5e86a0;
+   --jb-subnode-bg: #141f2e;
+   --jb-subnode-border: #4173ad;
+   --jb-eval-once-bg: #2e402e;
+   --jb-eval-once-text: #99e699;
+   --jb-eval-frame-bg: #383847;
+   --jb-eval-frame-text: #bfc7e6;
+   --jb-drag-highlight: rgba(128, 128, 128, 0.40);
+   --jb-msg-bar-bg: #212121;
+   --jb-msg-bar-border: #333333;
+   --jb-msg-bar-text: #a0a0a0;
+   --jb-msg-warn-bg: #2b240f;
+   --jb-msg-warn-border: #66520f;
+   --jb-msg-warn-text: #e0b838;
+   --jb-msg-err-bg: #331414;
+   --jb-msg-err-border: #8c2f2f;
+   --jb-msg-err-text: #f07a7a;
+   --jb-scroll-track: rgba(0, 0, 0, 0.30);
+   --jb-scroll-thumb: rgba(255, 255, 255, 0.40);
+   --jb-edge-width:      3;
+   --jb-edge-radius:     6;
+   --jb-edge-lane-pitch: 10;
+}
+
+.jb-seq-grid {
+   --grid-background-color: #1c1c1c;
+   --line-color:            rgba(255, 255, 255, 0.04);
+   --thick-line-color:      rgba(255, 255, 255, 0.09);
+   --spacing:               32;
+   --thick-lines:           8;
+}

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d71d31e764bc58942a699303f8d2bee5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Editor/LayoutBackupManager.cs
+  uploadId: 965462

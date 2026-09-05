@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b2e5f1c7d4035d509c1f2b3e4d5c6f71
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Editor/JuiceBox.Editor.asmdef
+  uploadId: 965462

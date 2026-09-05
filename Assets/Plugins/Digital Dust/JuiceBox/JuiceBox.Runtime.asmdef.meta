@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f1740c12d1e3ce84d9532e39afef8a91
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/JuiceBox.Runtime.asmdef
+  uploadId: 965462

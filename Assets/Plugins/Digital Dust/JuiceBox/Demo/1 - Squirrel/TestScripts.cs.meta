@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0ca0d3218d60ced4b9fbb5ae94091874
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/Demo/1 - Squirrel/TestScripts.cs
+  uploadId: 965462

@@ -1,0 +1,21 @@
+{
+    "name": "JuiceBox.Editor",
+    "rootNamespace": "",
+    "references": [
+        "DigitalDust",
+        "JuiceBox.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "JuiceBox.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

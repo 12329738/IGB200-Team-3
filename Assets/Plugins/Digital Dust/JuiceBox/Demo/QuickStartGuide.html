@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JuiceBox: Quick Start Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #fafaf8;
+        --fg: #1a1a18;
+        --fg-muted: #5c5c58;
+        --accent: #d35f2a;
+        --accent-light: #f4e8df;
+        --border: #d8d6d0;
+        --code-bg: #f0efeb;
+        --code-border: #d8d6d0;
+        --tip-bg: #fef8e8;
+        --tip-border: #e8d590;
+        --heading-decoration: #d35f2a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        font-size: 17px;
+        line-height: 1.72;
+        color: var(--fg);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 60px 40px 100px;
+    }
+
+    .cover {
+        text-align: center;
+        padding: 80px 0 60px;
+        border-bottom: 3px solid var(--heading-decoration);
+        margin-bottom: 50px;
+    }
+
+    .cover h1 {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 42px;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        color: var(--fg);
+    }
+
+    .cover h1 span { color: var(--accent); }
+
+    .cover .subtitle {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 19px;
+        font-weight: 400;
+        color: var(--fg-muted);
+        margin-top: 14px;
+    }
+
+    .cover .edition {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--accent);
+        margin-top: 28px;
+    }
+
+    .toc {
+        margin-bottom: 50px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .toc h2 {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--fg-muted);
+        margin-bottom: 18px;
+    }
+
+    .toc ol {
+        list-style: none;
+        counter-reset: toc;
+        columns: 2;
+        column-gap: 40px;
+    }
+
+    .toc li {
+        counter-increment: toc;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 15px;
+        line-height: 2.1;
+        color: var(--fg);
+        break-inside: avoid;
+    }
+
+    .toc li::before {
+        content: counter(toc, decimal-leading-zero);
+        font-weight: 600;
+        color: var(--accent);
+        margin-right: 10px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    section {
+        margin-bottom: 52px;
+    }
+
+    section > h2 {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 1.3;
+        color: var(--fg);
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--heading-decoration);
+        margin-bottom: 20px;
+    }
+
+    section > h2 .num {
+        color: var(--accent);
+        margin-right: 6px;
+    }
+
+    h3 {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--fg);
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    p { margin-bottom: 14px; }
+
+    ul, ol {
+        margin-bottom: 14px;
+        padding-left: 24px;
+    }
+
+    li { margin-bottom: 6px; }
+    li > strong { color: var(--fg); }
+
+    code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.84em;
+        background: var(--code-bg);
+        border: 1px solid var(--code-border);
+        border-radius: 3px;
+        padding: 1px 5px;
+    }
+
+    pre {
+        background: var(--code-bg);
+        border: 1px solid var(--code-border);
+        border-radius: 6px;
+        padding: 20px 22px;
+        margin: 16px 0 20px;
+        overflow-x: auto;
+        line-height: 1.55;
+    }
+
+    pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 14px;
+    }
+
+    .steps {
+        list-style: none;
+        counter-reset: step;
+        padding-left: 0;
+        margin: 16px 0 20px;
+    }
+
+    .steps li {
+        counter-increment: step;
+        padding-left: 36px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 1px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        text-align: center;
+        line-height: 24px;
+    }
+
+    .tip {
+        background: var(--tip-bg);
+        border-left: 4px solid var(--tip-border);
+        padding: 14px 18px;
+        margin: 18px 0 20px;
+        border-radius: 0 6px 6px 0;
+        font-size: 15.5px;
+    }
+
+    .tip::before {
+        content: "Tip";
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #a08430;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .tip p { margin-bottom: 0; }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 20px;
+        font-size: 15.5px;
+    }
+
+    th {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--fg-muted);
+        text-align: left;
+        padding: 8px 12px;
+        border-bottom: 2px solid var(--border);
+    }
+
+    td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+
+    .sig-table td:first-child {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13.5px;
+        white-space: nowrap;
+        color: var(--accent);
+    }
+
+    @media print {
+        body { background: white; font-size: 11pt; }
+        .page { padding: 0; max-width: none; }
+        section { break-inside: avoid; }
+        pre { font-size: 9.5pt; }
+    }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+    <h1>Juice<span>Box</span></h1>
+    <div class="subtitle">Quick Start Guide</div>
+    <div class="edition">Free Edition</div>
+</div>
+
+<nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+        <li>Setting Up</li>
+        <li>Sequences</li>
+        <li>OnUpdate</li>
+        <li>Tween</li>
+        <li>Follow</li>
+        <li>Shake</li>
+        <li>Effect Chaining</li>
+        <li>Tweening UI Elements</li>
+        <li>HookNodes: OnStart and OnDone</li>
+        <li>OnComplete and Finally</li>
+        <li>Looping</li>
+        <li>Relative Delegates</li>
+        <li>Multiple Sequences</li>
+        <li>Combining Sequences</li>
+        <li>Playing and Stopping from Script</li>
+        <li>Saving and Loading Snapshots</li>
+        <li>Copying Sequences to Other Animations</li>
+        <li>Custom Static Functions</li>
+    </ol>
+</nav>
+
+<!-- 01 -->
+<section>
+<h2><span class="num">01</span> Setting Up</h2>
+
+<p>JuiceBox animates GameObjects through a component and a graph editor. The component holds the animation data. The graph editor is where you build it visually.</p>
+
+<h3>Example: First-Time Setup</h3>
+
+<ol class="steps">
+    <li>Select any GameObject in your scene (or create an empty one called <strong>AnimTarget</strong>).</li>
+    <li>In the Inspector, click <strong>Add Component</strong> and search for <strong>JuiceBoxAnimation</strong>.</li>
+    <li>With the GameObject still selected, open the graph editor via the menu bar: <strong>Window &gt; JuiceBox &gt; Sequence Editor</strong>.</li>
+</ol>
+
+<p>The graph editor appears as a window with an empty canvas. The Inspector shows the JuiceBoxAnimation component with an empty Sequences list. Both views show the same data: the Inspector shows raw fields, the graph editor shows the visual layout. You will do most of your work in the graph editor.</p>
+
+<p>The graph editor follows your selection. When you select a different GameObject that has a JuiceBoxAnimation, the editor switches to show that animation's sequences.</p>
+</section>
+
+<!-- 02 -->
+<section>
+<h2><span class="num">02</span> Sequences</h2>
+
+<p>A sequence is one lane of animation. It has a name and a chain of effects that run in order. The sequence's property type is determined automatically when you add the first effect, so you don't need to choose it up front.</p>
+
+<p>The property type controls what kind of value the sequence animates:</p>
+
+<table>
+    <tr><th>Type</th><th>What it is</th><th>Use it for</th></tr>
+    <tr><td><strong>Float</strong></td><td>A single number</td><td>Opacity, volume, health bar fill, any scalar</td></tr>
+    <tr><td><strong>Vector2</strong></td><td>Two numbers</td><td>UI position, 2D movement</td></tr>
+    <tr><td><strong>Vector3</strong></td><td>Three numbers</td><td>3D position, scale, euler angles</td></tr>
+    <tr><td><strong>Vector4</strong></td><td>Four numbers</td><td>Color channels, shader parameters</td></tr>
+    <tr><td><strong>Quaternion</strong></td><td>A rotation</td><td>3D orientation with correct interpolation</td></tr>
+</table>
+
+<h3>Example: Creating a Sequence</h3>
+
+<ol class="steps">
+    <li>Right-click the graph editor canvas and choose <strong>Add Sequence</strong>.</li>
+    <li>A new filmstrip lane appears. Click the name field in the left cap and type <strong>FadeIn</strong>.</li>
+</ol>
+
+<p>The filmstrip is empty: no effects yet. When you add your first effect (section 4), the sequence type locks to match it.</p>
+
+<div class="tip"><p>Give every sequence a descriptive but unique name. No two sequences can have the same name. You use the sequence name to start it from scripts and to save and load it to other GameObjects.</p></div>
+</section>
+
+<!-- 03 -->
+<section>
+<h2><span class="num">03</span> OnUpdate</h2>
+
+<p>OnUpdate is the delegate that writes the animated value to something in your scene every frame. Without it the sequence computes values internally but nothing visible happens. Always set OnUpdate.</p>
+
+<p>The DelegatePicker lets you point OnUpdate at any compatible target on the GameObject, which includes public methods, public fields, and properties. For example, you can point a Vector3 sequence's OnUpdate directly at <code>Transform.localPosition</code> without writing any code.</p>
+
+<h3>Example: Animating a Transform's Position</h3>
+
+<ol class="steps">
+    <li>In the graph editor, look at the left cap of your sequence.</li>
+    <li>Click the <strong>OnUpdate</strong> slot. The DelegatePicker opens.</li>
+    <li>It lists components on the GameObject. Expand <strong>Transform</strong>.</li>
+    <li>Select <strong>localPosition</strong>. The picker closes and the slot shows the binding.</li>
+</ol>
+
+<p>Every frame the sequence runs, JuiceBox writes the current animated value into <code>transform.localPosition</code>.</p>
+
+<h3>Example: OnUpdate with a Custom Script</h3>
+
+<p>If you need to do something more than set a single field (say, fading a sprite's alpha), you can write a method on your own script and point OnUpdate at it:</p>
+
+<pre><code>using UnityEngine;
+
+public class FadeController : MonoBehaviour
+{
+    private SpriteRenderer _sr;
+
+    void Awake()
+    {
+        _sr = GetComponent&lt;SpriteRenderer&gt;();
+    }
+
+    public void SetAlpha(float value)
+    {
+        Color c = _sr.color;
+        c.a = value;
+        _sr.color = c;
+    }
+}</code></pre>
+
+<p>Attach this script to the same GameObject, open the DelegatePicker for OnUpdate, find <strong>FadeController &gt; SetAlpha</strong>, and select it.</p>
+
+<div class="tip"><p>The DelegatePicker shows every compatible public member on every component attached to the GameObject. Fields, properties, and methods all appear, so pick whichever suits the situation.</p></div>
+</section>
+
+<!-- 04 -->
+<section>
+<h2><span class="num">04</span> Tween</h2>
+
+<p>A Tween interpolates from a starting value to a target value over a fixed duration. It is the simplest effect type: give it a target, a duration, and optionally an easing curve.</p>
+
+<p>The target value is set through a delegate: it reads from a field, property, or method on one of your scripts. This lets you change the target at runtime or share the same value across multiple effects.</p>
+
+<p>A Tween is one of two closely related ways to move a value to a target; the other is Follow, covered in the next section. The defining trait of a Tween is that it always lands on its target in exactly the Duration you set, speeding up or slowing down along the way to stay on schedule. When the target does not move, that makes a Tween the easier of the two to define: you pick the value and the time, and JuiceBox handles the rest.</p>
+
+<h3>Example: Fading from 0 to 1 Over Two Seconds</h3>
+
+<p>First, add a field to hold the target value on a script attached to your GameObject:</p>
+
+<pre><code>public class FadeSettings : MonoBehaviour
+{
+    public float targetAlpha = 1f;
+}</code></pre>
+
+<p>Then set up the Tween:</p>
+
+<ol class="steps">
+    <li>Right-click inside the <strong>FadeIn</strong> filmstrip and choose <strong>Add Effect &gt; Tween</strong>.</li>
+    <li>An effect node appears in the filmstrip. On the node, click the <strong>GetTargetValue</strong> slot.</li>
+    <li>In the DelegatePicker, find <strong>FadeSettings &gt; targetAlpha</strong> and select it.</li>
+    <li>Set <strong>Duration</strong> to <code>2</code> (seconds).</li>
+</ol>
+
+<p>When this sequence plays, the float value goes from 0 to 1 over two seconds. The Tween reads <code>targetAlpha</code> from your script to know what value to interpolate toward.</p>
+
+<h3>Easing</h3>
+
+<p>By default a Tween interpolates linearly. You can change the shape of the interpolation by setting an easing function on the node. JuiceBox provides a built-in library:</p>
+
+<table>
+    <tr><th>Family</th><th>Variants</th></tr>
+    <tr><td>Sine</td><td>SineIn, SineOut, SineInOut</td></tr>
+    <tr><td>Power</td><td>Pow2In/Out/InOut through Pow5In/Out/InOut</td></tr>
+    <tr><td>Elastic</td><td>ElasticIn, ElasticOut, ElasticInOut</td></tr>
+    <tr><td>Bounce</td><td>BounceIn, BounceOut, BounceInOut</td></tr>
+    <tr><td>Back</td><td>BackIn, BackOut, BackInOut</td></tr>
+</table>
+
+<p>Select an easing function from the <strong>Easing</strong> slot on the Tween node. The "In" variants start slow and accelerate, "Out" variants start fast and decelerate, and "InOut" variants do both.</p>
+
+<div class="tip"><p>For UI animations, <code>Pow2InOut</code> is a good default: it feels smooth and polished without being dramatic. For bouncy, playful motion, try <code>BackOut</code> or <code>ElasticOut</code>.</p></div>
+</section>
+
+<!-- 05 -->
+<section>
+<h2><span class="num">05</span> Follow</h2>
+
+<p>If a Tween commits to the clock, a Follow commits to a speed. Both do the same job, moving a value to a target, so it helps to think of them as two sides of one coin. The difference only matters when the target moves while the effect is running: a Tween keeps adjusting its rate to arrive on time anyway, while a Follow keeps chasing at a steady, more natural-looking speed and arrives when it arrives. So the choice comes down to one question: if the target shifts mid-animation, do you want the value to stay on schedule, or to move believably? When the target cannot move at all, either works, and a Tween is usually the simpler one to set up.</p>
+
+<div class="tip"><p>Which computes faster, Tweens or Follows? Tweens are slightly faster, but in practice the difference is so small that you would hardly be able to tell even with 10,000 of them running at once.</p></div>
+
+<p>A Follow chases a target value at a given speed. Unlike a Tween, there is no fixed interpolation curve: the value moves toward the target each frame at the speed you set. This makes Follow useful for targets that move or values that need to arrive at varying speeds.</p>
+
+<p>Like Tween, the target value comes from a delegate: a field, property, or method on one of your scripts.</p>
+
+<h3>Example: An Object Chasing a Moving Target</h3>
+
+<p>Write a script that exposes the target position:</p>
+
+<pre><code>public class ChaseSettings : MonoBehaviour
+{
+    public Transform targetObject;
+
+    public Vector3 GetTargetPosition()
+    {
+        return targetObject.position;
+    }
+}</code></pre>
+
+<p>Create a Vector3 sequence called <strong>ChaseTarget</strong> with OnUpdate bound to <code>Transform.localPosition</code>. Then:</p>
+
+<ol class="steps">
+    <li>Right-click the filmstrip and choose <strong>Add Effect &gt; Follow</strong>.</li>
+    <li>Click the <strong>GetTargetValue</strong> slot. In the DelegatePicker, select <strong>ChaseSettings &gt; GetTargetPosition</strong>.</li>
+    <li>Set <strong>Speed</strong> to <code>5</code> (units per second).</li>
+</ol>
+
+<p>Each frame, the Follow reads the target's current position and moves toward it at speed 5.</p>
+
+<h3>End Conditions</h3>
+
+<p>A Follow needs to know when it is "done" so the next effect in the chain can start. There are three options:</p>
+
+<ul>
+    <li><strong>Time</strong>: stops after a fixed number of seconds regardless of whether it reached the target. This gives the Follow a fixed duration, similar to a Tween.</li>
+    <li><strong>Value in Range</strong>: stops when the current value is within a threshold of the target. Good for "close enough" arrival.</li>
+    <li><strong>Condition</strong>: stops when a custom delegate returns true.</li>
+</ul>
+
+<h3>Smoothing</h3>
+
+<p>By default a Follow moves in a straight line at constant speed and stops abruptly. To get smooth acceleration and deceleration, connect a SmoothingNode:</p>
+
+<ol class="steps">
+    <li>Right-click the canvas near the Follow node and choose <strong>Add Smoothing Node</strong>.</li>
+    <li>Drag an edge from the SmoothingNode's output port to the Follow node's Smoothing input.</li>
+    <li>Adjust <strong>Frequency</strong> (how fast the spring responds) and <strong>Damping Ratio</strong> (how quickly oscillations die out).</li>
+</ol>
+
+<p>A damping ratio below 1.0 will overshoot and oscillate. At 1.0 it arrives smoothly without overshoot. Above 1.0 it arrives sluggishly.</p>
+
+<div class="tip"><p>Frequency 3-5 and Damping Ratio 0.7-1.0 is a good starting range for UI elements. Lower frequency with damping ratio around 0.3 gives a springy, playful feel.</p></div>
+</section>
+
+<!-- 06 -->
+<section>
+<h2><span class="num">06</span> Shake</h2>
+
+<p>A Shake oscillates around the starting value using a periodic waveform. It's ideal for camera shake, UI jitter, hit reactions, or any vibration effect. Shake does not chase a target: it always returns to where it started. An optional easing curve controls how the intensity decays over the duration.</p>
+
+<h3>Example: Camera Shake on Impact</h3>
+
+<p>Suppose you want the camera to shake when the player takes damage. Create a Vector3 sequence called <strong>CameraShake</strong> with OnUpdate bound to a script that offsets the camera's local position. Write a settings script:</p>
+
+<pre><code>public class ShakeSettings : MonoBehaviour
+{
+    public Vector3 shakeOffset;
+
+    public void ApplyShake(Vector3 value)
+    {
+        shakeOffset = value;
+    }
+}</code></pre>
+
+<ol class="steps">
+    <li>Right-click the filmstrip and choose <strong>Add Effect &gt; Shake</strong>.</li>
+    <li>The Shake node shows a <strong>Waveform</strong> dropdown (Sine, Triangle, Square, Sawtooth) and a <strong>Hz</strong> field for oscillation frequency. Set the waveform to <code>Sine</code> and Hz to <code>12</code>.</li>
+    <li>Set the <strong>Amp</strong> (amplitude) fields. For a subtle horizontal shake, set X to <code>0.1</code>, Y to <code>0.05</code>, Z to <code>0</code>.</li>
+    <li>Set <strong>Duration</strong> to <code>0.5</code> seconds. This is how long the shake lasts before the effect ends.</li>
+    <li>Set <strong>Easing</strong> to <code>Pow2In</code>. The easing curve controls how the shake intensity decays: Pow2In starts strong and fades out smoothly.</li>
+</ol>
+
+<h3>Duration and Easing</h3>
+
+<p>The Duration field controls how long the shake runs. Toggle <strong>Inf</strong> for a continuous shake that never ends on its own (useful for idle vibrations or engine hum). When Duration is set to Inf, the Easing row is disabled: there's no finite duration to decay over.</p>
+
+<p>When a duration is set, the Easing curve shapes the intensity envelope. Without easing, the shake runs at full amplitude for the entire duration and stops abruptly. With easing, the amplitude is modulated by the derivative of the easing curve, producing a natural fade.</p>
+</section>
+
+<!-- 07 -->
+<section>
+<h2><span class="num">07</span> Effect Chaining</h2>
+
+<p>Effects in a sequence run one after another, left to right in the filmstrip. When one effect's end condition is met, it finishes and the next effect starts. The next effect picks up from whatever value the previous one left off at.</p>
+
+<h3>Example: Fade In, Hold, Fade Out</h3>
+
+<p>Using the <strong>FadeIn</strong> float sequence, set up a script with two fields:</p>
+
+<pre><code>public class FadeSettings : MonoBehaviour
+{
+    public float fullyVisible = 1f;
+    public float fullyHidden = 0f;
+}</code></pre>
+
+<ol class="steps">
+    <li>You already have a Tween with GetTargetValue bound to <code>fullyVisible</code> and Duration set to 2 seconds (fade in).</li>
+    <li>Right-click the filmstrip to the right of the first Tween and add a second <strong>Tween</strong>. Bind GetTargetValue to <code>fullyVisible</code> and set Duration to <code>1</code>. Because the value is already at 1 and the target is 1, this Tween holds the value steady for one second.</li>
+    <li>Add a third <strong>Tween</strong>. Bind GetTargetValue to <code>fullyHidden</code> and set Duration to <code>2</code>. This fades back out.</li>
+</ol>
+
+<p>The sequence now runs three effects in order: fade in over 2s, hold for 1s, fade out over 2s. Each effect inherits the value the previous one ended at.</p>
+
+<div class="tip"><p>You can mix effect types in a chain. A Tween followed by a Follow followed by a Shake is perfectly valid: the value flows continuously from one effect to the next.</p></div>
+</section>
+
+<!-- 08 -->
+<section>
+<h2><span class="num">08</span> Tweening UI Elements</h2>
+
+<p>Animating Canvas UI uses the same Tween and effect machinery as the rest of this guide. The only thing that changes is which member OnUpdate writes to. UI lives on a RectTransform, so you drive <code>anchoredPosition</code> and <code>sizeDelta</code> rather than <code>transform.position</code>, and you fade through a material or text color rather than a SpriteRenderer.</p>
+
+<p>You rarely need to write any code for this. JuiceBox ships a set of ready-made UI setters and getters in the built-in <code>StandardFunctions</code> class, registered by default, so they appear in the DelegatePicker's <strong>Static</strong> section as soon as you open a slot.</p>
+
+<h3>Common UI Targets</h3>
+
+<table>
+    <tr><th>What you want</th><th>Point OnUpdate at</th><th>Value type</th></tr>
+    <tr><td>Move a panel (both axes)</td><td><code>RectTransform.anchoredPosition</code></td><td>Vector2</td></tr>
+    <tr><td>Move one edge</td><td><code>SetRectTransformLeft</code> / <code>Right</code> / <code>Top</code> / <code>Bottom</code></td><td>float</td></tr>
+    <tr><td>Resize</td><td><code>SetRectTransformWidth</code> / <code>SetRectTransformHeight</code></td><td>float</td></tr>
+    <tr><td>Tint</td><td><code>SetMaterialColor</code> / <code>SetTextColor</code></td><td>Vector4 (Vector3 for RGB)</td></tr>
+    <tr><td>Fade</td><td><code>SetMaterialAlpha</code> / <code>SetTextAlpha</code></td><td>float</td></tr>
+</table>
+
+<p>Position is the one row that needs no helper: <code>anchoredPosition</code> is an ordinary Vector2 property on RectTransform, so the DelegatePicker lists it directly under the component. The edge, size, color, and fade rows are <code>JuiceBox.StandardFunctions</code> entries under <strong>Static</strong>, and each setter has a matching getter (<code>GetRectTransformWidth</code>, <code>GetMaterialAlpha</code>, and so on) for reading the current value. To fade a whole panel at once instead of a single graphic, point OnUpdate at <code>CanvasGroup.alpha</code>, which is also a plain float property.</p>
+
+<h3>Example: Slide a Panel In While Fading It Up</h3>
+
+<p>This drives one panel with two sequences: one slides it on screen, the other fades it from clear to solid. In the editor, park the panel at its off-screen start position with an alpha of 0; the tweens carry it the rest of the way.</p>
+
+<ol class="steps">
+    <li>Select the panel, add a JuiceBoxAnimation, and add a sequence for the slide.</li>
+    <li>Add a <strong>Tween</strong> effect. Click the sequence's <strong>OnUpdate</strong> slot, expand <strong>RectTransform</strong> in the DelegatePicker, and select <strong>anchoredPosition</strong>. The sequence type locks to Vector2.</li>
+    <li>Set the Tween's target to the on-screen position, the same way you set a target in section 4, and choose an easing such as <code>Pow2InOut</code>.</li>
+    <li>Right-click the canvas, choose <strong>Add Sequence</strong> for the fade, and add a Tween to it. Click <strong>OnUpdate</strong>, switch to the <strong>Static</strong> section, and select <strong>JuiceBox.StandardFunctions &gt; SetMaterialAlpha</strong>. The sequence type locks to float.</li>
+    <li>Set that Tween's target to <code>1</code>.</li>
+</ol>
+
+<p>Start both sequences together from script and the panel slides and fades in at once. Running more than one sequence on a single object is covered in section 13.</p>
+
+<div class="tip"><p>Three UI habits worth keeping: drive <code>anchoredPosition</code> and <code>sizeDelta</code>, never <code>transform.position</code>; fade through <code>SetMaterialAlpha</code> or <code>SetTextAlpha</code> for one graphic, or <code>CanvasGroup.alpha</code> for a whole panel; and reach for <code>Pow2InOut</code> as a good default easing for UI motion.</p></div>
+</section>
+
+<!-- 09 -->
+<section>
+<h2><span class="num">09</span> HookNodes: OnStart and OnDone</h2>
+
+<p>Every effect has <strong>OnStart</strong> and <strong>OnDone</strong> signal slots. These fire once when an effect begins and once when it finishes. They call parameterless methods: they don't pass the animated value, they just notify your code that something happened.</p>
+
+<p>To use them, you connect a HookNode to the effect's output port.</p>
+
+<h3>Example: Playing a Sound When a Tween Finishes</h3>
+
+<p>Suppose you have a script with a parameterless method:</p>
+
+<pre><code>public class AudioTrigger : MonoBehaviour
+{
+    public AudioSource clip;
+
+    public void PlaySound()
+    {
+        clip.Play();
+    }
+}</code></pre>
+
+<ol class="steps">
+    <li>On the effect node in the filmstrip, find the <strong>OnDone</strong> output port (small circle on the bottom of the node).</li>
+    <li>Drag an edge from the OnDone port into empty space below the filmstrip. A HookNode appears automatically.</li>
+    <li>Click the HookNode. The DelegatePicker opens.</li>
+    <li>Find <strong>AudioTrigger &gt; PlaySound</strong> and select it.</li>
+</ol>
+
+<p>When the Tween reaches its duration and finishes, JuiceBox calls <code>PlaySound()</code> once.</p>
+
+<p>OnStart works the same way: drag from the OnStart port, wire a HookNode, and pick a method. It fires once at the moment the effect begins running.</p>
+</section>
+
+<!-- 10 -->
+<section>
+<h2><span class="num">10</span> OnComplete and Finally</h2>
+
+<p>Section 9 covered the signals on an individual <em>effect</em>. A <em>sequence</em> has two of its own: <strong>OnComplete</strong> and <strong>Finally</strong>. You will find them as two rows at the bottom of the filmstrip's left panel, below INITIAL VALUE. (In JuiceBox Pro they sit on the filmstrip's right-hand panel instead, but they work the same way.)</p>
+
+<p><strong>OnComplete</strong> fires once when the sequence <em>finishes</em>: after the last effect in the chain completes and no loop sends it back to the beginning. It is about success, so it does <em>not</em> fire when a run is cut short &mdash; if the object is destroyed or deactivated part-way through, OnComplete stays silent. It also never fires on a looping sequence, because such a sequence never reaches an end on its own.</p>
+
+<p><strong>Finally</strong> fires when the run ends, <em>however</em> it ends: it completed, you called Stop(), the GameObject was deactivated or destroyed, or your own callback threw an exception. Use it for teardown that has to happen either way &mdash; returning a pooled object, releasing a lock, clearing a "busy" flag. It fires exactly once per run, one frame after the run stops. Unlike OnComplete it <em>will</em> fire on a looping sequence, because stopping a loop still ends the run.</p>
+
+<div class="tip"><p>Choosing between them: if the work only makes sense when the animation actually finished &mdash; awarding a score, opening a door &mdash; use OnComplete. If skipping the work would leave something broken, use Finally.</p></div>
+
+<h3>Example: Clearing a "busy" Flag</h3>
+
+<p>Suppose a script blocks input while a panel animates, and has to unblock it no matter how the animation ends:</p>
+
+<pre><code>public class PanelGate : MonoBehaviour
+{
+    public bool busy;
+
+    public void ClearBusy()
+    {
+        busy = false;
+    }
+}</code></pre>
+
+<ol class="steps">
+    <li>On the filmstrip's left panel, click the <strong>Finally</strong> row. The DelegatePicker opens, the same one the OnUpdate and INITIAL VALUE rows use.</li>
+    <li>Find <strong>PanelGate &gt; ClearBusy</strong> and select it.</li>
+</ol>
+
+<p>Now <code>busy</code> is cleared when the panel finishes, and equally when something stops it early. Binding OnComplete works exactly the same way: click its row and pick a method.</p>
+
+<p>To remove a binding, open the picker again and press <strong>Delete Hook</strong>.</p>
+
+<h3>If a bound method goes missing</h3>
+
+<p>If you rename or delete a method that a slot is bound to, JuiceBox reports it in the console the next time the animation loads, naming the slot and the method it could not find. Worth knowing, because a broken Finally or OnComplete has no other symptom: the animation still plays perfectly, it just stops calling you back.</p>
+</section>
+
+<!-- 11 -->
+<section>
+<h2><span class="num">11</span> Looping</h2>
+
+<p>A LoopNode makes a sequence restart from the beginning when it reaches the end of its effect chain. Without a loop, the sequence plays once and stops.</p>
+
+<h3>Example: An Endlessly Pulsing Glow</h3>
+
+<p>Create a Float sequence called <strong>Pulse</strong> with two Tweens: one targeting your <code>fullyVisible</code> field over 1 second and one targeting <code>fullyHidden</code> over 1 second (a fade up / fade down cycle). Then:</p>
+
+<ol class="steps">
+    <li>Right-click the filmstrip and choose <strong>Add Loop Node</strong>.</li>
+    <li>The LoopNode appears at the end of the filmstrip. The sequence will now restart from the first effect after the last effect finishes.</li>
+</ol>
+
+<p>The pulse now runs forever. Each cycle plays the full effect chain (fade up, fade down), then loops back to the start.</p>
+</section>
+
+<!-- 12 -->
+<section>
+<h2><span class="num">12</span> Relative Delegates</h2>
+
+<p>The DelegatePicker doesn't just show components on the current GameObject; it also lets you pick targets on other GameObjects in the scene hierarchy. When you do this, JuiceBox stores the reference as a relative path (like "the child named Model" or "the parent's sibling named Light") rather than a direct object reference.</p>
+
+<p>This is what makes JuiceBox animations work with prefabs. Because the path is relative, every instance of the prefab resolves to its own children automatically. As long as the GameObjects maintain the same names and relative positions in the hierarchy, the animation just works.</p>
+
+<h3>Example: Animating a Child Object</h3>
+
+<p>Say your hierarchy looks like this:</p>
+
+<pre><code>Enemy           ← JuiceBoxAnimation is here
+  └─ Model      ← MeshRenderer with your script is here</code></pre>
+
+<p>You want the sequence on <strong>Enemy</strong> to call a method on a script attached to <strong>Model</strong>.</p>
+
+<ol class="steps">
+    <li>Open the DelegatePicker for any slot (OnUpdate, GetTargetValue, etc.).</li>
+    <li>Instead of picking a target on the current GameObject, select the <strong>Model</strong> child object from the picker.</li>
+    <li>The picker updates to show components on <strong>Model</strong>. Select the method or field you want.</li>
+</ol>
+
+<p>JuiceBox stores this as a relative reference: "the child named Model." If you instantiate the Enemy prefab ten times, each instance's animation finds its own Model child.</p>
+
+<h3>Relative vs. Absolute References</h3>
+
+<p>The DelegatePicker defaults to storing references as relative whenever there is a parent/child relationship between the JuiceBoxAnimation's GameObject and the target. If there is no hierarchical relationship (for example, two unrelated objects in the scene), the reference is stored as absolute.</p>
+
+<p>You can override this with the <strong>Absolute</strong> checkbox in the picker. An absolute reference won't break if you rename the target GameObject or move it around in the hierarchy, but it works poorly with shared sequences and prefabs: the reference points to one specific object in the scene rather than resolving by path.</p>
+
+<div class="tip"><p>Stick with relative references whenever possible. They are what make animations portable across prefab instances and loadable onto new GameObjects via snapshots.</p></div>
+</section>
+
+<!-- 13 -->
+<section>
+<h2><span class="num">13</span> Multiple Sequences</h2>
+
+<p>A single JuiceBoxAnimation can hold multiple sequences. Each sequence runs independently: it has its own property type, its own effect chain, and its own OnUpdate. This lets you coordinate complex animations on one object.</p>
+
+<h3>Example: Position and Rotation Together</h3>
+
+<ol class="steps">
+    <li>On a GameObject that already has a JuiceBoxAnimation with a Vector3 movement sequence, right-click the graph editor canvas and choose <strong>Add Sequence</strong>.</li>
+    <li>Name it <strong>SpinUp</strong>.</li>
+    <li>Add a Quaternion Tween effect to it. The sequence type locks to Quaternion.</li>
+    <li>Wire OnUpdate to <code>Transform.localRotation</code>.</li>
+</ol>
+
+<p>When you start both sequences from script, they run in parallel: the object moves and rotates at the same time. Each sequence manages its own value independently.</p>
+
+<div class="tip"><p>Use multiple sequences whenever different aspects of an animation have different timing or different property types. Position (Vector3) and rotation (Quaternion) are a natural split. Scale (Vector3) might be a third. Each can have its own easing, duration, and loop behavior.</p></div>
+</section>
+
+<!-- 14 -->
+<section>
+<h2><span class="num">14</span> Combining Sequences</h2>
+
+<p>Sometimes you want two sequences to control different parts of the same value. For example, one sequence controls horizontal movement (X and Z) while another controls vertical movement (Y). JuiceBox provides <code>StandardFunctions</code>, a built-in library of helper methods that map sequence outputs to specific axes of a transform.</p>
+
+<h3>Example: Separate Horizontal and Vertical Movement</h3>
+
+<p>You want to animate an object's X/Z position with one sequence (for ground movement) and its Y position with another (for jumping). The two sequences have different timing and different effect types, but they both write to the same <code>transform.position</code>.</p>
+
+<ol class="steps">
+    <li>Create a <strong>Vector2</strong> sequence called <strong>GroundMove</strong>.</li>
+    <li>For its OnUpdate, open the DelegatePicker and find <strong>StandardFunctions &gt; SetPositionXZ</strong>. This writes the Vector2's X to position.x and Y to position.z, leaving position.y untouched.</li>
+    <li>Create a <strong>Float</strong> sequence called <strong>Jump</strong>.</li>
+    <li>For its OnUpdate, wire it to a script method that sets only <code>transform.position.y</code>.</li>
+</ol>
+
+<p>Now the two sequences can run simultaneously without fighting over the transform. GroundMove handles the horizontal plane and Jump handles the vertical axis. Each StandardFunctions method writes only the axes it names, leaving the others at their current value: this is what makes it safe to have multiple sequences writing to the same transform.</p>
+</section>
+
+<!-- 15 -->
+<section>
+<h2><span class="num">15</span> Playing and Stopping from Script</h2>
+
+<h3>Auto-Start vs. Manual Trigger</h3>
+
+<p>By default, sequences are set to start automatically when the GameObject becomes active (OnEnable). This means the animation plays as soon as the object is enabled in the scene, no script needed.</p>
+
+<p>If you want full control over when a sequence starts, change the trigger dropdown on the sequence to <strong>Manual</strong>. A manual sequence does nothing until you start it from code.</p>
+
+<h3>Runtime API</h3>
+
+<p>JuiceBoxAnimation exposes a simple API for controlling playback. Every method has two overloads: one takes a sequence index (int), the other takes the sequence name (string).</p>
+
+<table class="sig-table">
+    <tr><th>Method</th><th>What it does</th></tr>
+    <tr><td>StartSequence(int)</td><td>Start a sequence by index</td></tr>
+    <tr><td>StartSequence(string)</td><td>Start a sequence by name</td></tr>
+    <tr><td>Stop()</td><td>Stop all sequences</td></tr>
+    <tr><td>Stop(int)</td><td>Stop a sequence by index</td></tr>
+    <tr><td>Stop(string)</td><td>Stop a sequence by name</td></tr>
+    <tr><td>Pause() / Pause(int) / Pause(string)</td><td>Pause all, by index, or by name</td></tr>
+    <tr><td>Resume() / Resume(int) / Resume(string)</td><td>Resume after pausing</td></tr>
+    <tr><td>IsPlaying(int) / IsPlaying(string)</td><td>Returns true if the sequence is running</td></tr>
+</table>
+
+<h3>Example: Starting an Animation from an Input Action</h3>
+
+<pre><code>using UnityEngine;
+using UnityEngine.InputSystem;
+using JuiceBox;
+
+public class AnimationLauncher : MonoBehaviour
+{
+    [SerializeField] private InputAction startAction;
+    [SerializeField] private InputAction stopAction;
+
+    private JuiceBoxAnimation _anim;
+
+    void Awake()
+    {
+        _anim = GetComponent&lt;JuiceBoxAnimation&gt;();
+        startAction.Enable();
+        stopAction.Enable();
+    }
+
+    void Update()
+    {
+        if (startAction.WasPressedThisFrame())
+            _anim.StartSequence("FadeIn");
+
+        if (stopAction.WasPressedThisFrame())
+            _anim.Stop();
+    }
+}</code></pre>
+
+<p>Triggering the start action begins the "FadeIn" sequence. Triggering the stop action stops everything.</p>
+
+<div class="tip"><p>Use the string overloads for readability. Use the int overloads in tight loops where you want to avoid the name lookup.</p></div>
+</section>
+
+<!-- 16 -->
+<section>
+<h2><span class="num">16</span> Saving and Loading Snapshots</h2>
+
+<p>JuiceBox automatically saves snapshots of your sequences as you work. Snapshots are stored outside the scene file, so you can restore a previous version of a sequence if you make a mistake or want to try a different approach.</p>
+
+<h3>Example: Restoring a Previous Version</h3>
+
+<ol class="steps">
+    <li>In the graph editor, look at the left cap of the sequence you want to restore.</li>
+    <li>Click <strong>Restore from Snapshot</strong>. A window opens listing all saved snapshots for that sequence, ordered by time.</li>
+    <li>Click a snapshot to restore it. The sequence reverts to that saved state.</li>
+</ol>
+
+<p>Snapshots are keyed by the sequence name. When you rename a sequence, the snapshots transfer to the new name. The old name becomes available for a new sequence.</p>
+
+<div class="tip"><p>If you don't want to produce any snapshots for a sequence, just don't give the sequence a name. Unnamed sequences are skipped by the snapshot system.</p></div>
+
+<h3>Loading a Snapshot as a New Sequence</h3>
+
+<p>You can also pull a snapshot into the current animation as a brand new sequence:</p>
+
+<ol class="steps">
+    <li>Right-click the graph editor canvas and choose <strong>Load Sequence</strong>.</li>
+    <li>A window lists all snapshot sequence names across your entire project.</li>
+    <li>Click a name to load its most recent snapshot as a new strip in the current animation.</li>
+</ol>
+</section>
+
+<!-- 17 -->
+<section>
+<h2><span class="num">17</span> Copying Sequences to Other Animations</h2>
+
+<p>Snapshots double as a transport mechanism. Because they are stored globally by sequence name, any JuiceBoxAnimation in your project can load any snapshot.</p>
+
+<h3>Example: Reusing a Fade Sequence on Multiple Objects</h3>
+
+<ol class="steps">
+    <li>Build your "FadeIn" sequence on one object and make sure it has been saved (snapshots happen automatically as you edit).</li>
+    <li>Select a different GameObject and add a <strong>JuiceBoxAnimation</strong> component.</li>
+    <li>Open the graph editor and right-click the canvas.</li>
+    <li>Choose <strong>Load Sequence</strong> and select <strong>FadeIn</strong>.</li>
+    <li>The sequence appears as a new strip with all its effects, easing, and hook configurations intact.</li>
+    <li>Wire up OnUpdate to the new object's components.</li>
+</ol>
+
+<p>The loaded sequence is a full independent copy: editing it does not affect the original. OnUpdate needs to be rewired because it pointed to the original object's components.</p>
+
+<div class="tip"><p>If you use relative delegates throughout (section 12), a loaded sequence may already resolve correctly on the new object, provided the hierarchy structure and child names match. This makes relative delegates especially valuable for reusable animation templates.</p></div>
+</section>
+
+<!-- 18 -->
+<section>
+<h2><span class="num">18</span> Custom Static Functions</h2>
+
+<p>Every slot you have wired so far (OnUpdate, OnStart, OnDone) has pointed at a member of a component sitting on the target GameObject. Static functions lift that restriction. A <code>public static</code> method belongs to no instance, so it can route an effect's signal straight into a project-wide manager, an event bus, an object pool, or a third-party plugin from the Asset Store: anything that does not happen to be a component on the animated object.</p>
+
+<p>That makes static functions the natural way to build reusable custom hooks. Write them once in a static class, register that class with JuiceBox, and they appear in the DelegatePicker's <strong>Static</strong> section for every animation in the project.</p>
+
+<h3>Writing the Class</h3>
+
+<p>There are only three rules: methods must be <code>public static</code>, they must be declared directly on the class (inherited statics are ignored), and the class must be registered (next step). Nested classes are allowed: refer to one later with a <code>+</code>, for example <code>MyGame.JuiceHooks+Audio</code>.</p>
+
+<pre><code>using UnityEngine;
+
+namespace MyGame
+{
+    public static class JuiceHooks
+    {
+        // Parameterless hook: valid for OnStart and OnDone.
+        public static void NotifyComplete()
+        {
+            GameEvents.AnimationFinished();
+        }
+
+        // GameObject-first hook: JuiceBox supplies the animated object.
+        public static void PlayHitEffect(GameObject target)
+        {
+            ImpactSystem.Spawn(target.transform.position);
+        }
+    }
+}</code></pre>
+
+<p>The second method shows the most useful convention: <strong>if the first parameter is a <code>GameObject</code>, JuiceBox fills it with the animation's target object</strong> when the hook fires. That one parameter is what lets a static function act on the right object without being attached to it, which is ideal for dispatching into your own systems or an external plugin.</p>
+
+<h3>Registering the Class</h3>
+
+<ol class="steps">
+    <li>Let Unity finish compiling. A class only becomes selectable once it exists and has at least one <code>public static</code> method.</li>
+    <li>Open the graph editor and click the <strong>gear icon</strong> in the toolbar to open <strong>JuiceBox Settings</strong>.</li>
+    <li>Under <strong>Additional static method classes</strong>, pick the assembly and then the type from the two dropdowns, and press <strong>+</strong>.</li>
+    <li>Press <strong>Apply</strong>. The class is saved with the project (shared through version control) and the picker refreshes.</li>
+</ol>
+
+<p>The built-in <code>StandardFunctions</code> entries always sit at the top of that list and cannot be removed; your own classes appear below them, each with a remove button.</p>
+
+<h3>Example: A Custom OnDone Hook</h3>
+
+<ol class="steps">
+    <li>With <strong>MyGame.JuiceHooks</strong> registered, drag an edge from an effect's <strong>OnDone</strong> port into empty space to spawn a HookNode (see section 9).</li>
+    <li>Click the HookNode to open the DelegatePicker, then switch to the <strong>Static</strong> section.</li>
+    <li>Find <strong>MyGame.JuiceHooks &gt; PlayHitEffect</strong> and select it.</li>
+</ol>
+
+<p>When the effect finishes, JuiceBox calls <code>PlayHitEffect(go)</code> with the animation's GameObject. <code>NotifyComplete</code> appears in the same list and would be called with no arguments.</p>
+
+<div class="tip"><p>The same class can serve more than hooks. A static method matches OnUpdate when it returns <code>void</code> and takes the sequence's value type (<code>void Method(float)</code> or <code>void Method(GameObject, float)</code>) and matches a getter such as GetTargetValue when it returns that value type. One static class can hold a whole library of reusable setters, getters, and hooks for your project.</p></div>
+
+<div class="tip"><p>If it is ever unclear how to shape one of these methods, the built-in <code>StandardFunctions</code> class is full of working getters and setters to model your own on. Read it for reference, but keep your own functions in your own class rather than editing <code>StandardFunctions</code> directly: edits there work, but they are overwritten every time you update JuiceBox to a newer version.</p></div>
+</section>
+
+</div>
+</body>
+</html>

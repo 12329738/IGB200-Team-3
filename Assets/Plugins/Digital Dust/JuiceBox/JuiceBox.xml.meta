@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 789d13f8efce9194ebcdd0a46b36d240
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 373946
+  packageName: JuiceBox - FREE
+  packageVersion: 1.10.0
+  assetPath: Assets/Plugins/Digital Dust/JuiceBox/JuiceBox.xml
+  uploadId: 965462

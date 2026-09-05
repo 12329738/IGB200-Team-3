@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4070c3540d34e58a09fac25ae3372c9, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 1d166c7ce4bb74049832dc24ab02c47a, type: 3}
+  title: JuiceBox
+  sections:
+  - heading: Welcome
+    text: JuiceBox is a visual animation system for Unity. Build complex animation
+      sequences using a node-based graph editor with no code required.
+    linkText: 
+    url: 
+  - heading: Quick Start Guide
+    text: A step-by-step guide is included in the Demo folder covering setup, the
+      graph editor, and animation basics.
+    linkText: Open the Quick Start Guide
+    url: Demo/QuickStartGuide.html
+  - heading: Demo Scenes
+    text: 'Two demo scenes are included.
+
+
+      Basic Demo at JuiceBox/Demo/Basic
+      Demo.unity shows JuiceBox in action and how the animations are set up.
+
+
+      Easing
+      Graphs in Demo/2 - Easing/ shows the built-in easing functions as animated
+      graphs with sliding page transitions.'
+    linkText: 
+    url: 
+  - heading: JuiceBox Pro
+    text: This is the free edition of JuiceBox. JuiceBox Pro is the fully featured
+      version, with the complete set of effects and tools. If JuiceBox is a good
+      fit for your project, consider upgrading.
+    linkText: Get JuiceBox Pro on the Asset Store
+    url: https://assetstore.unity.com/packages/slug/376202
+  - heading: Website
+    text: Visit Dust Factory for more tools, updates, and news.
+    linkText: dustfactory.net
+    url: https://dustfactory.net/
+  - heading: Render Pipeline
+    text: 'The demo material uses a Standard shader. On URP or HDRP it will render
+      incorrectly until it is pointed at the matching shader.
+
+
+      The button
+      below does that for whichever pipeline this project is using. It touches only
+      the bundled demo material, never your own, and it is safe to press more than
+      once.'
+    linkText: 
+    url: 
+  highlightOnImport: 0
