@@ -54,6 +54,9 @@ public class Zone : MonoBehaviour
                     
             else
             {
+                TutorialPromptManager.ShowOnce(
+                    TutorialPromptId.FirstObjectOpened
+                );
 
                 string action = mapObjectDatabase.ActionsDictionary
                     .Where(x => x.Key.Item2 == currentObject.Name)
@@ -139,19 +142,36 @@ public class Zone : MonoBehaviour
 
         return false;
     }
+
     private void CreateMapObject()
     {
-        if (gameManager.CurrentMaterial != null)
+        if (GameManager.instance.CurrentMaterial != null)
         {
-            if (mapObjectDatabase.ZoneDictionary.TryGetValue((zone, gameManager.CurrentMaterial.Name), out MapObject mapObject))
+            if (MapObjectDatabase.instance.ZoneDictionary.TryGetValue(
+                (zone, GameManager.instance.CurrentMaterial.Name),
+                out MapObject mapObject))
+            {
                 ChangeMapObject(mapObject);
-        }        
+
+                TutorialPromptManager.ShowOnce(
+                    TutorialPromptId.FirstMaterialPlaced
+                );
+            }
+        }
     }
 
     private void CombineMapObjectWithMaterial()
     {
-        if (mapObjectDatabase.CombinationDictionary.TryGetValue((gameManager.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
-           ChangeMapObject(mapObject);
+        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue(
+            (GameManager.instance.CurrentMaterial.Name, currentObject.Name),
+            out MapObject mapObject))
+        {
+            ChangeMapObject(mapObject);
+
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.FirstMaterialCombined
+            );
+        }
     }
 
     private void PerformActionOnMapObject(string action)
@@ -160,6 +180,10 @@ public class Zone : MonoBehaviour
             return;
         if (mapObjectDatabase.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
         {
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.FirstActionUsed
+            );
+
             if (mapObjects.Count > 1)
             {
                 MapUI.instance.DisplayObjectSelectScreen(mapObjects, OnObjectSelected);
@@ -170,6 +194,7 @@ public class Zone : MonoBehaviour
             }        
         }      
     }
+
     private void OnObjectSelected(string objectName)
     {
         if (objectName == null)
@@ -205,6 +230,9 @@ public class Zone : MonoBehaviour
     private void RecycleMapObject(MapObject mapObject)
     {
         gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        TutorialPromptManager.ShowOnce(
+            TutorialPromptId.FirstRecycle
+        );
         gameManager.objectHistory.Push((currentObject, this));
         Destroy(currentMapObjectSprite.gameObject);
         currentObject = null;
@@ -212,6 +240,7 @@ public class Zone : MonoBehaviour
         UnHighlightObject();
         currentMapObjectSprite.popup.Disable();
     }
+
     private void ChangeMapObject(MapObject mapObject)
     {
         if (mapObject != null)
