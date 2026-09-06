@@ -1693,13 +1693,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 739808155}
     m_Modifications:
+    - target: {fileID: 2275190638890101998, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2275190638890101998, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d4f8ac452dd6f4442a82eb5475a43767, type: 3}
     - target: {fileID: 3531520158551266233, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 600.68
       objectReference: {fileID: 0}
     - target: {fileID: 3531520158551266233, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -73.4
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 3914609286974199641, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_Pivot.x
@@ -1767,7 +1775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3914609286974199641, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 390
+      value: 357
       objectReference: {fileID: 0}
     - target: {fileID: 3914609286974199641, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1782,12 +1790,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5033429805838729717, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
+      propertyPath: m_Spacing
+      value: 54.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5033429805838729717, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_ChildForceExpandWidth
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_text
-      value: Try making these items!
+      value: Try making these!
       objectReference: {fileID: 0}
     - target: {fileID: 7080168937265913416, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_fontSize
@@ -1815,7 +1827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9162998582488009754, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 250
+      value: 203
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5250889893052677195, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
