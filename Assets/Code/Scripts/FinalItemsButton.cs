@@ -20,6 +20,10 @@ public class FinalItemsButton : MonoBehaviour
         {
             MapUI.instance.DisplayFinalFormWindow();
             text.text = "Hide Final Items";
+
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.FirstFinalItemsOpened
+            );
         }
         
     }
