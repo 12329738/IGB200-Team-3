@@ -14,11 +14,13 @@ public class Zone : MonoBehaviour
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
+    public IslandDecorate decorationArea;
     GameManager gameManager;
     MapObjectDatabase mapObjectDatabase;
     public MapUI MapUi;
     private bool isHovering;
     public Color hoverColour;
+
 
     void Start()
     {
@@ -278,7 +280,20 @@ public class Zone : MonoBehaviour
                     gameManager.AddCompletedItem(mapObject.Name);
                 }          
             }
+
+            if (mapObject.isFinalForm)
+            {
+                MoveFinalForm(mapObject);
+            }
         }
+    }
+
+    private void MoveFinalForm(MapObject mapObject)
+    {
+        decorationArea.PlaceItemOnIsland(currentMapObjectSprite);
+        currentObject = null;
+        currentMapObjectSprite = null;
+
     }
 
     public void Undo(MapObject mapObject)
