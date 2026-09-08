@@ -6,6 +6,7 @@ using UnityEngine;
 public class MapUI : MonoBehaviour
 {
     public HistoryWindow historyWindow;
+    public GameObject optionsMenu;
     public ObjectSelectScreen objectSelectScreen;
     public GameObject finalFormWindow;
     bool finalFormWindowActive = false;
@@ -50,7 +51,11 @@ public class MapUI : MonoBehaviour
         }
         
     }
-
+    public void DisplayOptionsMenu()
+    {
+        blocker.SetActive(true);
+        optionsMenu.SetActive(true);
+    }
     public void HideFinalFormWindow()
     {
         if (finalFormWindowActive == true)
