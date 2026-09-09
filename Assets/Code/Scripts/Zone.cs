@@ -149,9 +149,9 @@ public class Zone : MonoBehaviour
     {
         if (GameManager.instance.CurrentMaterial != null)
         {
-            if (MapObjectDatabase.instance.ZoneDictionary.TryGetValue(
-                (zone, GameManager.instance.CurrentMaterial.Name),
-                out MapObject mapObject))
+            MapObject mapObject;
+
+            if (MapObjectDatabase.instance.BasicDictionary.TryGetValue(GameManager.instance.CurrentMaterial.Name, out mapObject))
             {
                 ChangeMapObject(mapObject);
 
