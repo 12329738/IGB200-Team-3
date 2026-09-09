@@ -31,8 +31,8 @@ public class GoalItemUI : MonoBehaviour
             bool sameZone = false;
             foreach (var obj in chosenObjects)
             {
-                
-                if (finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
+
+                if (finalForms[obj].RequiredZone != ZoneEnum.Any && finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
                     sameZone = true;
 
 
