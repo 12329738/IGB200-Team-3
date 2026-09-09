@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Iron Beam
+  m_Name: Sapling
   m_EditorClassIdentifier: 
-  Name: Iron Beam
-  image: {fileID: 21300000, guid: 896dda2ecb6542b47a981dc32f03e3e1, type: 3}
+  Name: Sapling
+  image: {fileID: 21300000, guid: 1a4841018252fe74aab232760c1a1426, type: 3}
   RequiredMapObject: {fileID: 0}
-  RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
-  RequiredZone: 1
+  RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  RequiredZone: 3
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
+  HarvestedMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
   isFinalForm: 0
