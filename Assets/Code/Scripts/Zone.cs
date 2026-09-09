@@ -14,283 +14,321 @@ public class Zone : MonoBehaviour
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
     public SpriteScript selection;
-    public IslandDecorate decorationArea;
     GameManager gameManager;
     MapObjectDatabase mapObjectDatabase;
-    public MapUI MapUi;
     private bool isHovering;
     public Color hoverColour;
 
 
-    void Start()
+    private void Start()
     {
         gameManager = GameManager.instance;
         mapObjectDatabase = MapObjectDatabase.instance;
     }
+
+    private void Update()
+    {
+        HandleHover();
+        HandlePopupClosing();
+    }
+
+
     private void OnMouseDown()
     {
+        if (IsPointerOverUI())
+            return;
 
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsPopupOpen())
         {
-             return;
-        }
-
-        if (currentMapObjectSprite != null && currentMapObjectSprite.popup.isActiveAndEnabled)
-        {
-            currentMapObjectSprite.popup.Disable(); return;
+            ClosePopup();
+            return;
         }
 
         if (currentObject == null)
         {
             CreateMapObject();
-        }
-
-        else 
-        {
-            if (gameManager.CurrentMaterial != null)
-            {
-                CombineMapObjectWithMaterial();
-                return;
-
-            }
-                    
-            else
-            {
-                TutorialPromptManager.ShowOnce(
-                    TutorialPromptId.FirstObjectOpened
-                );
-
-                string action = mapObjectDatabase.ActionsDictionary
-                    .Where(x => x.Key.Item2 == currentObject.Name)
-                    .Select(x => x.Key.Item1)
-                    .FirstOrDefault();
-
-                currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
-            }
-        }
-    }
-
-
-    private void Update()
-    {
-        if (IsPointerOverCollider())
-        {
-
-            if (!isHovering)
-            {
-                isHovering = true;
-                if (currentObject != null)
-                    currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-                if (selection.image.color.a == 1)
-                    selection.image.color = hoverColour;
-            }
-
-
-
             return;
         }
 
-        else if (isHovering)
+        if (gameManager.CurrentMaterial != null)
         {
-            isHovering = false;
-            if (currentObject != null)
-                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
-            if (selection.image.color.a == 1)
-                selection.image.color = Color.white;
+            CombineMapObjectWithMaterial();
+            return;
         }
-        
 
+        OpenObjectPopup();
+    }
+    private void HandleHover()
+    {
+        bool pointerOverZone = IsPointerOverCollider();
+
+        if (pointerOverZone && !isHovering)
+        {
+            SetHoverState(true);
+        }
+        else if (!pointerOverZone && isHovering)
+        {
+            SetHoverState(false);
+        }
+    }
+
+    private void SetHoverState(bool hovering)
+    {
+        isHovering = hovering;
+
+        if (currentMapObjectSprite != null)
+            currentMapObjectSprite.SetHighlight(hovering);
+
+        if (selection != null && selection.image.color.a == 1f)
+            selection.image.color = hovering ? hoverColour : Color.white;
+    }
+    private void HandlePopupClosing()
+    {
         if (!Input.GetMouseButtonDown(0))
             return;
-        
-        if (currentMapObjectSprite && currentMapObjectSprite.popup.isActiveAndEnabled)
-        {
-            if (!IsPointerOverPopup())
-                currentMapObjectSprite.popup.Disable();
-        }   
+
+        if (!IsPopupOpen())
+            return;
+
+        if (IsPointerOverPopup())
+            return;
+
+        if (IsPointerOverCollider())
+            return;
+
+        ClosePopup();
     }
-
-    private bool IsPointerOverPopup()
+    private void OpenObjectPopup()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            position = Input.mousePosition
-        };
+        if (currentObject == null || currentMapObjectSprite == null)
+            return;
 
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerData, results);
+        TutorialPromptManager.ShowOnce(
+            TutorialPromptId.FirstObjectOpened
+        );
 
-        foreach (RaycastResult result in results)
+        string action = GetActionForCurrentObject();
+
+        currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
+    }
+    private string GetActionForCurrentObject()
+    {
+        foreach (var entry in mapObjectDatabase.ActionsDictionary)
         {
-            if (result.gameObject.transform.IsChildOf(
-                    currentMapObjectSprite.popup.transform))
-            {
-                return true;
-            }
+            if (entry.Key.Item2 == currentObject.Name)
+                return entry.Key.Item1;
         }
 
-        return false;
-    }
-
-    private bool IsPointerOverCollider()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            return hit.collider.gameObject == gameObject ||
-                   hit.collider.transform.IsChildOf(transform);
-        }
-
-        return false;
+        return null;
     }
 
     private void CreateMapObject()
     {
-        if (GameManager.instance.CurrentMaterial != null)
-        {
-            MapObject mapObject;
+        Material material = gameManager.CurrentMaterial;
 
-            if (MapObjectDatabase.instance.BasicDictionary.TryGetValue(GameManager.instance.CurrentMaterial.Name, out mapObject))
-            {
-                ChangeMapObject(mapObject);
+        if (material == null)
+            return;
 
-                TutorialPromptManager.ShowOnce(
-                    TutorialPromptId.FirstMaterialPlaced
-                );
-            }
-        }
+        if (!mapObjectDatabase.BasicDictionary.TryGetValue(material.Name, out MapObject mapObject))    
+            return;
+        
+        ChangeMapObject(mapObject);
+
+        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialPlaced);
     }
 
     private void CombineMapObjectWithMaterial()
     {
-        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue(
-            (GameManager.instance.CurrentMaterial.Name, currentObject.Name),
-            out MapObject mapObject))
-        {
-            ChangeMapObject(mapObject);
+        Material material = gameManager.CurrentMaterial;
 
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.FirstMaterialCombined
-            );
-        }
+        if (material == null || currentObject == null)
+            return;
+
+        if (!mapObjectDatabase.CombinationDictionary.TryGetValue((material.Name, currentObject.Name), out MapObject mapObject))     
+            return;   
+
+        ChangeMapObject(mapObject);
+
+        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialCombined);
     }
 
     private void PerformActionOnMapObject(string action)
     {
-        if (action == null)
+        if (string.IsNullOrEmpty(action) || currentObject == null)
             return;
-        if (mapObjectDatabase.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
-        {
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.FirstActionUsed
-            );
 
-            if (mapObjects.Count > 1)
-            {
-                MapUI.instance.DisplayObjectSelectScreen(mapObjects, OnObjectSelected);
-            }
-            else 
-            {
-                OnObjectSelected(mapObjects[0].Name);          
-            }        
-        }      
+        if (!mapObjectDatabase.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))      
+            return;
+        
+        if (mapObjects == null || mapObjects.Count == 0)
+            return;
+
+        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstActionUsed);
+
+        if (mapObjects.Count == 1)
+        {
+            OnObjectSelected(mapObjects[0].Name);
+            return;
+        }
+
+        MapUI.instance.DisplayObjectSelectScreen(mapObjects, OnObjectSelected
+        );
     }
 
     private void OnObjectSelected(string objectName)
     {
-        if (objectName == null)
+        if (string.IsNullOrEmpty(objectName))
             return;
-        MapObject mapObject = mapObjectDatabase.MapObjectDictionary[objectName];
+
+        if (!mapObjectDatabase.MapObjectDictionary.TryGetValue(objectName, out MapObject mapObject))
+            return;
+       
         if (mapObject.HarvestedMaterial != null)
         {
             RecycleMapObject(mapObject);
             return;
         }
-        if (mapObject.RequiredMapObject.Name == currentObject.Name)
-        {
 
-            if (mapObject.RequiredStoredMaterial != null)
-            {
-                if (!gameManager.HasRequiredMatierals(mapObject))
-                    return;
-                else
-                {
-                    gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
-                }
-
-            }
-
-            ChangeMapObject(mapObject);
+        if (mapObject.RequiredMapObject == null)
             return;
 
-        }
+        if (mapObject.RequiredMapObject.Name != currentObject?.Name)
+            return;
+
+        if (!HasRequiredMaterials(mapObject))
+            return;
+
+        ConsumeRequiredMaterials(mapObject);
+        ChangeMapObject(mapObject);
     }
 
- 
+    private bool HasRequiredMaterials(MapObject mapObject)
+    {
+        if (mapObject.RequiredStoredMaterial == null)
+            return true;
+
+        return gameManager.HasRequiredMatierals(mapObject);
+    }
+
+    private void ConsumeRequiredMaterials(MapObject mapObject)
+    {
+        if (mapObject.RequiredStoredMaterial == null)
+            return;
+
+        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+    }
 
     private void RecycleMapObject(MapObject mapObject)
     {
-        gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
-        TutorialPromptManager.ShowOnce(
-            TutorialPromptId.FirstRecycle
-        );
+        if (mapObject == null || currentObject == null)
+            return;
+
+        if (mapObject.HarvestedMaterial != null)
+        {
+            gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+        }
+
+        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
+
         gameManager.objectHistory.Push((currentObject, this));
-        Destroy(currentMapObjectSprite.gameObject);
+
+        if (currentMapObjectSprite != null)
+            Destroy(currentMapObjectSprite.gameObject);
+
         currentObject = null;
+        currentMapObjectSprite = null;
+
         gameManager.ResetCurrentAction();
         UnHighlightObject();
-        currentMapObjectSprite.popup.Disable();
     }
 
     private void ChangeMapObject(MapObject mapObject)
     {
-        if (mapObject != null)
-        {
-            if (currentObject == null)
-                currentMapObjectSprite = Instantiate(mapObjectPrefab, transform);
+        if (mapObject == null)
+            return;
 
-            if (mapObject.image != null)
-            {
-                
-                currentMapObjectSprite.image.sprite = mapObject.image;
-            }
-            else
-            {
-                currentMapObjectSprite.image.sprite = null;
-            }
+        EnsureMapObjectSpriteExists();
+
+        if (currentObject != null)
             gameManager.objectHistory.Push((currentObject, this));
-            currentObject = mapObject;
-            gameManager.ResetCurrentAction();
-            UnHighlightObject();
 
-            mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
-            if (mapObject.RequiredAction != null)
-                mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name, mapObject.RequiredAction);
-            foreach (var historyItem in mapObject.createdFrom)
-            {
-                mapObjectDatabase.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
-            }
-            currentMapObjectSprite.popup.Disable();
+        SetMapObjectVisual(mapObject);
+        AudioManager.instance.PlaySound(mapObject.creationSound, currentMapObjectSprite.transform.position);
+        currentObject = mapObject;
 
-            if (!gameManager.goalItemsFinished && gameManager.goalItems.Contains(mapObject.Name))
-            {
-                if (!gameManager.completedGoalItems.Contains(mapObject.Name))
-                {
-                    gameManager.AddCompletedItem(mapObject.Name);
-                }          
-            }
+        gameManager.ResetCurrentAction();
 
-            if (mapObject.isFinalForm)
-            {
-                MoveFinalForm(mapObject);
-            }
+        UnHighlightObject();
+
+        DiscoverMapObject(mapObject);
+        CheckGoalItem(mapObject);
+
+        currentMapObjectSprite.popup.Disable();
+
+        if (mapObject.isFinalForm)
+            MoveFinalForm(mapObject);
+    }
+    private void EnsureMapObjectSpriteExists()
+    {
+        if (currentMapObjectSprite != null)
+            return;
+
+        if (mapObjectPrefab == null)
+        {
+            return;
         }
+
+        currentMapObjectSprite = Instantiate(
+            mapObjectPrefab,
+            transform
+        );
+    }
+
+    private void SetMapObjectVisual(MapObject mapObject)
+    {
+        if (currentMapObjectSprite == null)
+            return;
+
+        currentMapObjectSprite.image.sprite = mapObject.image;
+    }
+
+    private void DiscoverMapObject(MapObject mapObject)
+    {
+        mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+
+        if (mapObject.RequiredAction != null)
+        {
+            mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name,mapObject.RequiredAction);
+        }
+
+        if (mapObject.createdFrom == null)
+            return;
+
+        foreach (HistoryItem historyItem in mapObject.createdFrom)
+        {
+            if (historyItem == null)
+                continue;
+
+            mapObjectDatabase.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
+        }
+    }
+    private void CheckGoalItem(MapObject mapObject)
+    {
+        if (gameManager.goalItemsFinished)
+            return;
+
+        if (!gameManager.goalItems.Contains(mapObject.Name))
+            return;
+
+        if (gameManager.completedGoalItems.Contains(mapObject.Name))
+            return;
+
+        gameManager.AddCompletedItem(mapObject.Name);
     }
 
     private void MoveFinalForm(MapObject mapObject)
     {
-        decorationArea.PlaceItemOnIsland(currentMapObjectSprite);
+        ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
         currentObject = null;
         currentMapObjectSprite = null;
 
@@ -309,47 +347,147 @@ public class Zone : MonoBehaviour
             currentObject = mapObject;
 
         }
-       
+
     }
 
-    internal void HighlightObject(Material material, Action action)
+    public void HighlightObject(Material material, Action action)
     {
-        
+        UnHighlightObject();
+
         if (material != null && currentObject == null)
         {
-            selection.SetVisible(true);
-            selection.GetComponent<SpriteScript>().SetHighlight(true);
+            ShowSelectionHighlight();
             return;
         }
 
-        if (currentObject != null)
+        if (currentObject == null)
+            return;
+
+        if (material != null && CanCombine(material))
         {
-            currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);
+            ShowObjectHighlight();
+            ShowSelectionHighlight();
+            return;
+        }
 
-
-            
-            if (material != null && mapObjectDatabase.CombinationDictionary.TryGetValue((gameManager.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
-            {
-                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-                selection.SetVisible(true);
-                selection.GetComponent<SpriteScript>().SetHighlight(true);
-                
-            }
-            else if (action != null && mapObjectDatabase.ActionsDictionary.TryGetValue((gameManager.CurrentAction.Name, currentObject.Name), out List<MapObject> mapObjects))
-            {
-                currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(true);
-                selection.SetVisible(true);
-                selection.GetComponent<SpriteScript>().SetHighlight(true);
-                
-            }
-        }                  
+        if (action != null && CanPerformAction(action))
+        {
+            ShowObjectHighlight();
+            ShowSelectionHighlight();
+        }
     }
 
     public void UnHighlightObject()
     {
-        selection.GetComponent<SpriteScript>().SetHighlight(false);
-        selection.SetVisible(false);
-        if (currentObject != null)
-            currentMapObjectSprite.GetComponent<SpriteScript>().SetHighlight(false);           
+        if (selection != null)
+        {
+            selection.SetVisible(false);
+            selection.SetHighlight(false);
+        }
+
+        if (currentMapObjectSprite != null)
+            currentMapObjectSprite.SetHighlight(false);
+    }
+
+    private void ShowObjectHighlight()
+    {
+        if (currentMapObjectSprite != null)
+            currentMapObjectSprite.SetHighlight(true);
+    }
+
+    private void ShowSelectionHighlight()
+    {
+        if (selection == null)
+            return;
+
+        selection.SetVisible(true);
+        selection.SetHighlight(true);
+    }
+
+    private bool CanCombine(Material material)
+    {
+        if (material == null || currentObject == null)
+            return false;
+
+        return mapObjectDatabase.CombinationDictionary.ContainsKey(
+            (material.Name, currentObject.Name)
+        );
+    }
+
+    private bool CanPerformAction(Action action)
+    {
+        if (action == null || currentObject == null)
+            return false;
+
+        return mapObjectDatabase.ActionsDictionary.ContainsKey(
+            (action.Name, currentObject.Name)
+        );
+    }
+
+    private bool IsPopupOpen()
+    {
+        return currentMapObjectSprite != null &&
+               currentMapObjectSprite.popup != null &&
+               currentMapObjectSprite.popup.isActiveAndEnabled;
+    }
+
+    private void ClosePopup()
+    {
+        if (currentMapObjectSprite?.popup != null)
+            currentMapObjectSprite.popup.Disable();
+    }
+
+    private bool IsPointerOverPopup()
+    {
+        if (!IsPopupOpen())
+            return false;
+
+        PointerEventData pointerData = new PointerEventData(
+            EventSystem.current
+        )
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(
+            pointerData,
+            results
+        );
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.transform.IsChildOf(
+                    currentMapObjectSprite.popup.transform))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current != null &&
+               EventSystem.current.IsPointerOverGameObject();
+    }
+
+
+    private bool IsPointerOverCollider()
+    {
+        if (Camera.main == null)
+            return false;
+
+        Ray ray = Camera.main.ScreenPointToRay(
+            Input.mousePosition
+        );
+
+        if (!Physics.Raycast(ray, out RaycastHit hit))
+            return false;
+
+        return hit.collider.gameObject == gameObject ||
+               hit.collider.transform.IsChildOf(transform);
     }
 }

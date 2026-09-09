@@ -15,6 +15,7 @@ public class MapObject : HistoryItem
     public Material HarvestedMaterial;
     public List<HistoryItem> createdFrom;
     public bool isFinalForm;
+    public AudioClip creationSound;
 
     public MapObject(MapObjectSO SO)
     {
@@ -42,5 +43,6 @@ public class MapObject : HistoryItem
         RequiredStoredMaterialAmount = SO.RequiredStoredMaterialAmount;
         if (SO.HarvestedMaterial != null) HarvestedMaterial = new Material(SO.HarvestedMaterial);
         isFinalForm = SO.isFinalForm;
+        creationSound = SO.creationSound;
     }
 }

@@ -16,8 +16,7 @@ public class GameManager : MonoBehaviour
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
-    public AudioSource currentMusic;
-    int currentTrack;
+    
     public List<AudioClip> gameMusic;
     public HashSet<string> goalItems = new();
     public HashSet<string> completedGoalItems = new();
@@ -33,8 +32,12 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
-        PlayMusic();
 
+
+    }
+    void Start()
+    {
+        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene());
     }
     void Update()
     {
@@ -47,21 +50,9 @@ public class GameManager : MonoBehaviour
         {
             ResetCurrentAction();
         }
-        if (!currentMusic.isPlaying)
-        {
-            currentTrack++;
-            if (currentTrack >= gameMusic.Count)
-                currentTrack = 0;
-            currentMusic.clip = gameMusic[currentTrack];
-            currentMusic.Play();
-        }
+        
     }
-    public void PlayMusic()
-    {
-        currentMusic.clip = gameMusic[0];
-        currentTrack = 0;
-        currentMusic.Play();
-    }
+    
     public void SetCurrentMaterial(Material material)
     {
         ZoneManager.instance.UnHighlightObject();
