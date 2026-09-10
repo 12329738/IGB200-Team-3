@@ -1301,9 +1301,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   mainMenuMusic: []
   gameMusic:
-  - {fileID: 8300000, guid: 37517f9b50a60ae4b9126b255690d41f, type: 3}
-  - {fileID: 8300000, guid: 703afdf1c101c0e4d972a8a3ba505f85, type: 3}
   - {fileID: 8300000, guid: f25d374684e09bd4fa080effb54b6a62, type: 3}
+  - {fileID: 8300000, guid: 703afdf1c101c0e4d972a8a3ba505f85, type: 3}
+  - {fileID: 8300000, guid: 37517f9b50a60ae4b9126b255690d41f, type: 3}
   currentMusic: {fileID: 370782137}
   audioSourcePrefab: {fileID: 7078633981754635083, guid: 42b173ac52e8ddb408e3b47d536d4a12, type: 3}
 --- !u!4 &370782136
@@ -1334,7 +1334,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.147
+  m_Volume: 0.097
   m_Pitch: 1
   Loop: 0
   Mute: 0
