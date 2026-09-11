@@ -22,4 +22,4 @@ MonoBehaviour:
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 0
-  creationSound: {fileID: 0}
+  creationSound: {fileID: 8300000, guid: 87cf4a034aa4dd740ac2adb01871ec30, type: 3}
