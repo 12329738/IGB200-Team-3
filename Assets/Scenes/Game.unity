@@ -663,6 +663,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739808156}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Menus, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2039838826828515858, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -810,6 +830,14 @@ PrefabInstance:
     - target: {fileID: 6403835570630476830, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181722029185252165, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739808156}
+    - target: {fileID: 9181722029185252165, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 9211761869183703973, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1590,6 +1618,7 @@ GameObject:
   - component: {fileID: 512275232}
   - component: {fileID: 512275231}
   - component: {fileID: 512275233}
+  - component: {fileID: 512275234}
   m_Layer: 5
   m_Name: TutorialPromptPanel
   m_TagString: Untagged
@@ -1667,6 +1696,116 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &512275234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512275229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
+  playOnAwake: 1
+  animationMode: 0
+  components:
+  - rid: 7970485410163851338
+  - rid: 7970485410163851339
+  references:
+    version: 2
+    RefIds:
+    - rid: 7970485410163851338
+      type: {class: ImageColorAlphaAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Color (Alpha)
+        enabled: 1
+        target: {fileID: 512275231}
+        settings:
+          startValue: 0
+          endValue: 0.6
+          duration: 0.75
+          ease: 0
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0
+          delayType: 0
+          loops: 1
+          loopType: 0
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 0
+        relative: 0
+    - rid: 7970485410163851339
+      type: {class: TMPTextColorAlphaAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Color (Alpha)
+        enabled: 1
+        target: {fileID: 1636275937}
+        settings:
+          startValue: 0
+          endValue: 1
+          duration: 0.75
+          ease: 0
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0
+          delayType: 0
+          loops: 1
+          loopType: 0
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 0
+        relative: 0
 --- !u!1 &517739325
 GameObject:
   m_ObjectHideFlags: 0
