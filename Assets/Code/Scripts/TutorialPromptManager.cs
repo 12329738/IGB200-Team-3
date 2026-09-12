@@ -61,6 +61,9 @@ public class TutorialPromptManager : MonoBehaviour
             promptCanvasGroup.interactable = false;
             promptCanvasGroup.blocksRaycasts = false;
         }
+
+        //Display first tutorial prompt when the game loads
+        TutorialPromptManager.ShowOnce(TutorialPromptId.GameLoaded);
     }
 
 
