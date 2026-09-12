@@ -1,6 +1,12 @@
+using LitMotion;
+using LitMotion.Animation;
+using LitMotion.Animation.Components;
+using LitMotion.Animation.Editor;
+using LitMotion.Extensions;
 using System;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
@@ -12,8 +18,22 @@ public class HistoryWindow : MonoBehaviour
     public GameObject arrow;
     public GameObject historyBranch;
     public GameObject historyRow;
+    public LitMotionAnimation closeAnimation;
+    bool closing = false;
+
     public void OnClick()
     {
+        if (!closing)
+        {
+            closing = true;
+            closeAnimation.Play();
+            
+        }   
+    }
+
+    public void Update()
+    {
+        if (closing && !closeAnimation.IsPlaying)
         Destroy(this.gameObject);
         MapUI.instance.blocker.SetActive(false);
     }

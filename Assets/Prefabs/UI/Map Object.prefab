@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
   image: {fileID: 4746859858784275437}
   popup: {fileID: 1962267432593792244}
+  lmAnimation: {fileID: 2977066722216189832}
 --- !u!212 &4746859858784275437
 SpriteRenderer:
   serializedVersion: 2
@@ -179,7 +180,7 @@ MonoBehaviour:
           skipValuesDuringDelay: 0
           immediateBind: 0
           schedulerType: 0
-          additionalSettings: 0
+          additionalSettings: 1
         relative: 0
 --- !u!1 &7400171329153206206
 GameObject:

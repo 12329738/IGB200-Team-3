@@ -1,3 +1,4 @@
+using LitMotion.Animation;
 using UnityEngine;
 
 public class SpriteScript : MonoBehaviour
@@ -6,6 +7,7 @@ public class SpriteScript : MonoBehaviour
     public ObjectPopup popup;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
+    public LitMotionAnimation lmAnimation;
 
     private void Awake()
     {

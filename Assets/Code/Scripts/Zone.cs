@@ -264,6 +264,7 @@ public class Zone : MonoBehaviour
         CheckGoalItem(mapObject);
 
         currentMapObjectSprite.popup.Disable();
+        currentMapObjectSprite.lmAnimation.Restart();
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
