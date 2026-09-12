@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,25 +58,33 @@ public class AudioManager : MonoBehaviour
         currentMusic.Play();
     }
 
-    public void PlaySound(AudioClip clip, Vector3 position, float volume = 1f)
+
+    public AudioHandle PlaySound(AudioClip clip, Vector3 position, float volume = 1f)
     {
-        if (clip == null) return;
+        if (clip == null)
+            return null;
 
+        GameObject pooledGO =
+            ObjectPool.instance.GetObject(audioSourcePrefab);
 
-        GameObject pooledGO = ObjectPool.instance.GetObject(audioSourcePrefab);
         pooledGO.transform.position = position;
 
-        AudioSource aSource = pooledGO.GetComponent<AudioSource>();
+        AudioSource aSource =
+            pooledGO.GetComponent<AudioSource>();
+
         aSource.clip = clip;
         aSource.volume = volume;
         aSource.Play();
 
-        StartCoroutine(ReturnToPoolAfterPlay(pooledGO, clip.length));
+        Coroutine returnCoroutine = StartCoroutine(ReturnToPoolAfterPlay(pooledGO, clip.length));
+
+        return new AudioHandle(pooledGO, aSource, returnCoroutine);
     }
 
-    private System.Collections.IEnumerator ReturnToPoolAfterPlay(GameObject go, float delay)
+    private IEnumerator ReturnToPoolAfterPlay(GameObject go,float delay)
     {
         yield return new WaitForSeconds(delay);
+
         ObjectPool.instance.ReturnObject(go);
     }
 }

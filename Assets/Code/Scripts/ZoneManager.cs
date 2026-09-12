@@ -5,6 +5,7 @@ public class ZoneManager : MonoBehaviour
     public Zone[] zones;
     public static ZoneManager instance = null;
     public IslandDecorate decorationArea;
+    private AudioHandle creationSoundHandle;
     void Awake()
     {
 
@@ -48,5 +49,18 @@ public class ZoneManager : MonoBehaviour
     internal void PlaceItemOnIsland(SpriteScript currentMapObjectSprite)
     {
         decorationArea.PlaceItemOnIsland(currentMapObjectSprite);
+    }
+
+    public void PlayCreationSound(MapObject mapObject)
+    {
+        StopSound();
+        creationSoundHandle = AudioManager.instance.PlaySound(mapObject.creationSound, transform.position);
+    }
+    
+    public void StopSound()
+    {
+        creationSoundHandle?.Stop();
+        creationSoundHandle = null;
+
     }
 }

@@ -18,6 +18,7 @@ public class Zone : MonoBehaviour
     MapObjectDatabase mapObjectDatabase;
     private bool isHovering;
     public Color hoverColour;
+    private AudioHandle creationSoundHandle;
 
 
     private void Start()
@@ -234,7 +235,7 @@ public class Zone : MonoBehaviour
 
         if (currentMapObjectSprite != null)
             Destroy(currentMapObjectSprite.gameObject);
-
+        ZoneManager.instance.StopSound();
         currentObject = null;
         currentMapObjectSprite = null;
 
@@ -253,7 +254,7 @@ public class Zone : MonoBehaviour
             gameManager.objectHistory.Push((currentObject, this));
 
         SetMapObjectVisual(mapObject);
-        AudioManager.instance.PlaySound(mapObject.creationSound, currentMapObjectSprite.transform.position);
+        ZoneManager.instance.PlayCreationSound(mapObject);
         currentObject = mapObject;
 
         gameManager.ResetCurrentAction();
@@ -284,6 +285,7 @@ public class Zone : MonoBehaviour
             transform
         );
     }
+
 
     private void SetMapObjectVisual(MapObject mapObject)
     {
