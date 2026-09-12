@@ -6,5 +6,6 @@ public enum TutorialPromptId
     FirstActionUsed,
     FirstRecycle,
     FirstUndo,
-    FirstFinalItemsOpened
+    FirstFinalItemsOpened,
+    GameLoaded
 }
