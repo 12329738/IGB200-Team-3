@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fishing Set
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Fishing Set
-  image: {fileID: 21300000, guid: b942525ebb5978f43be2e68142f32271, type: 3}
+  image: {fileID: 21300000, guid: 0dad323e566f9a34dbd94b3b88b2ebd5, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: e38821334cde730489ebddc1e7fc32e9, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 1
-  creationSound: {fileID: 0}
+  creationSound: {fileID: 8300000, guid: 7d02c8a9da27d2942a75f29cbf35b0e3, type: 3}

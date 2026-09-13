@@ -1725,7 +1725,7 @@ MonoBehaviour:
         target: {fileID: 512275231}
         settings:
           startValue: 0
-          endValue: 0.6
+          endValue: 0.75
           duration: 0.75
           ease: 0
           customEaseCurve:
@@ -4513,7 +4513,7 @@ MonoBehaviour:
   - id: 7
     message: Welcome! Click a material on the bottom and place it in the world to
       get started.
-    displayDuration: 5
+    displayDuration: 6
 --- !u!4 &1847438301
 Transform:
   m_ObjectHideFlags: 0
