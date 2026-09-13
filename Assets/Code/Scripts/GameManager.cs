@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
+    
+    public List<AudioClip> gameMusic;
+    public HashSet<string> goalItems = new();
+    public HashSet<string> completedGoalItems = new();
+    public bool goalItemsFinished = false;
+    public GoalItemUI goalItemUI;
     void Awake()
     {
 
@@ -29,13 +35,24 @@ public class GameManager : MonoBehaviour
 
 
     }
+    void Start()
+    {
+        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene());
+    }
     void Update()
     {
         if (inputTracker.TimeSinceLastInput > inputTracker.ResetTimer)
         {
             ResetScene();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ResetCurrentAction();
+        }
+        
     }
+    
     public void SetCurrentMaterial(Material material)
     {
         ZoneManager.instance.UnHighlightObject();
@@ -82,5 +99,20 @@ public class GameManager : MonoBehaviour
     {
         materialCounts[material.Name] += amount;
         storageUi.ChangeStorageAmount(material.Name);
+    }
+
+    internal void AddCompletedItem(string name)
+    {
+        if (!completedGoalItems.Contains(name))
+        {
+            completedGoalItems.Add(name);
+            Destroy(goalItemUI.finalFormButtons[name].gameObject);
+            if (completedGoalItems.Count == goalItems.Count)
+            {
+                goalItemsFinished = true;
+                goalItemUI.CreateFinalItems();
+            }
+                
+        }
     }
 }

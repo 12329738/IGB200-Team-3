@@ -9,6 +9,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
+    public Dictionary<string, MapObject> BasicDictionary;
     public Dictionary<string, HistoryItem> KnownRecipeDictionary;
 
     void Awake()
@@ -36,8 +37,19 @@ public class MapObjectDatabase : MonoBehaviour
         CreateMapObjectDictionary(mapObjects);
         CreateCombinationDictionary(mapObjects);
         CreateActionsDictionary(mapObjects);
-        CreateZoneDictionary(mapObjects);
+        //CreateZoneDictionary(mapObjects);
+        CreateBasicDictionary(mapObjects);
         CreateKnownRecipeDictionary(mapObjects);
+    }
+
+    private void CreateBasicDictionary(MapObject[] mapObjects)
+    {
+        BasicDictionary = new();
+        foreach (MapObject obj in mapObjects)
+        {
+            if (obj.RequiredMaterial != null & obj.RequiredMapObject == null)
+                BasicDictionary.TryAdd(obj.RequiredMaterial.Name, obj);
+        }
     }
 
     private void CreateKnownRecipeDictionary(MapObject[] mapObjects)
@@ -97,7 +109,7 @@ public class MapObjectDatabase : MonoBehaviour
                 objects.Add(obj);
                 ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
             }
-                
+
         }
     }
 
@@ -106,7 +118,7 @@ public class MapObjectDatabase : MonoBehaviour
         ZoneDictionary = new();
         foreach (MapObject obj in mapObjects)
         {
-            if (obj.RequiredZone != ZoneEnum.Any)
+            if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
             {
                 ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
             }

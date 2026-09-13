@@ -1,16 +1,21 @@
+using LitMotion.Animation;
 using UnityEngine;
 
 public class SpriteScript : MonoBehaviour
 {
     public SpriteRenderer image;
-
+    public ObjectPopup popup;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
+    public LitMotionAnimation lmAnimation;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         propertyBlock = new MaterialPropertyBlock();
+        Canvas canvas = GetComponentInChildren<Canvas>();
+        if (canvas != null)
+            canvas.worldCamera = Camera.main;
     }
 
     public void SetHighlight(bool highlighted)

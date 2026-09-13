@@ -113,11 +113,13 @@ public class Menus : MonoBehaviour
     public void OpenOptionsMenu()
     {
         optionsMenu.SetActive(true);
+        MapUI.instance.blocker.SetActive(true);
     }
 
     public void CloseOptionsMenu()
     {
         optionsMenu.SetActive(false);
+        MapUI.instance.blocker.SetActive(false);
     }
 
     // =========================================================
