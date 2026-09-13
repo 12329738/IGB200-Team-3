@@ -663,7 +663,7 @@ MonoBehaviour:
           startValue: {x: 0, y: 1, z: 1}
           endValue: {x: 1, y: 1, z: 1}
           duration: 0.5
-          ease: 23
+          ease: 26
           customEaseCurve:
             serializedVersion: 2
             m_Curve:
@@ -727,7 +727,7 @@ MonoBehaviour:
           startValue: {x: 1, y: 1, z: 1}
           endValue: {x: 0, y: 1, z: 1}
           duration: 0.5
-          ease: 23
+          ease: 25
           customEaseCurve:
             serializedVersion: 2
             m_Curve:
