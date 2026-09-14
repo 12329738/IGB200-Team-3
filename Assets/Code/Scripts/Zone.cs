@@ -77,7 +77,7 @@ public class Zone : MonoBehaviour
     {
         isHovering = hovering;
 
-        if (currentMapObjectSprite != null)
+        if (currentMapObjectSprite != null && gameManager.CurrentMaterial == null)
             currentMapObjectSprite.SetHighlight(hovering);
 
         if (selection != null && selection.image.color.a == 1f)
@@ -333,7 +333,7 @@ public class Zone : MonoBehaviour
     {
         ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
         currentObject = null;
-        currentMapObjectSprite = null;
+        Destroy(currentMapObjectSprite.gameObject);
 
     }
 
@@ -451,7 +451,7 @@ public class Zone : MonoBehaviour
         {
             position = Input.mousePosition
         };
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         List<RaycastResult> results = new List<RaycastResult>();
 
         EventSystem.current.RaycastAll(
