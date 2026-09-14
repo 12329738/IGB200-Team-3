@@ -85,7 +85,7 @@ public class HistoryWindow : MonoBehaviour
 
             if (mapObject.createdFrom.Count >1)
             {
-                GameObject branch = Instantiate(historyBranch, historyUI.transform);
+                GameObject branch = Instantiate(historyBranch, parent.transform);
                 foreach (HistoryItem previousHistory in mapObject.createdFrom)
                 {
                     GameObject row = Instantiate(historyRow, branch.transform);

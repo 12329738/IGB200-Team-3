@@ -300,10 +300,12 @@ public class Zone : MonoBehaviour
     private void DiscoverMapObject(MapObject mapObject)
     {
         mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+        ZoneManager.instance.MarkItemAsBuilt(mapObject.Name);
 
         if (mapObject.RequiredAction != null)
         {
             mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name,mapObject.RequiredAction);
+            
         }
 
         if (mapObject.createdFrom == null)
