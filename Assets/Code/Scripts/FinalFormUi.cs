@@ -11,7 +11,7 @@ public class FinalFormUi : MonoBehaviour
 
     void Start()
     {
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
         finalFormButtonDictionary = new();
         foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
