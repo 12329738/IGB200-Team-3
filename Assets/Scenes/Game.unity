@@ -5797,8 +5797,7 @@ MonoBehaviour:
       you can do with it.
     displayDuration: 5
   - id: 2
-    message: Objects can have different actions available. Experiment with them to
-      discover new results.
+    message: 'Objects can have different actions available. '
     displayDuration: 5
   - id: 3
     message: Different actions can transform objects in different ways. Keep experimenting
@@ -5819,7 +5818,7 @@ MonoBehaviour:
   - id: 7
     message: Welcome! Click a material on the bottom and place it in the world to
       get started.
-    displayDuration: 6
+    displayDuration: 7
 --- !u!4 &1847438301
 Transform:
   m_ObjectHideFlags: 0
