@@ -55,6 +55,7 @@ MonoBehaviour:
   highlight: {fileID: 306392403913135869}
   creationAnimation: {fileID: 2977066722216189832}
   idleAnimation: {fileID: 0}
+  zone: {fileID: 0}
 --- !u!114 &306392403913135869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.24, y: 2.24}
+  m_Size: {x: 2.22, y: 2.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -147,10 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 0
-  animationMode: 0
+  playOnAwake: 1
+  animationMode: 1
   components:
   - rid: 7970485387106713668
+  - rid: 7970485472784547905
   references:
     version: 2
     RefIds:
@@ -162,7 +164,7 @@ MonoBehaviour:
         target: {fileID: 4679307523171237192}
         settings:
           startValue: {x: 0.25, y: 0.25, z: 0.25}
-          endValue: {x: 1, y: 1, z: 1}
+          endValue: {x: 1, y: 0.9, z: 1}
           duration: 0.5
           ease: 14
           customEaseCurve:
@@ -198,6 +200,51 @@ MonoBehaviour:
           immediateBind: 0
           schedulerType: 0
           additionalSettings: 1
+        relative: 0
+    - rid: 7970485472784547905
+      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Scale
+        enabled: 1
+        target: {fileID: 4679307523171237192}
+        settings:
+          startValue: {x: 1, y: 0.9, z: 1}
+          endValue: {x: 1, y: 1.1, z: 1}
+          duration: 2
+          ease: 6
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0
+          delayType: 0
+          loops: 99999
+          loopType: 1
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 0
         relative: 0
 --- !u!65 &1703738821133180225
 BoxCollider:
