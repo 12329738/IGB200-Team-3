@@ -33,7 +33,7 @@ public class Zone : MonoBehaviour
         HandlePopupClosing();
     }
 
-
+    
     private void OnMouseDown()
     {
         if (IsPointerOverUI())
@@ -45,6 +45,11 @@ public class Zone : MonoBehaviour
             return;
         }
 
+        HandleClick();        
+    }
+
+    public void HandleClick()
+    {
         if (currentObject == null)
         {
             CreateMapObject();
@@ -59,7 +64,8 @@ public class Zone : MonoBehaviour
 
         OpenObjectPopup();
     }
-    private void HandleHover()
+
+    public void HandleHover()
     {
         bool pointerOverZone = IsPointerOverCollider();
 
@@ -138,7 +144,7 @@ public class Zone : MonoBehaviour
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialPlaced);
     }
 
-    private void CombineMapObjectWithMaterial()
+    public void CombineMapObjectWithMaterial()
     {
         Material material = gameManager.CurrentMaterial;
 
@@ -233,6 +239,7 @@ public class Zone : MonoBehaviour
 
         gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
         if (currentMapObjectSprite != null)
             Destroy(currentMapObjectSprite.gameObject);
         ZoneManager.instance.StopSound();
@@ -253,6 +260,7 @@ public class Zone : MonoBehaviour
         if (currentObject != null)
             gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
         SetMapObjectVisual(mapObject);
         ZoneManager.instance.PlayCreationSound(mapObject);
         currentObject = mapObject;
@@ -298,10 +306,12 @@ public class Zone : MonoBehaviour
     private void DiscoverMapObject(MapObject mapObject)
     {
         mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+        ZoneManager.instance.MarkItemAsBuilt(mapObject.Name);
 
         if (mapObject.RequiredAction != null)
         {
             mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name,mapObject.RequiredAction);
+            
         }
 
         if (mapObject.createdFrom == null)
