@@ -1,3 +1,4 @@
+using LitMotion.Animation;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class ObjectPopup : MonoBehaviour
     public GameObject history;
     public GameObject recycle;
     public GameObject action;
+    public LitMotionAnimation historyAnimation;
+    public LitMotionAnimation actionAnimation;
 
     private System.Action onHistory;
     private System.Action onAction;
@@ -34,6 +37,9 @@ public class ObjectPopup : MonoBehaviour
         {
             action.SetActive(false);
         }
+        historyAnimation.Restart();
+        actionAnimation.Restart();
+
     }
 
     public void Disable()
