@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
-  m_Name: Salt Lantern
+  m_Name: Salt Lamp
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
-  Name: Salt Lantern
-  image: {fileID: 21300000, guid: 645d1115bcc2fef4d9fb9a6bf69ee7fa, type: 3}
+  Name: Salt Lamp
+  image: {fileID: 21300000, guid: 27b1c8bb6eb61b94f8b9c3d8830c7954, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 8ab46c6dfaf1da840a23494d67f447cb, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredZone: 0

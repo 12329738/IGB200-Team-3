@@ -77,7 +77,7 @@ public class Zone : MonoBehaviour
     {
         isHovering = hovering;
 
-        if (currentMapObjectSprite != null)
+        if (currentMapObjectSprite != null && gameManager.CurrentMaterial == null)
             currentMapObjectSprite.SetHighlight(hovering);
 
         if (selection != null && selection.image.color.a == 1f)
@@ -233,6 +233,7 @@ public class Zone : MonoBehaviour
 
         gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
         if (currentMapObjectSprite != null)
             Destroy(currentMapObjectSprite.gameObject);
         ZoneManager.instance.StopSound();
@@ -253,6 +254,7 @@ public class Zone : MonoBehaviour
         if (currentObject != null)
             gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
         SetMapObjectVisual(mapObject);
         ZoneManager.instance.PlayCreationSound(mapObject);
         currentObject = mapObject;
@@ -298,10 +300,12 @@ public class Zone : MonoBehaviour
     private void DiscoverMapObject(MapObject mapObject)
     {
         mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
+        ZoneManager.instance.MarkItemAsBuilt(mapObject.Name);
 
         if (mapObject.RequiredAction != null)
         {
             mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name,mapObject.RequiredAction);
+            
         }
 
         if (mapObject.createdFrom == null)
@@ -333,7 +337,7 @@ public class Zone : MonoBehaviour
     {
         ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
         currentObject = null;
-        currentMapObjectSprite = null;
+        Destroy(currentMapObjectSprite.gameObject);
 
     }
 
@@ -451,7 +455,7 @@ public class Zone : MonoBehaviour
         {
             position = Input.mousePosition
         };
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         List<RaycastResult> results = new List<RaycastResult>();
 
         EventSystem.current.RaycastAll(
