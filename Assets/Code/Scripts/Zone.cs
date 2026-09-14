@@ -13,7 +13,7 @@ public class Zone : MonoBehaviour
     public MapObject currentObject;
     public SpriteScript mapObjectPrefab;
     public SpriteScript currentMapObjectSprite;
-    public SpriteScript selection;
+    public SelectionBox selection;
     GameManager gameManager;
     MapObjectDatabase mapObjectDatabase;
     private bool isHovering;
@@ -25,100 +25,14 @@ public class Zone : MonoBehaviour
     {
         gameManager = GameManager.instance;
         mapObjectDatabase = MapObjectDatabase.instance;
+        selection = GetComponentInChildren<SelectionBox>();
     }
 
-    private void Update()
-    {
-        HandleHover();
-        HandlePopupClosing();
-    }
-
+   
     
-    private void OnMouseDown()
-    {
-        if (IsPointerOverUI())
-            return;
-
-        if (IsPopupOpen())
-        {
-            ClosePopup();
-            return;
-        }
-
-        HandleClick();        
-    }
-
-    public void HandleClick()
-    {
-        if (currentObject == null)
-        {
-            CreateMapObject();
-            return;
-        }
-
-        if (gameManager.CurrentMaterial != null)
-        {
-            CombineMapObjectWithMaterial();
-            return;
-        }
-
-        OpenObjectPopup();
-    }
-
-    public void HandleHover()
-    {
-        bool pointerOverZone = IsPointerOverCollider();
-
-        if (pointerOverZone && !isHovering)
-        {
-            SetHoverState(true);
-        }
-        else if (!pointerOverZone && isHovering)
-        {
-            SetHoverState(false);
-        }
-    }
-
-    private void SetHoverState(bool hovering)
-    {
-        isHovering = hovering;
-
-        if (currentMapObjectSprite != null && gameManager.CurrentMaterial == null)
-            currentMapObjectSprite.SetHighlight(hovering);
-
-        if (selection != null && selection.image.color.a == 1f)
-            selection.image.color = hovering ? hoverColour : Color.white;
-    }
-    private void HandlePopupClosing()
-    {
-        if (!Input.GetMouseButtonDown(0))
-            return;
-
-        if (!IsPopupOpen())
-            return;
-
-        if (IsPointerOverPopup())
-            return;
-
-        if (IsPointerOverCollider())
-            return;
-
-        ClosePopup();
-    }
-    private void OpenObjectPopup()
-    {
-        if (currentObject == null || currentMapObjectSprite == null)
-            return;
-
-        TutorialPromptManager.ShowOnce(
-            TutorialPromptId.FirstObjectOpened
-        );
-
-        string action = GetActionForCurrentObject();
-
-        currentMapObjectSprite.popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(currentObject), () => PerformActionOnMapObject(action), () => PerformActionOnMapObject(action));
-    }
-    private string GetActionForCurrentObject()
+    
+ 
+    public string GetActionForCurrentObject()
     {
         foreach (var entry in mapObjectDatabase.ActionsDictionary)
         {
@@ -129,7 +43,7 @@ public class Zone : MonoBehaviour
         return null;
     }
 
-    private void CreateMapObject()
+    public void CreateMapObject()
     {
         Material material = gameManager.CurrentMaterial;
 
@@ -159,7 +73,7 @@ public class Zone : MonoBehaviour
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialCombined);
     }
 
-    private void PerformActionOnMapObject(string action)
+    public void PerformActionOnMapObject(string action)
     {
         if (string.IsNullOrEmpty(action) || currentObject == null)
             return;
@@ -394,18 +308,18 @@ public class Zone : MonoBehaviour
     {
         if (selection != null)
         {
-            selection.SetVisible(false);
-            selection.SetHighlight(false);
+            selection.highlight.SetVisible(false);
+            selection.highlight.SetHighlight(false);
         }
 
         if (currentMapObjectSprite != null)
-            currentMapObjectSprite.SetHighlight(false);
+            currentMapObjectSprite.highlight.SetHighlight(false);
     }
 
     private void ShowObjectHighlight()
     {
         if (currentMapObjectSprite != null)
-            currentMapObjectSprite.SetHighlight(true);
+            currentMapObjectSprite.highlight.SetHighlight(true);
     }
 
     private void ShowSelectionHighlight()
@@ -413,8 +327,8 @@ public class Zone : MonoBehaviour
         if (selection == null)
             return;
 
-        selection.SetVisible(true);
-        selection.SetHighlight(true);
+        selection.highlight.SetVisible(true);
+        selection.highlight.SetHighlight(true);
     }
 
     private bool CanCombine(Material material)

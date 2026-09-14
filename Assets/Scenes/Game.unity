@@ -145,7 +145,9 @@ GameObject:
   m_Component:
   - component: {fileID: 66229067}
   - component: {fileID: 66229068}
-  - component: {fileID: 66229069}
+  - component: {fileID: 66229070}
+  - component: {fileID: 66229071}
+  - component: {fileID: 66229072}
   m_Layer: 3
   m_Name: Selection
   m_TagString: Untagged
@@ -227,7 +229,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &66229069
+--- !u!114 &66229070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,12 +238,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 66229066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7e4757dc3cefb4698fe65e32364f96, type: 3}
+  m_Script: {fileID: 11500000, guid: 290dccddb91dcab458ee6f89be17463a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
+  m_EditorClassIdentifier: Assembly-CSharp::ImageHighlight
   image: {fileID: 66229068}
-  popup: {fileID: 0}
-  lmAnimation: {fileID: 0}
+--- !u!114 &66229071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66229066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260b634a104bb9a4ba6abc6f1954d71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionBox
+  image: {fileID: 66229068}
+  highlight: {fileID: 66229070}
+  hoverColour: {r: 1, g: 0.94509804, b: 0, a: 1}
+--- !u!65 &66229072
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66229066}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &81697826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1459,7 @@ MonoBehaviour:
   zone: 2
   mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
-  selection: {fileID: 747137570}
+  selection: {fileID: 0}
   hoverColour: {r: 1, g: 0.8228265, b: 0, a: 1}
 --- !u!65 &321350418
 BoxCollider:
@@ -1442,7 +1478,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 0}
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -2933,7 +2969,9 @@ GameObject:
   m_Component:
   - component: {fileID: 747137568}
   - component: {fileID: 747137569}
-  - component: {fileID: 747137570}
+  - component: {fileID: 747137571}
+  - component: {fileID: 747137572}
+  - component: {fileID: 747137573}
   m_Layer: 3
   m_Name: Selection
   m_TagString: Untagged
@@ -3015,7 +3053,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &747137570
+--- !u!114 &747137571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3024,12 +3062,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 747137567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7e4757dc3cefb4698fe65e32364f96, type: 3}
+  m_Script: {fileID: 11500000, guid: 290dccddb91dcab458ee6f89be17463a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
+  m_EditorClassIdentifier: Assembly-CSharp::ImageHighlight
   image: {fileID: 747137569}
-  popup: {fileID: 0}
-  lmAnimation: {fileID: 0}
+--- !u!114 &747137572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747137567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260b634a104bb9a4ba6abc6f1954d71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionBox
+  image: {fileID: 747137569}
+  highlight: {fileID: 747137571}
+  hoverColour: {r: 1, g: 0.94509804, b: 0, a: 1}
+--- !u!65 &747137573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747137567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &801849659
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,7 +4128,7 @@ MonoBehaviour:
   zone: 1
   mapObjectPrefab: {fileID: 8118577665880505736, guid: c1173ed7775ad5d45827a7f623ed9f8b, type: 3}
   currentMapObjectSprite: {fileID: 0}
-  selection: {fileID: 66229069}
+  selection: {fileID: 0}
   hoverColour: {r: 1, g: 0.8724341, b: 0, a: 1}
 --- !u!65 &1359855221
 BoxCollider:
@@ -4075,7 +4147,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 0}
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -5145,6 +5217,65 @@ MonoBehaviour:
           schedulerType: 0
           additionalSettings: 0
         relative: 0
+--- !u!1 &1844773069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7274772530226257251, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+  m_PrefabInstance: {fileID: 337309631074001212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1844773072 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3800867537435540434, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+  m_PrefabInstance: {fileID: 337309631074001212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1844773073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844773069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290dccddb91dcab458ee6f89be17463a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageHighlight
+  image: {fileID: 1844773072}
+--- !u!114 &1844773074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844773069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260b634a104bb9a4ba6abc6f1954d71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionBox
+  image: {fileID: 1844773072}
+  highlight: {fileID: 1844773073}
+  hoverColour: {r: 1, g: 0.94509804, b: 0, a: 1}
+--- !u!65 &1844773075
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844773069}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1847438299
 GameObject:
   m_ObjectHideFlags: 0
@@ -5835,8 +5966,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Outer
       objectReference: {fileID: 0}
+    - target: {fileID: 362126738134789593, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      propertyPath: highlight
+      value: 
+      objectReference: {fileID: 1844773073}
     - target: {fileID: 2807840370135451663, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
       propertyPath: m_Size.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2807840370135451663, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2807840370135451663, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
@@ -5935,10 +6074,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 362126738134789593, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7274772530226257251, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1844773073}
+    - targetCorrespondingSourceObject: {fileID: 7274772530226257251, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1844773074}
+    - targetCorrespondingSourceObject: {fileID: 7274772530226257251, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1844773075}
   m_SourcePrefab: {fileID: 100100000, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

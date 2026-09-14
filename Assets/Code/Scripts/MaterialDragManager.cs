@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class MaterialDragController : MonoBehaviour
@@ -6,7 +8,7 @@ public class MaterialDragController : MonoBehaviour
     public static MaterialDragController Instance { get; private set; }
 
     private Material draggedMaterial;
-    private Zone currentTarget;
+    private SelectionBox currentTarget;
 
     private bool isDragging;
     private Vector2 startPosition;
@@ -79,7 +81,7 @@ public class MaterialDragController : MonoBehaviour
 
     private void UpdateDrag(Vector2 screenPosition)
     {
-        Zone target = GetTarget(screenPosition);
+        SelectionBox target = GetTarget(screenPosition);
 
         if (target == currentTarget)
             return;
@@ -89,25 +91,34 @@ public class MaterialDragController : MonoBehaviour
 
     private void EndDrag(Vector2 screenPosition)
     {
-        Zone target = GetTarget(screenPosition);
+        SelectionBox target = GetTarget(screenPosition);
 
         if (target != null)
         {
-            target.HandleClick();
+            target.OnMouseDown();
                 
         }
         GameManager.instance.ResetCurrentAction();
         CancelDrag();
     }
 
-    private Zone GetTarget(Vector2 screenPosition)
+    private SelectionBox GetTarget(Vector2 screenPosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit))
-            return null;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        return hit.collider.GetComponent<Zone>();
+        RaycastHit[] hits = Physics.RaycastAll(ray);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.TryGetComponent(out SelectionBox selection))
+            {
+                return selection;
+            }
+        }
+
+        return null;
+
     }
 
     private void CancelDrag()
