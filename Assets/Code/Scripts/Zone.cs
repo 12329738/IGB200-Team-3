@@ -77,7 +77,7 @@ public class Zone : MonoBehaviour
     {
         isHovering = hovering;
 
-        if (currentMapObjectSprite != null)
+        if (currentMapObjectSprite != null && gameManager.CurrentMaterial == null)
             currentMapObjectSprite.SetHighlight(hovering);
 
         if (selection != null && selection.image.color.a == 1f)
