@@ -333,7 +333,7 @@ public class Zone : MonoBehaviour
     {
         ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
         currentObject = null;
-        currentMapObjectSprite = null;
+        Destroy(currentMapObjectSprite.gameObject);
 
     }
 
@@ -451,7 +451,7 @@ public class Zone : MonoBehaviour
         {
             position = Input.mousePosition
         };
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         List<RaycastResult> results = new List<RaycastResult>();
 
         EventSystem.current.RaycastAll(
