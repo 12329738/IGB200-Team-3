@@ -1,6 +1,5 @@
 using LitMotion.Animation;
 using System;
-using Unity.ProjectAuditor.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
