@@ -33,7 +33,7 @@ public class Zone : MonoBehaviour
         HandlePopupClosing();
     }
 
-
+    
     private void OnMouseDown()
     {
         if (IsPointerOverUI())
@@ -45,6 +45,11 @@ public class Zone : MonoBehaviour
             return;
         }
 
+        HandleClick();        
+    }
+
+    public void HandleClick()
+    {
         if (currentObject == null)
         {
             CreateMapObject();
@@ -59,7 +64,8 @@ public class Zone : MonoBehaviour
 
         OpenObjectPopup();
     }
-    private void HandleHover()
+
+    public void HandleHover()
     {
         bool pointerOverZone = IsPointerOverCollider();
 
@@ -138,7 +144,7 @@ public class Zone : MonoBehaviour
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialPlaced);
     }
 
-    private void CombineMapObjectWithMaterial()
+    public void CombineMapObjectWithMaterial()
     {
         Material material = gameManager.CurrentMaterial;
 

@@ -72,6 +72,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
+  decorationArea: {fileID: 0}
 --- !u!212 &4746859858784275437
 SpriteRenderer:
   serializedVersion: 2
