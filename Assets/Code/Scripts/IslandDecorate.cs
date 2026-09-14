@@ -29,11 +29,9 @@ public class IslandDecorate : MonoBehaviour
                 0f
             );
 
-            // Make sure the decoration is completely inside the island
             if (!IsDecorationInsideIsland(position, boxCollider))
                 continue;
 
-            // Check for obstacles
             Collider[] colliders = Physics.OverlapBox(
                 position,
                 boxCollider.size * 0.5f,

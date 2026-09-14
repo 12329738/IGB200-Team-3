@@ -233,6 +233,7 @@ public class Zone : MonoBehaviour
 
         gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
         if (currentMapObjectSprite != null)
             Destroy(currentMapObjectSprite.gameObject);
         ZoneManager.instance.StopSound();
@@ -253,6 +254,7 @@ public class Zone : MonoBehaviour
         if (currentObject != null)
             gameManager.objectHistory.Push((currentObject, this));
 
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
         SetMapObjectVisual(mapObject);
         ZoneManager.instance.PlayCreationSound(mapObject);
         currentObject = mapObject;

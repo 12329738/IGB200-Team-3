@@ -102,7 +102,6 @@ public class MapDecoration : MonoBehaviour
         {
             if (hit.collider.TryGetComponent(out MapDecoration knob))
             {
-                // Calculate where on the object the mouse grabbed it
                 mouseOffset = knob.transform.position - GetMousePosition();
 
                 knob.IsMoving = true;
@@ -136,18 +135,6 @@ public class MapDecoration : MonoBehaviour
             if (colliders.Length == 0 || (colliders.Length == 1 && colliders[0] == boxCollider))
                 transform.position = GetMousePosition() + mouseOffset;
         }
-    }
-
-    private bool IsDecorationInsideIsland(
-        Vector3 position,
-        BoxCollider boxCollider)
-    {
-
-            if (!decorationArea.OverlapPoint(position))
-                return false;
-      
-
-        return true;
     }
 
 }
