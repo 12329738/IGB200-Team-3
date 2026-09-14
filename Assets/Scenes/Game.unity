@@ -692,6 +692,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseOptionsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2525791806936384647, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525791806936384647, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d4f8ac452dd6f4442a82eb5475a43767, type: 3}
     - target: {fileID: 3601209577585817603, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
