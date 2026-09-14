@@ -7,7 +7,8 @@ public class SpriteScript : MonoBehaviour
     public ObjectPopup popup;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
-    public LitMotionAnimation lmAnimation;
+    public LitMotionAnimation creationAnimation;
+    public LitMotionAnimation idleAnimation;
 
     private void Awake()
     {
