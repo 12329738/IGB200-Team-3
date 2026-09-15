@@ -10,7 +10,7 @@ public class MapDecoration : MonoBehaviour
     public SpriteRenderer image;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
-    public LitMotionAnimation lmAnimation;
+    //public LitMotionAnimation lmAnimation;
     [SerializeField] private InputAction mouseClick;
     [HideInInspector] public bool IsMoving = false;
     public LayerMask obstacleLayer;

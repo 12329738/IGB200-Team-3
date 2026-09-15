@@ -1,10 +1,12 @@
 using LitMotion.Animation;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SpriteScript : MonoBehaviour
 {
+    public MapObject mapObject;
     public SpriteRenderer image;
     public ObjectPopup popup;
     public ImageHighlight highlight;
@@ -54,9 +56,30 @@ public class SpriteScript : MonoBehaviour
             TutorialPromptId.FirstObjectOpened
         );
 
-        string action = zone.GetActionForCurrentObject();
+        string action = MapObjectDatabase.instance.GetActionForCurrentObject(mapObject.Name);
 
-        popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(zone.currentObject), () => zone.PerformActionOnMapObject(action), () => zone.PerformActionOnMapObject(action));
+        popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(mapObject), () => PerformActionOnMapObject(action), () => RecycleMapObject(action));
+    }
+
+    private void RecycleMapObject(string action)
+    {
+        if (mapObject.Name == "Waste")
+        {
+            GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+            
+            TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
+
+            Popup.instance.ShowText(gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
+            Destroy(this.gameObject);
+
+        }
+        else
+        zone.PerformActionOnMapObject(action);
+    }
+
+    private void PerformActionOnMapObject(string action)
+    {
+        zone.PerformActionOnMapObject(action);
     }
 
     private void ClosePopup()

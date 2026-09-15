@@ -112,7 +112,15 @@ public class MapObjectDatabase : MonoBehaviour
 
         }
     }
+    public string GetActionForCurrentObject(string name)
+    {
+        foreach (var entry in ActionsDictionary)
+        {
+            if (entry.Key.Item2 == name)
+                return entry.Key.Item1;
+        }
 
+<<<<<<< Updated upstream
     public void CreateZoneDictionary(MapObject[] mapObjects)
     {
         ZoneDictionary = new();
@@ -124,8 +132,23 @@ public class MapObjectDatabase : MonoBehaviour
             }
         }
     }
+=======
+        return null;
+    }
+    //public void CreateZoneDictionary(MapObject[] mapObjects)
+    //{
+    //    ZoneDictionary = new();
+    //    foreach (MapObject obj in mapObjects)
+    //    {
+    //        if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
+    //        {
+    //            ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
+    //        }
+    //    }
+    //}
+>>>>>>> Stashed changes
 
 
- 
+
 
 }

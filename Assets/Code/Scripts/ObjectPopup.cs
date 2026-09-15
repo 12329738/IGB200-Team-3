@@ -26,11 +26,15 @@ public class ObjectPopup : MonoBehaviour
         onHistory = historyCallback;
         onAction = actionCallback;
         onRecycle = recycleCallback;
-
-        if (actionText != null)
+        
+        if (actionText != null && actionText != "Recycle")
         {
             action.SetActive(true);
+<<<<<<< Updated upstream
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+=======
+            action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;     
+>>>>>>> Stashed changes
         }
 
         else

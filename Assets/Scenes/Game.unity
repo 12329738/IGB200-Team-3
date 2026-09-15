@@ -932,6 +932,7 @@ MonoBehaviour:
     m_Bits: 8
   area: {fileID: 289052542}
   decorationPrefab: {fileID: 189570919954901242, guid: 32dc8fd6451484b42a06d1dd426b6339, type: 3}
+  wastePrefab: {fileID: 189570919954901242, guid: 0da3dabf0bc3f764dbecb779aa1afc9c, type: 3}
 --- !u!212 &289052541
 SpriteRenderer:
   serializedVersion: 2

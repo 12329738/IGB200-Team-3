@@ -13,9 +13,15 @@ GameObject:
   - component: {fileID: 4746859858784275437}
   - component: {fileID: 7755317427680937641}
   - component: {fileID: 2977066722216189832}
+<<<<<<< Updated upstream
   - component: {fileID: 5917145799506905947}
   - component: {fileID: 4037443306595071060}
   m_Layer: 3
+=======
+  - component: {fileID: 1204833170207334763}
+  - component: {fileID: 8792507711200250197}
+  m_Layer: 0
+>>>>>>> Stashed changes
   m_Name: Map Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,3 +295,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8792507711200250197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189570919954901242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e4757dc3cefb4698fe65e32364f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
+  image: {fileID: 0}
+  popup: {fileID: 0}
+  highlight: {fileID: 0}
+  creationAnimation: {fileID: 0}
+  idleAnimation: {fileID: 0}
+  zone: {fileID: 0}

@@ -47,9 +47,15 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     internal void PlaceItemOnIsland(SpriteScript currentMapObjectSprite)
     {
         decorationArea.PlaceItemOnIsland(currentMapObjectSprite);
+=======
+    internal void PlaceItemOnIsland(MapObject mapObject)
+    {
+        decorationArea.PlaceItemOnIsland(mapObject);
+>>>>>>> Stashed changes
     }
 
     public void PlayCreationSound(MapObject mapObject)
