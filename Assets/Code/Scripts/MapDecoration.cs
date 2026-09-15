@@ -13,6 +13,7 @@ public class MapDecoration : MonoBehaviour
     [HideInInspector] public bool IsMoving = false;
     public LayerMask obstacleLayer;
     public PolygonCollider2D decorationArea;
+    public bool movable = true;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -92,19 +93,23 @@ public class MapDecoration : MonoBehaviour
 
     private void MouseClickAction(InputAction.CallbackContext context)
     {
-        Ray ray = Camera.main.ScreenPointToRay(
+        if (movable)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(
             Mouse.current.position.ReadValue()
         );
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (hit.collider.TryGetComponent(out MapDecoration knob))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                mouseOffset = knob.transform.position - GetMousePosition();
+                if (hit.collider.TryGetComponent(out MapDecoration knob))
+                {
+                    mouseOffset = knob.transform.position - GetMousePosition();
 
-                knob.IsMoving = true;
+                    knob.IsMoving = true;
+                }
             }
         }
+        
     }
 
     private void MouseReleaseAction(InputAction.CallbackContext context)

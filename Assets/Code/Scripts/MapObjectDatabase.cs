@@ -9,7 +9,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<string, MapObject> MapObjectDictionary;
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
-    //public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
+    public Dictionary<string, MapObject> WasteDictionary;
     public Dictionary<string, MapObject> BasicDictionary;
     public Dictionary<string, HistoryItem> KnownRecipeDictionary;
     void Awake()
@@ -37,9 +37,21 @@ public class MapObjectDatabase : MonoBehaviour
         CreateMapObjectDictionary(mapObjects);
         CreateCombinationDictionary(mapObjects);
         CreateActionsDictionary(mapObjects);
-        //CreateZoneDictionary(mapObjects);
+        CreateWasteDictionary(mapObjects);
         CreateBasicDictionary(mapObjects);
         CreateKnownRecipeDictionary(mapObjects);
+    }
+
+    private void CreateWasteDictionary(MapObject[] mapObjects)
+    {
+        WasteDictionary = new();
+        foreach (MapObject obj in mapObjects)
+        {
+            if (obj.HarvestedMaterial != null)
+            {
+                WasteDictionary.Add(obj.HarvestedMaterial.Name, obj);
+            }
+        }
     }
 
     private void CreateBasicDictionary(MapObject[] mapObjects)

@@ -64,7 +64,7 @@ public class SpriteScript : MonoBehaviour
 
     private void RecycleMapObject(string action)
     {
-        if (mapObject.Name == "Waste")
+        if (mapObject.Name.Contains("Waste"))
         {
             GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
             

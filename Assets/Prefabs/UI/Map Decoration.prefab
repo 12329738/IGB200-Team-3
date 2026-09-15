@@ -13,11 +13,8 @@ GameObject:
   - component: {fileID: 4746859858784275437}
   - component: {fileID: 7755317427680937641}
   - component: {fileID: 2977066722216189832}
-  - component: {fileID: 5917145799506905947}
-  - component: {fileID: 4037443306595071060}
   - component: {fileID: 1204833170207334763}
   - component: {fileID: 8792507711200250197}
-  - component: {fileID: 1204833170207334763}
   m_Layer: 0
   m_Name: Map Decoration
   m_TagString: Untagged
@@ -53,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapDecoration
   image: {fileID: 4746859858784275437}
-  lmAnimation: {fileID: 0}
   mouseClick:
     m_Name: Mouse Click
     m_Type: 0
@@ -76,6 +72,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   decorationArea: {fileID: 0}
+  movable: 1
 --- !u!212 &4746859858784275437
 SpriteRenderer:
   serializedVersion: 2

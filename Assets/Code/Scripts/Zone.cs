@@ -176,15 +176,30 @@ public class Zone : MonoBehaviour
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
+        CreateWaste(mapObject);
 
-        CreateWaste();
     }
 
-    private void CreateWaste()
+    private void CreateWaste(MapObject mapObject)
     {
-        MapObject mapObject = mapObjectDatabase.MapObjectDictionary["Waste"];
-        ZoneManager.instance.PlaceItemOnIsland(mapObject);
+        
+        List<Material> materials = new();
+        foreach (HistoryItem historyItem in mapObject.createdFrom)
+        {
+            if (historyItem == null)
+                continue;
 
+            if (historyItem is Material material)
+            {
+                materials.Add(material);
+            }
+        }
+
+        foreach (Material material in materials)
+        {
+            MapObject waste = mapObjectDatabase.WasteDictionary[material.Name];
+            ZoneManager.instance.PlaceItemOnIsland(waste);
+        }
     }
 
 

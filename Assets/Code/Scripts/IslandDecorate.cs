@@ -11,10 +11,9 @@ public class IslandDecorate : MonoBehaviour
 
     public void PlaceItemOnIsland(MapObject mapObject)
 
-    public void PlaceItemOnIsland(Sprite image)
     {
         GameObject obj;
-        if (mapObject.Name == "Waste")
+        if (mapObject.Name.Contains("Waste"))
         {
             obj = Instantiate(wastePrefab);
             SpriteScript waste = obj.GetComponent<SpriteScript>();
