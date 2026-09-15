@@ -1743,7 +1743,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: c9581bb23c069c348a4d0f7bcf8fe6e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1834,7 +1834,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 93b6c13191a0a124e9cd75d590a9c0a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2289,6 +2289,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869381692}
     m_Modifications:
+    - target: {fileID: 2880778146444214737, guid: b3561276292116f44b3633d6fa5e456b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7367136642906319108, guid: b3561276292116f44b3633d6fa5e456b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.24
@@ -2421,6 +2425,10 @@ PrefabInstance:
     - target: {fileID: 4296309512285985103, guid: 0c9c95cb7e34e82498b653a22324b54d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6450356077746004059, guid: 0c9c95cb7e34e82498b653a22324b54d, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2771,6 +2779,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_3
       objectReference: {fileID: 0}
+    - target: {fileID: 3785438246417622373, guid: 6915f04780945af47b65ac1c485bb722, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4499831335341092632, guid: 6915f04780945af47b65ac1c485bb722, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.69
@@ -2895,7 +2907,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f3b0abed86ba2104fb50f6161899c402, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4136,6 +4148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grass_1
       objectReference: {fileID: 0}
+    - target: {fileID: 3235497525208665860, guid: 9ff72f86603fa10439e71aee135dbab4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4329,6 +4345,10 @@ PrefabInstance:
     - target: {fileID: 4296309512285985103, guid: 0c9c95cb7e34e82498b653a22324b54d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6450356077746004059, guid: 0c9c95cb7e34e82498b653a22324b54d, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4712,7 +4732,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 376b4946390dfbd45a54d937999ad7c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4871,6 +4891,10 @@ PrefabInstance:
     - target: {fileID: 1764828640843102570, guid: 9ff72f86603fa10439e71aee135dbab4, type: 3}
       propertyPath: m_Name
       value: Grass_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235497525208665860, guid: 9ff72f86603fa10439e71aee135dbab4, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7096,7 +7120,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 1c80c59346c345142bbb92c316c36198, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7116,6 +7140,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 869381692}
     m_Modifications:
+    - target: {fileID: 2880778146444214737, guid: b3561276292116f44b3633d6fa5e456b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7367136642906319108, guid: b3561276292116f44b3633d6fa5e456b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.09
