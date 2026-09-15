@@ -176,6 +176,8 @@ public class Zone : MonoBehaviour
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
+
+        CreateWaste();
     }
 
     private void CreateWaste()

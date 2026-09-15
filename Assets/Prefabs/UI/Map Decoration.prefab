@@ -13,15 +13,12 @@ GameObject:
   - component: {fileID: 4746859858784275437}
   - component: {fileID: 7755317427680937641}
   - component: {fileID: 2977066722216189832}
-<<<<<<< Updated upstream
   - component: {fileID: 5917145799506905947}
   - component: {fileID: 4037443306595071060}
-  m_Layer: 3
-=======
   - component: {fileID: 1204833170207334763}
   - component: {fileID: 8792507711200250197}
+  - component: {fileID: 1204833170207334763}
   m_Layer: 0
->>>>>>> Stashed changes
   m_Name: Map Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,72 +207,8 @@ MonoBehaviour:
           schedulerType: 0
           additionalSettings: 1
         relative: 0
---- !u!114 &5917145799506905947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189570919954901242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
-  animationMode: 0
-  components:
-  - rid: 7970485431458857032
-  references:
-    version: 2
-    RefIds:
-    - rid: 7970485431458857032
-      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
-      data:
-        displayName: Scale
-        enabled: 1
-        target: {fileID: 4679307523171237192}
-        settings:
-          startValue: {x: 0.75, y: 0.8, z: 1}
-          endValue: {x: 0.75, y: 0.75, z: 1}
-          duration: 1.25
-          ease: 6
-          customEaseCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          delay: 0
-          delayType: 0
-          loops: 55
-          loopType: 1
-          cancelOnError: 0
-          skipValuesDuringDelay: 0
-          immediateBind: 0
-          schedulerType: 0
-          additionalSettings: 0
-        relative: 1
---- !u!65 &4037443306595071060
-BoxCollider:
+--- !u!135 &1204833170207334763
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -284,7 +217,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -293,7 +226,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0}
+  m_Radius: 0.45
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &8792507711200250197
 MonoBehaviour:

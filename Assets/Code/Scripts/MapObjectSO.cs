@@ -10,7 +10,7 @@ public class MapObjectSO : ScriptableObject
     public Sprite image;
     public MapObjectSO RequiredMapObject;
     public MaterialSO RequiredMaterial;
-    public ZoneEnum RequiredZone;
+    //public ZoneEnum RequiredZone;
     public ActionSO RequiredAction;
     public MaterialSO RequiredStoredMaterial;
     public int RequiredStoredMaterialAmount;

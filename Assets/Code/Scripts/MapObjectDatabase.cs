@@ -9,7 +9,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<string, MapObject> MapObjectDictionary;
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
-    public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
+    //public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
     public Dictionary<string, MapObject> BasicDictionary;
     public Dictionary<string, HistoryItem> KnownRecipeDictionary;
     void Awake()
@@ -132,7 +132,6 @@ public class MapObjectDatabase : MonoBehaviour
     //        }
     //    }
     //}
-
 
 
 

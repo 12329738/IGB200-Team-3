@@ -13,6 +13,7 @@ public class MapUI : MonoBehaviour
     public static MapUI instance;
     public GameObject blocker;
     public Canvas canvas;
+    public HistoryWindow historyWindowPrefab;
 
     void Awake()
     {
@@ -29,9 +30,11 @@ public class MapUI : MonoBehaviour
     }
     public void DisplayHistoryWindow(MapObject mapObject)
     {
+        if (historyWindow != null)
+            Destroy(historyWindow.gameObject);
         blocker.SetActive(true);
-        HistoryWindow window = Instantiate(historyWindow, canvas.transform);
-        window.CreateHistory(mapObject);
+        historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
+        historyWindow.CreateHistory(mapObject);
     }
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)

@@ -31,7 +31,6 @@ public class ObjectPopup : MonoBehaviour
         {
             action.SetActive(true);
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
-
         }
 
         else
