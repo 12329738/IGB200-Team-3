@@ -2358,7 +2358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &517739326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2376,7 +2376,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 1920, y: 300}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &517739327
 MonoBehaviour:
@@ -2390,7 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5657,12 +5657,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a961e89e504a1a0418264cfee9b5ec8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  historyWindow: {fileID: 5447990238995787474, guid: f15e5b30eacfa7b4fbf964451d2aae0b, type: 3}
+  historyWindow: {fileID: 0}
   optionsMenu: {fileID: 0}
   objectSelectScreen: {fileID: 5250889893052677195, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
   finalFormWindow: {fileID: 137932387}
   blocker: {fileID: 517739325}
   canvas: {fileID: 739808154}
+  historyWindowPrefab: {fileID: 5447990238995787474, guid: f15e5b30eacfa7b4fbf964451d2aae0b, type: 3}
 --- !u!1 &1860011440 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 500683895617760190, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
