@@ -121,7 +121,7 @@ public class Zone : MonoBehaviour
         if (mapObject.RequiredStoredMaterial == null)
             return;
 
-        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
+        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial.Name, mapObject.RequiredStoredMaterialAmount);
     }
 
     private void RecycleMapObject(MapObject mapObject)
@@ -131,14 +131,13 @@ public class Zone : MonoBehaviour
 
         if (mapObject.HarvestedMaterial != null)
         {
-            gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
+            
         }
 
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
 
         gameManager.objectHistory.Push((currentObject, this));
-
-        Popup.instance.ShowText(currentMapObjectSprite.gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
+        gameManager.RecycleItem(mapObject.HarvestedMaterial, currentMapObjectSprite.gameObject);
         if (currentMapObjectSprite != null)
             Destroy(currentMapObjectSprite.gameObject);
         ZoneManager.instance.StopSound();

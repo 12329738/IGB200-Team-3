@@ -99,10 +99,10 @@ public class GameManager : MonoBehaviour
             return false;
     }
 
-    public void ChangeStoredMaterialAmount(Material material, int amount)
+    public void ChangeStoredMaterialAmount(string name, int amount)
     {
-        materialCounts[material.Name] += amount;
-        storageUi.ChangeStorageAmount(material.Name);
+        materialCounts[name] += amount;
+        storageUi.ChangeStorageAmount(name);
     }
 
     internal void AddCompletedItem(string name)
@@ -118,5 +118,13 @@ public class GameManager : MonoBehaviour
             }
                 
         }
+    }
+
+    public void RecycleItem(Material material, GameObject gameObject)
+    {
+
+        TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 Recycled {material.Name}");
+        ChangeStoredMaterialAmount(material.Name, 1);
+        
     }
 }

@@ -1,6 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
-using System;
+using static UnityEngine.GraphicsBuffer;
 
 public class TextPopup : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class TextPopup : MonoBehaviour
     private float lifetime;
     private float fadeTime;
     private float floatSpeed;
+    public float moveSpeed;
     private Action onFinished;
     private Color startColor;
-
+    RectTransform destination = null;
+    string destinationName;
     public bool finished;
 
     public void Setup(
@@ -37,6 +40,12 @@ public class TextPopup : MonoBehaviour
 
     public void Tick()
     {
+        if (destination != null)
+        {
+            MoveTowardsDestination();
+            return;
+        }
+
         lifetime += Time.deltaTime;
 
         float t = Mathf.Clamp01(lifetime / fadeTime);
@@ -52,5 +61,41 @@ public class TextPopup : MonoBehaviour
             finished = true;
             ObjectPool.instance.ReturnObject(gameObject);
         }
+    }
+    public void MoveTowardsDestination()
+    {
+        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(null, destination.position);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+
+
+        Plane plane = new Plane(Vector3.forward, new Vector3(0, 0, transform.position.z));
+
+        if (plane.Raycast(ray, out float distance))
+        {
+            Vector3 destination = ray.GetPoint(distance);
+
+            transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, destination) < 0.01f)
+            {
+                transform.position = destination;
+                finished = true;
+
+                AddRecycledMaterial(destinationName);
+                ObjectPool.instance.ReturnObject(gameObject);
+            }
+        }
+    }
+
+    public void SetDestination(RectTransform position, string name)
+    {
+        destination = position;
+        destinationName = name;
+    }
+
+    public void AddRecycledMaterial(string name)
+    {
+        GameManager.instance.ChangeStoredMaterialAmount(name, 1);
     }
 }

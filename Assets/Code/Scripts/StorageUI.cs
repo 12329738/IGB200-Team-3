@@ -1,3 +1,4 @@
+using LitMotion.Animation;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class StorageUI : MonoBehaviour
             Material material = new Material(materialSO[i]);
             GameObject icon = Instantiate(StorageIconPrefab, StorageUi.transform);
             storageDictionary.Add(material.Name, icon);
-            TextMeshProUGUI text = icon.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI text = icon.GetComponentInChildren<TextMeshProUGUI>();
 
             if (GameManager.instance.materialCounts == null) GameManager.instance.materialCounts = new(); 
             GameManager.instance.materialCounts.Add(material.Name, 0);
@@ -29,7 +30,16 @@ public class StorageUI : MonoBehaviour
 
     public void ChangeStorageAmount (string material)
     {
-        TextMeshProUGUI text = storageDictionary[material].GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text = storageDictionary[material].GetComponentInChildren<TextMeshProUGUI>();
+        LitMotionAnimation animation = text.gameObject.GetComponent<LitMotionAnimation>();
+        animation.Stop();
+        animation.Play();
         text.text = $"{material}: {GameManager.instance.materialCounts[material]}";
+    }
+
+    public RectTransform GetMaterialUILocation(string name)
+    {
+
+        return storageDictionary[name].GetComponent<RectTransform>();
     }
 }
