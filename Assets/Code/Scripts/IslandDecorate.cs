@@ -7,11 +7,9 @@ public class IslandDecorate : MonoBehaviour
     public GameObject decorationPrefab;
     public GameObject wastePrefab;
 
-<<<<<<< Updated upstream
-    public void PlaceItemOnIsland(SpriteScript mapObject)
-=======
+
     public void PlaceItemOnIsland(MapObject mapObject)
->>>>>>> Stashed changes
+
     {
         GameObject obj;
         if (mapObject.Name == "Waste")
@@ -25,11 +23,10 @@ public class IslandDecorate : MonoBehaviour
     
         MapDecoration decoration = obj.GetComponent<MapDecoration>();
         decoration.decorationArea = area;
-<<<<<<< Updated upstream
-        decoration.image.sprite = mapObject.image.sprite;
-=======
+
+
         decoration.image.sprite = mapObject.image;
->>>>>>> Stashed changes
+
         decoration.transform.SetParent(transform);
 
         BoxCollider boxCollider = decoration.GetComponent<BoxCollider>();
@@ -68,35 +65,16 @@ public class IslandDecorate : MonoBehaviour
         Vector3 position,
         BoxCollider boxCollider)
     {
-<<<<<<< Updated upstream
+
         Vector3 halfExtents = boxCollider.size * 0.5f;
 
         Vector3[] corners =
-=======
-        float radius = sphereCollider.radius;
-      
-        float scale = Mathf.Max(
-            sphereCollider.transform.lossyScale.x,
-            sphereCollider.transform.lossyScale.y);
-
-        radius *= scale;
-
-        Vector2 center = new Vector2(position.x, position.y);
-
-        const int pointCount = 16;
-
-        if (!area.OverlapPoint(center))
-            return false;
-
-        for (int i = 0; i < pointCount; i++)
->>>>>>> Stashed changes
-        {
+            {
             position + new Vector3(-halfExtents.x, -halfExtents.y, 0),
             position + new Vector3(-halfExtents.x,  halfExtents.y, 0),
             position + new Vector3( halfExtents.x, -halfExtents.y, 0),
             position + new Vector3( halfExtents.x,  halfExtents.y, 0)
         };
-
         foreach (Vector3 corner in corners)
         {
             Vector2 point = new Vector2(corner.x, corner.y);
@@ -106,5 +84,26 @@ public class IslandDecorate : MonoBehaviour
         }
 
         return true;
+
+
+
+        //float radius = sphereCollider.radius;
+      
+        //float scale = Mathf.Max(
+        //    sphereCollider.transform.lossyScale.x,
+        //    sphereCollider.transform.lossyScale.y);
+
+        //radius *= scale;
+
+        //Vector2 center = new Vector2(position.x, position.y);
+
+        //const int pointCount = 16;
+
+        //if (!area.OverlapPoint(center))
+        //    return false;
+
+        //for (int i = 0; i < pointCount; i++)
+
+
     }
 }

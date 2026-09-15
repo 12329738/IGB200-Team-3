@@ -28,24 +28,6 @@ public class Zone : MonoBehaviour
         selection = GetComponentInChildren<SelectionBox>();
     }
 
-<<<<<<< Updated upstream
-   
-    
-    
- 
-    public string GetActionForCurrentObject()
-    {
-        foreach (var entry in mapObjectDatabase.ActionsDictionary)
-        {
-            if (entry.Key.Item2 == currentObject.Name)
-                return entry.Key.Item1;
-        }
-
-        return null;
-    }
-
-=======
->>>>>>> Stashed changes
     public void CreateMapObject()
     {
         Material material = gameManager.CurrentMaterial;
@@ -195,8 +177,6 @@ public class Zone : MonoBehaviour
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
     }
-<<<<<<< Updated upstream
-=======
 
     private void CreateWaste()
     {
@@ -205,7 +185,7 @@ public class Zone : MonoBehaviour
 
     }
 
->>>>>>> Stashed changes
+
     private void EnsureMapObjectSpriteExists()
     {
         if (currentMapObjectSprite != null)
@@ -271,11 +251,8 @@ public class Zone : MonoBehaviour
 
     private void MoveFinalForm(MapObject mapObject)
     {
-<<<<<<< Updated upstream
-        ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
-=======
+
         ZoneManager.instance.PlaceItemOnIsland(mapObject);
->>>>>>> Stashed changes
         currentObject = null;
         Destroy(currentMapObjectSprite.gameObject);
 

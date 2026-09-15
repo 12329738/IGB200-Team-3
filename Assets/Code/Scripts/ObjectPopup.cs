@@ -30,11 +30,8 @@ public class ObjectPopup : MonoBehaviour
         if (actionText != null && actionText != "Recycle")
         {
             action.SetActive(true);
-<<<<<<< Updated upstream
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
-=======
-            action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;     
->>>>>>> Stashed changes
+
         }
 
         else

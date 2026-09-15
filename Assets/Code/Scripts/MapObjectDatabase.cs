@@ -119,20 +119,6 @@ public class MapObjectDatabase : MonoBehaviour
             if (entry.Key.Item2 == name)
                 return entry.Key.Item1;
         }
-
-<<<<<<< Updated upstream
-    public void CreateZoneDictionary(MapObject[] mapObjects)
-    {
-        ZoneDictionary = new();
-        foreach (MapObject obj in mapObjects)
-        {
-            if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
-            {
-                ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
-            }
-        }
-    }
-=======
         return null;
     }
     //public void CreateZoneDictionary(MapObject[] mapObjects)
@@ -146,7 +132,6 @@ public class MapObjectDatabase : MonoBehaviour
     //        }
     //    }
     //}
->>>>>>> Stashed changes
 
 
 
