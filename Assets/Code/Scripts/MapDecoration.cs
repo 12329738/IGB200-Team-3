@@ -1,9 +1,7 @@
 using LitMotion.Animation;
-using System;
 using Unity.ProjectAuditor.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class MapDecoration : MonoBehaviour
 {
@@ -118,23 +116,63 @@ public class MapDecoration : MonoBehaviour
     {
         if (IsMoving)
         {
-            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            SphereCollider sphereCollider = GetComponent<SphereCollider>();
 
-            Vector3 halfExtents = boxCollider.size * 0.5f;
+            float radius = sphereCollider.radius;
             Vector3 newPosition = GetMousePosition() + mouseOffset;
-            Collider[] colliders = Physics.OverlapBox(
+
+            if (!IsDecorationInsideIsland(newPosition, sphereCollider))
+                return;
+
+            Collider[] colliders = Physics.OverlapSphere(
                 newPosition,
-                halfExtents,
-                transform.rotation,
+                radius,
                 obstacleLayer
             );
-            if (!decorationArea.OverlapPoint(GetMousePosition()))
+            if (!decorationArea.OverlapPoint(GetMousePosition() + mouseOffset))
                 return;
 
 
-            if (colliders.Length == 0 || (colliders.Length == 1 && colliders[0] == boxCollider))
+            if (colliders.Length == 0 || (colliders.Length == 1 && colliders[0] == sphereCollider))
                 transform.position = GetMousePosition() + mouseOffset;
         }
+    }
+
+    private bool IsDecorationInsideIsland(
+    Vector3 position,
+    SphereCollider sphereCollider)
+    {
+        float radius = sphereCollider.radius;
+
+        // Account for the collider's transform scale.
+        float scale = Mathf.Max(
+            sphereCollider.transform.lossyScale.x,
+            sphereCollider.transform.lossyScale.y);
+
+        radius *= scale;
+
+        Vector2 center = new Vector2(position.x, position.y);
+
+        // Check the center and points around the circumference.
+        const int pointCount = 16;
+
+        if (!decorationArea.OverlapPoint(center))
+            return false;
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float angle = (i / (float)pointCount) * Mathf.PI * 2f;
+
+            Vector2 point = center + new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            ) * radius;
+
+            if (!decorationArea.OverlapPoint(point))
+                return false;
+        }
+
+        return true;
     }
 
 }

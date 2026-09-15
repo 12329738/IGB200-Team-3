@@ -15,13 +15,13 @@ public class IslandDecorate : MonoBehaviour
         decoration.image.sprite = mapObject.image.sprite;
         decoration.transform.SetParent(transform);
 
-        BoxCollider boxCollider = decoration.GetComponent<BoxCollider>();
+        SphereCollider sphereCollider = decoration.GetComponent<SphereCollider>();
 
         Bounds bounds = area.bounds;
 
         for (int i = 0; i < 100; i++)
         {
-            Vector3 extents = boxCollider.bounds.extents;
+            Vector3 extents = sphereCollider.bounds.extents;
 
             Vector3 position = new Vector3(
                 Random.Range(bounds.min.x + extents.x, bounds.max.x - extents.x),
@@ -29,13 +29,12 @@ public class IslandDecorate : MonoBehaviour
                 0f
             );
 
-            if (!IsDecorationInsideIsland(position, boxCollider))
+            if (!IsDecorationInsideIsland(position, sphereCollider))
                 continue;
 
-            Collider[] colliders = Physics.OverlapBox(
+            Collider[] colliders = Physics.OverlapSphere(
                 position,
-                boxCollider.size * 0.5f,
-                decoration.transform.rotation,
+                sphereCollider.radius,
                 obstacleLayer
             );
 
@@ -48,22 +47,34 @@ public class IslandDecorate : MonoBehaviour
     }
 
     private bool IsDecorationInsideIsland(
-        Vector3 position,
-        BoxCollider boxCollider)
+    Vector3 position,
+    SphereCollider sphereCollider)
     {
-        Vector3 halfExtents = boxCollider.size * 0.5f;
+        float radius = sphereCollider.radius;
 
-        Vector3[] corners =
-        {
-            position + new Vector3(-halfExtents.x, -halfExtents.y, 0),
-            position + new Vector3(-halfExtents.x,  halfExtents.y, 0),
-            position + new Vector3( halfExtents.x, -halfExtents.y, 0),
-            position + new Vector3( halfExtents.x,  halfExtents.y, 0)
-        };
+        // Account for the collider's transform scale.
+        float scale = Mathf.Max(
+            sphereCollider.transform.lossyScale.x,
+            sphereCollider.transform.lossyScale.y);
 
-        foreach (Vector3 corner in corners)
+        radius *= scale;
+
+        Vector2 center = new Vector2(position.x, position.y);
+
+        // Check the center and points around the circumference.
+        const int pointCount = 16;
+
+        if (!area.OverlapPoint(center))
+            return false;
+
+        for (int i = 0; i < pointCount; i++)
         {
-            Vector2 point = new Vector2(corner.x, corner.y);
+            float angle = (i / (float)pointCount) * Mathf.PI * 2f;
+
+            Vector2 point = center + new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            ) * radius;
 
             if (!area.OverlapPoint(point))
                 return false;

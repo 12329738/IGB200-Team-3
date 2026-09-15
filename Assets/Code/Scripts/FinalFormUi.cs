@@ -1,13 +1,21 @@
+using LitMotion.Animation;
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class FinalFormUi : MonoBehaviour
+public class FinalFormUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject FinalFormUI;
     public FinalFormButton FinalFormIconPrefab;
     public Dictionary<string, FinalFormButton> finalFormButtonDictionary;
+    bool expanded = false;
+    bool hovering = false;
+    public LitMotionAnimation expandAnimation;
+    public LitMotionAnimation retractAnimation;
+    public LitMotionAnimation hoverExpandAnimation;
 
     void Start()
     {
@@ -30,4 +38,59 @@ public class FinalFormUi : MonoBehaviour
     {
         finalFormButtonDictionary[name].SetComplete();
     }
+
+    public void OnClick()
+    {
+          
+        if (expanded)
+        {
+            retractAnimation.Stop();
+            retractAnimation.Play();
+            expanded = false;
+        }
+            
+        else
+        {
+            retractAnimation.Stop();
+            expandAnimation.Stop();
+            expandAnimation.Play();
+            expanded = true;
+        }                   
+    }
+
+    public void OnMouseEnter()
+    {
+        
+
+    }
+
+    public void OnMouseExit()
+    {
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        hovering = true;
+        if (!expanded)
+        {
+            retractAnimation.Stop();
+            expandAnimation.Stop();
+            expandAnimation.Play();
+            expanded = true;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hovering = false;
+
+        if (expanded)
+        {
+            retractAnimation.Stop();
+            retractAnimation.Play();
+            expanded = false;
+        }
+    }
 }
+
