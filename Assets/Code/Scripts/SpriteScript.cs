@@ -2,6 +2,7 @@ using LitMotion.Animation;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class SpriteScript : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class SpriteScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!popupOpen && GameManager.instance.CurrentMaterial == null)
+        if (!popupOpen && GameManager.instance.CurrentMaterial == null && !Mouse.current.leftButton.isPressed)
           OpenObjectPopup();
     }
 

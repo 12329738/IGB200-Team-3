@@ -42,7 +42,7 @@ public class SelectionBox : MonoBehaviour
     {
 
         if (zone.currentMapObjectSprite != null && GameManager.instance.CurrentMaterial == null)
-            zone.currentMapObjectSprite.highlight.SetHighlight(hovering);
+            //zone.currentMapObjectSprite.highlight.SetHighlight(hovering);
 
         if (image.color.a == 1f)
             image.color = hovering ? hoverColour : Color.white;
