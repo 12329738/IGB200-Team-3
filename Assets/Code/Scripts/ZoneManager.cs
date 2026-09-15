@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ZoneManager : MonoBehaviour
 {
@@ -47,9 +48,9 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
-    internal void PlaceItemOnIsland(SpriteScript currentMapObjectSprite)
+    internal void PlaceItemOnIsland(Sprite image)
     {
-        decorationArea.PlaceItemOnIsland(currentMapObjectSprite);
+        decorationArea.PlaceItemOnIsland(image);
     }
 
     public void PlayCreationSound(MapObject mapObject)

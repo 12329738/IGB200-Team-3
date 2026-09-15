@@ -28,17 +28,17 @@ public class GoalItemUI : MonoBehaviour
         while (chosenObjects.Count < itemNumber)
         {
             int random = Random.Range(0, finalForms.Count);
-            bool sameZone = false;
-            foreach (var obj in chosenObjects)
-            {
+            //bool sameZone = false;
+            //foreach (var obj in chosenObjects)
+            //{
 
-                if (finalForms[obj].RequiredZone != ZoneEnum.Any && finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
-                    sameZone = true;
+            //    if (finalForms[obj].RequiredZone != ZoneEnum.Any && finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
+            //        sameZone = true;
 
 
-            }
-            if (sameZone)
-                continue;
+            //}
+            //if (sameZone)
+            //    continue;
             chosenObjects.Add(random);
         }
         finalFormButtons = new();

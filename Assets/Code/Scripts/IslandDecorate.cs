@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class IslandDecorate : MonoBehaviour
 {
@@ -6,13 +7,13 @@ public class IslandDecorate : MonoBehaviour
     public PolygonCollider2D area;
     public GameObject decorationPrefab;
 
-    public void PlaceItemOnIsland(SpriteScript mapObject)
+    public void PlaceItemOnIsland(Sprite image)
     {
         GameObject obj = Instantiate(decorationPrefab);
 
         MapDecoration decoration = obj.GetComponent<MapDecoration>();
         decoration.decorationArea = area;
-        decoration.image.sprite = mapObject.image.sprite;
+        decoration.image.sprite = image;
         decoration.transform.SetParent(transform);
 
         SphereCollider sphereCollider = decoration.GetComponent<SphereCollider>();

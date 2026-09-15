@@ -31,6 +31,10 @@ public class ObjectPopup : MonoBehaviour
         {
             action.SetActive(true);
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
+            if (actionText == "Recycle")
+            {
+                history.SetActive(false);
+            }
         }
 
         else
