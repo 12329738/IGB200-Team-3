@@ -60,7 +60,13 @@ public class HistoryWindow : MonoBehaviour
                 text.text += $" + \n 1 recycled {requiredStoredMaterial.Name}";
 
             if (historyItem.image != null)
-                icon.GetComponent<Image>().sprite = historyItem.image;
+            {
+                Image image = icon.GetComponent<Image>();
+                image.sprite = historyItem.image;
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 255);
+                
+            }
+                
         }
         else
         {
@@ -79,7 +85,7 @@ public class HistoryWindow : MonoBehaviour
 
             if (mapObject.createdFrom.Count >1)
             {
-                GameObject branch = Instantiate(historyBranch, historyUI.transform);
+                GameObject branch = Instantiate(historyBranch, parent.transform);
                 foreach (HistoryItem previousHistory in mapObject.createdFrom)
                 {
                     GameObject row = Instantiate(historyRow, branch.transform);

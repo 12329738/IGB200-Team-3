@@ -1,28 +1,96 @@
+using LitMotion.Animation;
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class FinalFormUi : MonoBehaviour
+public class FinalFormUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject FinalFormUI;
     public FinalFormButton FinalFormIconPrefab;
-
+    public Dictionary<string, FinalFormButton> finalFormButtonDictionary;
+    bool expanded = false;
+    bool hovering = false;
+    public LitMotionAnimation expandAnimation;
+    public LitMotionAnimation retractAnimation;
+    public LitMotionAnimation hoverExpandAnimation;
 
     void Start()
     {
-        gameObject.SetActive(false);
-
+        //gameObject.SetActive(false);
+        finalFormButtonDictionary = new();
         foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
-            if (mapObject.isFinalForm)
-            {
-                FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
-                button.image.sprite = mapObject.image;
-                TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-                text.text = mapObject.Name;
-                button.mapObject = mapObject;
-            }            
+
+            FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
+            button.image.sprite = mapObject.image;
+            TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
+            //text.text = mapObject.Name;
+            button.mapObject = mapObject;
+            finalFormButtonDictionary.Add(mapObject.Name, button);
+                      
+        }
+    }
+
+    public void MarkItemAsComplete(string name)
+    {
+        finalFormButtonDictionary[name].SetComplete();
+    }
+
+    public void OnClick()
+    {
+          
+        if (expanded)
+        {
+            retractAnimation.Stop();
+            retractAnimation.Play();
+            expanded = false;
+        }
+            
+        else
+        {
+            retractAnimation.Stop();
+            expandAnimation.Stop();
+            expandAnimation.Play();
+            expanded = true;
+        }                   
+    }
+
+    public void OnMouseEnter()
+    {
+        
+
+    }
+
+    public void OnMouseExit()
+    {
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        hovering = true;
+        if (!expanded)
+        {
+            retractAnimation.Stop();
+            expandAnimation.Stop();
+            expandAnimation.Play();
+            expanded = true;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        hovering = false;
+
+        if (expanded)
+        {
+            retractAnimation.Stop();
+            retractAnimation.Play();
+            expanded = false;
         }
     }
 }
+

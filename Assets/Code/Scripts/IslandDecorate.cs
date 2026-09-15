@@ -3,33 +3,83 @@ using UnityEngine;
 public class IslandDecorate : MonoBehaviour
 {
     public LayerMask obstacleLayer;
-    public BoxCollider area;
+    public PolygonCollider2D area;
+    public GameObject decorationPrefab;
+
     public void PlaceItemOnIsland(SpriteScript mapObject)
     {
-        mapObject.gameObject.transform.SetParent(transform);
-        mapObject.transform.localScale = mapObject.transform.localScale / 2;
+        GameObject obj = Instantiate(decorationPrefab);
+
+        MapDecoration decoration = obj.GetComponent<MapDecoration>();
+        decoration.decorationArea = area;
+        decoration.image.sprite = mapObject.image.sprite;
+        decoration.transform.SetParent(transform);
+
+        SphereCollider sphereCollider = decoration.GetComponent<SphereCollider>();
 
         Bounds bounds = area.bounds;
 
         for (int i = 0; i < 100; i++)
         {
+            Vector3 extents = sphereCollider.bounds.extents;
+
             Vector3 position = new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                Random.Range(bounds.min.y, bounds.max.y),
-                Random.Range(bounds.min.z, bounds.max.z)
+                Random.Range(bounds.min.x + extents.x, bounds.max.x - extents.x),
+                Random.Range(bounds.min.y + extents.y, bounds.max.y - extents.y),
+                0f
             );
+
+            if (!IsDecorationInsideIsland(position, sphereCollider))
+                continue;
 
             Collider[] colliders = Physics.OverlapSphere(
                 position,
-                0.01f,
+                sphereCollider.radius,
                 obstacleLayer
             );
 
             if (colliders.Length == 0)
             {
-                mapObject.transform.position = position;
+                decoration.transform.position = position;
+                break;
             }
         }
     }
-}
 
+    private bool IsDecorationInsideIsland(
+    Vector3 position,
+    SphereCollider sphereCollider)
+    {
+        float radius = sphereCollider.radius;
+
+        // Account for the collider's transform scale.
+        float scale = Mathf.Max(
+            sphereCollider.transform.lossyScale.x,
+            sphereCollider.transform.lossyScale.y);
+
+        radius *= scale;
+
+        Vector2 center = new Vector2(position.x, position.y);
+
+        // Check the center and points around the circumference.
+        const int pointCount = 16;
+
+        if (!area.OverlapPoint(center))
+            return false;
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float angle = (i / (float)pointCount) * Mathf.PI * 2f;
+
+            Vector2 point = center + new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            ) * radius;
+
+            if (!area.OverlapPoint(point))
+                return false;
+        }
+
+        return true;
+    }
+}

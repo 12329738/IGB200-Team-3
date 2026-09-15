@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     public HashSet<string> completedGoalItems = new();
     public bool goalItemsFinished = false;
     public GoalItemUI goalItemUI;
+
+    [SerializeField] private InputAction mouseClick;
+    [HideInInspector] public bool IsMoving = false;
     void Awake()
     {
 

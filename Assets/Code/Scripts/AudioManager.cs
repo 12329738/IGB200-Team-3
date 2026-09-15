@@ -28,15 +28,23 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+        if (!applicationFocused)
+            return;
+
+        if (currentMusic == null || currentMusicList == null)
+            return;
+
         if (!currentMusic.isPlaying)
         {
             currentTrack++;
-            if (currentTrack >= gameMusic.Count)
-                currentTrack = 0;
-            PlayMusic(currentTrack);
 
+            if (currentTrack >= currentMusicList.Count)
+                currentTrack = 0;
+
+            PlayMusic(currentTrack);
         }
     }
+
     public void ChangeMusic(Scene scene)
     {
         if (scene.buildIndex == 0)
@@ -87,4 +95,18 @@ public class AudioManager : MonoBehaviour
 
         ObjectPool.instance.ReturnObject(go);
     }
+    private bool applicationFocused = true;
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        applicationFocused = hasFocus;
+        if (hasFocus)
+        {
+            currentMusic.UnPause();
+        }
+        else
+        {
+            currentMusic.Pause();
+        }
+    }
+
 }

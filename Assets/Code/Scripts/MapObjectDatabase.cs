@@ -12,7 +12,6 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
     public Dictionary<string, MapObject> BasicDictionary;
     public Dictionary<string, HistoryItem> KnownRecipeDictionary;
-
     void Awake()
     {
         if (instance == null)
@@ -125,6 +124,7 @@ public class MapObjectDatabase : MonoBehaviour
             }
         }
     }
+
 
  
 

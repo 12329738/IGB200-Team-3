@@ -6,6 +6,7 @@ public class ZoneManager : MonoBehaviour
     public static ZoneManager instance = null;
     public IslandDecorate decorationArea;
     private AudioHandle creationSoundHandle;
+    public FinalFormUi finalFormUi;
     void Awake()
     {
 
@@ -62,5 +63,10 @@ public class ZoneManager : MonoBehaviour
         creationSoundHandle?.Stop();
         creationSoundHandle = null;
 
+    }
+
+    internal void MarkItemAsBuilt(string name)
+    {
+        finalFormUi.MarkItemAsComplete(name);
     }
 }
