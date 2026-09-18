@@ -6647,20 +6647,18 @@ MonoBehaviour:
       create.
     displayDuration: 5
   - id: 1
-    message: Some creations can be changed further. Try clicking one to see what
-      you can do with it.
+    message: When creating new objects, you generate waste as a byproduct. Try recycling
+      them.
     displayDuration: 5
   - id: 2
-    message: Objects can have different actions available. Experiment with them to
-      discover new results.
+    message: Objects have actions that you can perform, such as seeing it's history.
     displayDuration: 5
   - id: 3
-    message: Different actions can transform objects in different ways. Keep experimenting
-      to discover what they do.
+    message: Some actions can change an object further, and may require recycled
+      resources.
     displayDuration: 5
   - id: 4
-    message: Recycling certain objects returns useful materials that you can use
-      again later.
+    message: Recycling waste returns useful materials that you can use again later.
     displayDuration: 5
   - id: 5
     message: Undo lets you take back your most recent change if you want to try something
