@@ -88,12 +88,6 @@ public class Zone : MonoBehaviour
 
         if (!mapObjectDatabase.MapObjectDictionary.TryGetValue(objectName, out MapObject mapObject))
             return;
-       
-        if (mapObject.HarvestedMaterial != null)
-        {
-            RecycleMapObject(mapObject);
-            return;
-        }
 
         if (mapObject.RequiredMapObject == null)
             return;
@@ -110,7 +104,7 @@ public class Zone : MonoBehaviour
 
     private bool HasRequiredMaterials(MapObject mapObject)
     {
-        if (mapObject.RequiredStoredMaterial == null)
+        if (mapObject.RequiredStoredMaterialAmount == 0)
             return true;
 
         return gameManager.HasRequiredMatierals(mapObject);
@@ -118,34 +112,10 @@ public class Zone : MonoBehaviour
 
     private void ConsumeRequiredMaterials(MapObject mapObject)
     {
-        if (mapObject.RequiredStoredMaterial == null)
+        if (mapObject.RequiredStoredMaterialAmount == 0)
             return;
 
-        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial.Name, mapObject.RequiredStoredMaterialAmount);
-    }
-
-    private void RecycleMapObject(MapObject mapObject)
-    {
-        if (mapObject == null || currentObject == null)
-            return;
-
-        if (mapObject.HarvestedMaterial != null)
-        {
-            
-        }
-
-        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
-
-        gameManager.objectHistory.Push((currentObject, this));
-        gameManager.RecycleItem(mapObject.HarvestedMaterial, currentMapObjectSprite.gameObject);
-        if (currentMapObjectSprite != null)
-            Destroy(currentMapObjectSprite.gameObject);
-        ZoneManager.instance.StopSound();
-        currentObject = null;
-        currentMapObjectSprite = null;
-
-        gameManager.ResetCurrentAction();
-        UnHighlightObject();
+        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterialAmount);
     }
 
     private void ChangeMapObject(MapObject mapObject)
@@ -182,25 +152,9 @@ public class Zone : MonoBehaviour
     private void CreateWaste(MapObject mapObject)
     {
         
-        List<Material> materials = new();
-        foreach (HistoryItem historyItem in mapObject.createdFrom)
-        {
-            if (historyItem == null)
-                continue;
-
-            if (historyItem is Material material)
-            {
-                materials.Add(material);
-            }
-        }
-
-        foreach (Material material in materials)
-        {
-            MapObject waste = mapObjectDatabase.WasteDictionary[material.Name];
-            ZoneManager.instance.PlaceItemOnIsland(waste);
-        }
+        if (mapObject.RequiredMapObject != null)
+             ZoneManager.instance.PlaceItemOnIsland(MapObjectDatabase.instance.waste);     
     }
-
 
     private void EnsureMapObjectSpriteExists()
     {

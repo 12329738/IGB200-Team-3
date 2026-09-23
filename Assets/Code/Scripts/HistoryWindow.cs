@@ -47,7 +47,7 @@ public class HistoryWindow : MonoBehaviour
         
     }
 
-    internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent, Material? requiredStoredMaterial = null)
+    internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent, int? requiredStoredMaterialAmount = 0)
     {
         
         GameObject icon = Instantiate(objectIcon, parent);
@@ -56,8 +56,8 @@ public class HistoryWindow : MonoBehaviour
         if (MapObjectDatabase.instance.KnownRecipeDictionary.ContainsKey(historyItem.Name))
         {
             text.text = historyItem.Name;
-            if (requiredStoredMaterial != null)
-                text.text += $" + \n 1 recycled {requiredStoredMaterial.Name}";
+            if (requiredStoredMaterialAmount > 0)
+                text.text += $" + \n 1 recycled waste";
 
             if (historyItem.image != null)
             {
@@ -80,7 +80,7 @@ public class HistoryWindow : MonoBehaviour
 
             if (mapObject.RequiredAction != null)
             {
-                CreatePreviousHistory(mapObject.RequiredAction, parent, mapObject.RequiredStoredMaterial);
+                CreatePreviousHistory(mapObject.RequiredAction, parent, mapObject.RequiredStoredMaterialAmount);
             }
 
             if (mapObject.createdFrom.Count >1)

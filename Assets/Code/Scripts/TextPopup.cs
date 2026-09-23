@@ -82,20 +82,14 @@ public class TextPopup : MonoBehaviour
                 transform.position = destination;
                 finished = true;
 
-                AddRecycledMaterial(destinationName);
+                AddRecycledMaterial();
                 ObjectPool.instance.ReturnObject(gameObject);
             }
         }
     }
 
-    public void SetDestination(RectTransform position, string name)
+    public void AddRecycledMaterial()
     {
-        destination = position;
-        destinationName = name;
-    }
-
-    public void AddRecycledMaterial(string name)
-    {
-        GameManager.instance.ChangeStoredMaterialAmount(name, 1);
+        GameManager.instance.ChangeStoredMaterialAmount(1);
     }
 }
