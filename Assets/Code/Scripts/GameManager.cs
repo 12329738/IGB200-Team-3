@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Action CurrentAction;
 
-    public Dictionary<string, int> materialCounts;
+    public int currentRecycledWaste;
     public StorageUI storageUi;
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
@@ -93,16 +93,16 @@ public class GameManager : MonoBehaviour
 
     public bool HasRequiredMatierals(MapObject mapObject)
     {
-        if (materialCounts[mapObject.RequiredStoredMaterial.Name] >= mapObject.RequiredStoredMaterialAmount)
+        if (currentRecycledWaste >= mapObject.RequiredStoredMaterialAmount)
             return true;
         else
             return false;
     }
 
-    public void ChangeStoredMaterialAmount(Material material, int amount)
+    public void ChangeStoredMaterialAmount(int amount)
     {
-        materialCounts[material.Name] += amount;
-        storageUi.ChangeStorageAmount(material.Name);
+        currentRecycledWaste += amount;
+        storageUi.ChangeStorageAmount();
     }
 
     internal void AddCompletedItem(string name)
@@ -118,5 +118,11 @@ public class GameManager : MonoBehaviour
             }
                 
         }
+    }
+
+    public void RecycleItem(Material material, GameObject gameObject)
+    {
+        TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 <sprite name=\"Waste edit\">");
+        ChangeStoredMaterialAmount(1);     
     }
 }

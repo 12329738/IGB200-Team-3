@@ -28,21 +28,6 @@ public class Zone : MonoBehaviour
         selection = GetComponentInChildren<SelectionBox>();
     }
 
-   
-    
-    
- 
-    public string GetActionForCurrentObject()
-    {
-        foreach (var entry in mapObjectDatabase.ActionsDictionary)
-        {
-            if (entry.Key.Item2 == currentObject.Name)
-                return entry.Key.Item1;
-        }
-
-        return null;
-    }
-
     public void CreateMapObject()
     {
         Material material = gameManager.CurrentMaterial;
@@ -103,12 +88,6 @@ public class Zone : MonoBehaviour
 
         if (!mapObjectDatabase.MapObjectDictionary.TryGetValue(objectName, out MapObject mapObject))
             return;
-       
-        if (mapObject.HarvestedMaterial != null)
-        {
-            RecycleMapObject(mapObject);
-            return;
-        }
 
         if (mapObject.RequiredMapObject == null)
             return;
@@ -125,7 +104,7 @@ public class Zone : MonoBehaviour
 
     private bool HasRequiredMaterials(MapObject mapObject)
     {
-        if (mapObject.RequiredStoredMaterial == null)
+        if (mapObject.RequiredStoredMaterialAmount == 0)
             return true;
 
         return gameManager.HasRequiredMatierals(mapObject);
@@ -133,35 +112,10 @@ public class Zone : MonoBehaviour
 
     private void ConsumeRequiredMaterials(MapObject mapObject)
     {
-        if (mapObject.RequiredStoredMaterial == null)
+        if (mapObject.RequiredStoredMaterialAmount == 0)
             return;
 
-        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterial, mapObject.RequiredStoredMaterialAmount);
-    }
-
-    private void RecycleMapObject(MapObject mapObject)
-    {
-        if (mapObject == null || currentObject == null)
-            return;
-
-        if (mapObject.HarvestedMaterial != null)
-        {
-            gameManager.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
-        }
-
-        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
-
-        gameManager.objectHistory.Push((currentObject, this));
-
-        Popup.instance.ShowText(currentMapObjectSprite.gameObject, $"+1 Recycled {mapObject.HarvestedMaterial.Name}");
-        if (currentMapObjectSprite != null)
-            Destroy(currentMapObjectSprite.gameObject);
-        ZoneManager.instance.StopSound();
-        currentObject = null;
-        currentMapObjectSprite = null;
-
-        gameManager.ResetCurrentAction();
-        UnHighlightObject();
+        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterialAmount);
     }
 
     private void ChangeMapObject(MapObject mapObject)
@@ -191,7 +145,17 @@ public class Zone : MonoBehaviour
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
+        CreateWaste(mapObject);
+
     }
+
+    private void CreateWaste(MapObject mapObject)
+    {
+        
+        if (mapObject.RequiredMapObject != null)
+             ZoneManager.instance.PlaceItemOnIsland(MapObjectDatabase.instance.waste);     
+    }
+
     private void EnsureMapObjectSpriteExists()
     {
         if (currentMapObjectSprite != null)
@@ -206,6 +170,7 @@ public class Zone : MonoBehaviour
             mapObjectPrefab,
             transform
         );
+        
     }
 
 
@@ -215,6 +180,7 @@ public class Zone : MonoBehaviour
             return;
 
         currentMapObjectSprite.image.sprite = mapObject.image;
+        currentMapObjectSprite.mapObject = mapObject;
     }
 
     private void DiscoverMapObject(MapObject mapObject)
@@ -255,7 +221,8 @@ public class Zone : MonoBehaviour
 
     private void MoveFinalForm(MapObject mapObject)
     {
-        ZoneManager.instance.PlaceItemOnIsland(currentMapObjectSprite);
+
+        ZoneManager.instance.PlaceItemOnIsland(mapObject);
         currentObject = null;
         Destroy(currentMapObjectSprite.gameObject);
 

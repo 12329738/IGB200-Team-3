@@ -1,18 +1,33 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class IslandDecorate : MonoBehaviour
 {
     public LayerMask obstacleLayer;
     public PolygonCollider2D area;
     public GameObject decorationPrefab;
+    public GameObject wastePrefab;
 
-    public void PlaceItemOnIsland(SpriteScript mapObject)
+
+    public void PlaceItemOnIsland(MapObject mapObject)
+
     {
-        GameObject obj = Instantiate(decorationPrefab);
-
+        GameObject obj;
+        if (mapObject.Name.Contains("Waste"))
+        {
+            obj = Instantiate(wastePrefab);
+            SpriteScript waste = obj.GetComponent<SpriteScript>();
+            waste.mapObject = mapObject;
+        }
+        else
+            obj = Instantiate(decorationPrefab);
+    
         MapDecoration decoration = obj.GetComponent<MapDecoration>();
         decoration.decorationArea = area;
-        decoration.image.sprite = mapObject.image.sprite;
+
+
+        decoration.image.sprite = mapObject.image;
+
         decoration.transform.SetParent(transform);
 
         SphereCollider sphereCollider = decoration.GetComponent<SphereCollider>();
@@ -81,5 +96,26 @@ public class IslandDecorate : MonoBehaviour
         }
 
         return true;
+
+
+
+        //float radius = sphereCollider.radius;
+      
+        //float scale = Mathf.Max(
+        //    sphereCollider.transform.lossyScale.x,
+        //    sphereCollider.transform.lossyScale.y);
+
+        //radius *= scale;
+
+        //Vector2 center = new Vector2(position.x, position.y);
+
+        //const int pointCount = 16;
+
+        //if (!area.OverlapPoint(center))
+        //    return false;
+
+        //for (int i = 0; i < pointCount; i++)
+
+
     }
 }

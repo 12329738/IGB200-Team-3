@@ -28,17 +28,17 @@ public class GoalItemUI : MonoBehaviour
         while (chosenObjects.Count < itemNumber)
         {
             int random = Random.Range(0, finalForms.Count);
-            bool sameZone = false;
-            foreach (var obj in chosenObjects)
-            {
+            //bool sameZone = false;
+            //foreach (var obj in chosenObjects)
+            //{
 
-                if (finalForms[obj].RequiredZone != ZoneEnum.Any && finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
-                    sameZone = true;
+            //    if (finalForms[obj].RequiredZone != ZoneEnum.Any && finalForms[obj].RequiredZone == finalForms[random].RequiredZone)
+            //        sameZone = true;
 
 
-            }
-            if (sameZone)
-                continue;
+            //}
+            //if (sameZone)
+            //    continue;
             chosenObjects.Add(random);
         }
         finalFormButtons = new();
@@ -65,17 +65,6 @@ public class GoalItemUI : MonoBehaviour
     }
     public void CreateFinalItems()
     {
-        text.text = "See what else you can make!";
-        foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
-        {
-            if (mapObject.isFinalForm)
-            {
-                FinalFormButton button = Instantiate(FinalFormIconPrefab, GoalItemUi.transform);
-                button.image.sprite = mapObject.image;
-                TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-                //text.text = mapObject.Name;
-                button.mapObject = mapObject;
-            }
-        }
+        Destroy(this.gameObject);
     }
 }

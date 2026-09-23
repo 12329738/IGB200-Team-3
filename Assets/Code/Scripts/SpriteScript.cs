@@ -1,11 +1,14 @@
 using LitMotion.Animation;
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class SpriteScript : MonoBehaviour
 {
+    public MapObject mapObject;
     public SpriteRenderer image;
     public ObjectPopup popup;
     public ImageHighlight highlight;
@@ -13,6 +16,10 @@ public class SpriteScript : MonoBehaviour
     public LitMotionAnimation idleAnimation;
     public Zone zone;
     bool popupOpen;
+    RectTransform destination;
+    float moveSpeed = 15;
+    private float startingDistance;
+
     private void Awake()
     {
         highlight = GetComponent<ImageHighlight>();
@@ -30,6 +37,13 @@ public class SpriteScript : MonoBehaviour
 
     private void Update()
     {
+        if (destination != null)
+        {
+            MoveTowardsDestination();
+            return;
+        }
+
+
         if (!popupOpen)
             return;
 
@@ -55,9 +69,25 @@ public class SpriteScript : MonoBehaviour
             TutorialPromptId.FirstObjectOpened
         );
 
-        string action = zone.GetActionForCurrentObject();
+        string action = MapObjectDatabase.instance.GetActionForCurrentObject(mapObject.Name);
 
-        popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(zone.currentObject), () => zone.PerformActionOnMapObject(action), () => zone.PerformActionOnMapObject(action));
+        popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(mapObject), () => PerformActionOnMapObject(action), () => RecycleMapObject(action));
+    }
+
+    private void RecycleMapObject(string action)
+    {
+        if (mapObject.Name.Contains("Waste"))
+        {       
+            TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
+            SetDestination();
+        }
+        else
+        zone.PerformActionOnMapObject(action);
+    }
+
+    private void PerformActionOnMapObject(string action)
+    {
+        zone.PerformActionOnMapObject(action);
     }
 
     private void ClosePopup()
@@ -106,5 +136,67 @@ public class SpriteScript : MonoBehaviour
 
         return false;
     }
+    public void MoveTowardsDestination()
+    {
+        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(
+            Camera.main,
+            destination.position
+        );
 
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+
+        Plane plane = new Plane(
+            Vector3.forward,
+            new Vector3(0, 0, transform.position.z)
+        );
+
+        if (plane.Raycast(ray, out float distance))
+        {
+            Vector3 targetPosition = ray.GetPoint(distance);
+
+            float distanceToTarget = Vector3.Distance(
+                transform.position,
+                targetPosition
+            );
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition,moveSpeed * Time.deltaTime);
+
+            float remainingPercentage = distanceToTarget / startingDistance;
+
+            transform.localScale = Vector3.one * remainingPercentage;
+
+
+            if (distanceToTarget < 0.01f)
+            {
+                transform.position = targetPosition;
+                transform.localScale = Vector3.zero;
+
+                GameManager.instance.RecycleItem(
+                    mapObject.HarvestedMaterial,
+                    gameObject
+                );
+
+                ObjectPool.instance.ReturnObject(gameObject);
+            }
+        }
+    }
+
+
+    public void SetDestination()
+    {
+        destination = GameManager.instance.storageUi.GetMaterialUILocation(mapObject.HarvestedMaterial.Name);
+        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, destination.position);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+
+        Plane plane = new Plane(Vector3.forward, new Vector3(0, 0, transform.position.z));
+
+        if (plane.Raycast(ray, out float distance))
+        {
+            Vector3 targetPosition = ray.GetPoint(distance);
+
+            startingDistance = Vector3.Distance(transform.position, targetPosition);
+        }
+
+    }
 }

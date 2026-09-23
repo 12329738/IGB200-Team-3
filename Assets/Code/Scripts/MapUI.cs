@@ -32,7 +32,7 @@ public class MapUI : MonoBehaviour
     {
         if (historyWindow != null)
             Destroy(historyWindow.gameObject);
-        blocker.SetActive(true);
+        //blocker.SetActive(true);
         historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
         historyWindow.CreateHistory(mapObject);
     }

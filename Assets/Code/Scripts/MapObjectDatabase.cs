@@ -8,7 +8,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<string, MapObject> MapObjectDictionary;
     public Dictionary<(string, string), MapObject> CombinationDictionary;
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
-    public Dictionary<(ZoneEnum, string), MapObject> ZoneDictionary;
+    public MapObject waste;
     public Dictionary<string, MapObject> BasicDictionary;
     public Dictionary<string, HistoryItem> KnownRecipeDictionary;
     void Awake()
@@ -36,10 +36,11 @@ public class MapObjectDatabase : MonoBehaviour
         CreateMapObjectDictionary(mapObjects);
         CreateCombinationDictionary(mapObjects);
         CreateActionsDictionary(mapObjects);
-        //CreateZoneDictionary(mapObjects);
         CreateBasicDictionary(mapObjects);
         CreateKnownRecipeDictionary(mapObjects);
     }
+
+
 
     private void CreateBasicDictionary(MapObject[] mapObjects)
     {
@@ -48,6 +49,8 @@ public class MapObjectDatabase : MonoBehaviour
         {
             if (obj.RequiredMaterial != null & obj.RequiredMapObject == null)
                 BasicDictionary.TryAdd(obj.RequiredMaterial.Name, obj);
+            if (obj.Name.Contains("Waste"))
+                waste = obj;
         }
     }
 
@@ -111,20 +114,27 @@ public class MapObjectDatabase : MonoBehaviour
 
         }
     }
-
-    public void CreateZoneDictionary(MapObject[] mapObjects)
+    public string GetActionForCurrentObject(string name)
     {
-        ZoneDictionary = new();
-        foreach (MapObject obj in mapObjects)
+        foreach (var entry in ActionsDictionary)
         {
-            if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
-            {
-                ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
-            }
+            if (entry.Key.Item2 == name)
+                return entry.Key.Item1;
         }
+        return null;
     }
+    //public void CreateZoneDictionary(MapObject[] mapObjects)
+    //{
+    //    ZoneDictionary = new();
+    //    foreach (MapObject obj in mapObjects)
+    //    {
+    //        if (obj.RequiredZone != ZoneEnum.Any && !obj.isFinalForm)
+    //        {
+    //            ZoneDictionary.Add((obj.RequiredZone, obj.RequiredMaterial.Name), obj);
+    //        }
+    //    }
+    //}
 
 
- 
 
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7755317427680937641}
   - component: {fileID: 2977066722216189832}
   - component: {fileID: 1204833170207334763}
+  - component: {fileID: 8792507711200250197}
   m_Layer: 0
   m_Name: Map Decoration
   m_TagString: Untagged
@@ -49,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapDecoration
   image: {fileID: 4746859858784275437}
-  lmAnimation: {fileID: 0}
   mouseClick:
     m_Name: Mouse Click
     m_Type: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   decorationArea: {fileID: 0}
+  movable: 1
 --- !u!212 &4746859858784275437
 SpriteRenderer:
   serializedVersion: 2
@@ -152,9 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
   playOnAwake: 1
-  animationMode: 0
+  animationMode: 1
   components:
   - rid: 7970485387106713668
+  - rid: 7970485472784547905
   references:
     version: 2
     RefIds:
@@ -166,7 +168,7 @@ MonoBehaviour:
         target: {fileID: 4679307523171237192}
         settings:
           startValue: {x: 0.25, y: 0.25, z: 0.25}
-          endValue: {x: 0.75, y: 0.75, z: 1}
+          endValue: {x: 1, y: 0.9, z: 1}
           duration: 0.5
           ease: 14
           customEaseCurve:
@@ -203,6 +205,51 @@ MonoBehaviour:
           schedulerType: 0
           additionalSettings: 1
         relative: 0
+    - rid: 7970485472784547905
+      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Scale
+        enabled: 1
+        target: {fileID: 4679307523171237192}
+        settings:
+          startValue: {x: 1, y: 0.9, z: 1}
+          endValue: {x: 1, y: 1.1, z: 1}
+          duration: 2
+          ease: 6
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0
+          delayType: 0
+          loops: 99999
+          loopType: 1
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 0
+        relative: 0
 --- !u!135 &1204833170207334763
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -224,3 +271,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.45
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8792507711200250197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189570919954901242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e4757dc3cefb4698fe65e32364f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteScript
+  image: {fileID: 0}
+  popup: {fileID: 0}
+  highlight: {fileID: 0}
+  creationAnimation: {fileID: 0}
+  idleAnimation: {fileID: 0}
+  zone: {fileID: 0}

@@ -42,10 +42,10 @@ public class Popup : MonoBehaviour
             }
         }
     }
-    public void ShowText(GameObject obj, string text)
+    public TextPopup ShowText(GameObject obj, string text)
     {
         if (activePopups.Count >= maxPopupInstances)
-            return;
+            return null;
 
         GameObject damageText = ObjectPool.instance.GetObject(textPopupPrefab.gameObject);
         TextPopup textPopup = damageText.GetComponent<TextPopup>();
@@ -56,5 +56,6 @@ public class Popup : MonoBehaviour
         textPopup.Setup(position, colour, size, fadeTime, floatSpeed);
         textPopup.text.SetText(text);
         activePopups.Add(textPopup);
+        return textPopup;
     }
 }

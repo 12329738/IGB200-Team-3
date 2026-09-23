@@ -8,7 +8,7 @@ public class MapObject : HistoryItem
  
     public MapObject RequiredMapObject;
     public Material RequiredMaterial;
-    public ZoneEnum RequiredZone;
+    //public ZoneEnum RequiredZone;
     public Action RequiredAction;
     public Material RequiredStoredMaterial;
     public int RequiredStoredMaterialAmount;
@@ -33,7 +33,7 @@ public class MapObject : HistoryItem
             RequiredMaterial = new Material(SO.RequiredMaterial);
             createdFrom.Add(RequiredMaterial);
         }
-        RequiredZone = SO.RequiredZone;
+        //RequiredZone = SO.RequiredZone;
         if (SO.RequiredAction != null) RequiredAction = new Action(SO.RequiredAction);
         if (SO.RequiredStoredMaterial != null)
         {
