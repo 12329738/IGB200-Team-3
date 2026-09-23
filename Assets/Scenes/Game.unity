@@ -2910,7 +2910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -259, y: -12}
+  m_AnchoredPosition: {x: -604, y: -713}
   m_SizeDelta: {x: 471.2, y: 323.7}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &512275231
@@ -3499,7 +3499,7 @@ PrefabInstance:
     - target: {fileID: 2275190638890101998, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: dacfbae3393a108409748ee653e21196, type: 3}
+      objectReference: {fileID: 21300000, guid: d4f8ac452dd6f4442a82eb5475a43767, type: 3}
     - target: {fileID: 3531520158551266233, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
       propertyPath: m_SizeDelta.x
       value: 600.68
@@ -5813,8 +5813,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dacfbae3393a108409748ee653e21196, type: 3}
-  m_Type: 2
+  m_Sprite: {fileID: 21300000, guid: d4f8ac452dd6f4442a82eb5475a43767, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6805,8 +6805,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 100
     m_Right: 0
-    m_Top: 20
-    m_Bottom: 20
+    m_Top: 60
+    m_Bottom: 60
   m_ChildAlignment: 3
   m_Spacing: 25
   m_ChildForceExpandWidth: 1
