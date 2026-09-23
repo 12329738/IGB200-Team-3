@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class FinalFormUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class FinalFormUi : MonoBehaviour
 {
     public GameObject FinalFormUI;
     public FinalFormButton FinalFormIconPrefab;
@@ -23,7 +23,8 @@ public class FinalFormUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         finalFormButtonDictionary = new();
         foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
-
+            if (mapObject == MapObjectDatabase.instance.waste)
+                continue;
             FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
             button.image.sprite = mapObject.image;
             TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
@@ -69,28 +70,28 @@ public class FinalFormUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        hovering = true;
-        if (!expanded)
-        {
-            retractAnimation.Stop();
-            expandAnimation.Stop();
-            expandAnimation.Play();
-            expanded = true;
-        }
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    hovering = true;
+    //    if (!expanded)
+    //    {
+    //        retractAnimation.Stop();
+    //        expandAnimation.Stop();
+    //        expandAnimation.Play();
+    //        expanded = true;
+    //    }
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        hovering = false;
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    hovering = false;
 
-        if (expanded)
-        {
-            retractAnimation.Stop();
-            retractAnimation.Play();
-            expanded = false;
-        }
-    }
+    //    if (expanded)
+    //    {
+    //        retractAnimation.Stop();
+    //        retractAnimation.Play();
+    //        expanded = false;
+    //    }
+    //}
 }
 

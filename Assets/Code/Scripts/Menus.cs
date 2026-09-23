@@ -12,6 +12,7 @@ public class Menus : MonoBehaviour
     public GameObject mainMenu;
     public GameObject helpMenu;
     public GameObject optionsMenu;
+    public GameObject gameMenu;
 
     [Header("SCENES")]
     public string gameScene = "Game";
@@ -91,6 +92,17 @@ public class Menus : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
+    // =========================================================
+    // Game MENU
+    // =========================================================
+
+    public void ToggleGameMenu()
+    {
+        if (gameMenu.activeSelf)
+            gameMenu.SetActive(false);
+        else
+            gameMenu.SetActive(true);
+    }
 
     // =========================================================
     // HELP MENU
@@ -113,13 +125,11 @@ public class Menus : MonoBehaviour
     public void OpenOptionsMenu()
     {
         optionsMenu.SetActive(true);
-        MapUI.instance.blocker.SetActive(true);
     }
 
     public void CloseOptionsMenu()
     {
         optionsMenu.SetActive(false);
-        MapUI.instance.blocker.SetActive(false);
     }
 
     // =========================================================

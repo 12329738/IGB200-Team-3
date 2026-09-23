@@ -65,17 +65,6 @@ public class GoalItemUI : MonoBehaviour
     }
     public void CreateFinalItems()
     {
-        text.text = "See what else you can make!";
-        foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
-        {
-            if (mapObject.isFinalForm)
-            {
-                FinalFormButton button = Instantiate(FinalFormIconPrefab, GoalItemUi.transform);
-                button.image.sprite = mapObject.image;
-                TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-                //text.text = mapObject.Name;
-                button.mapObject = mapObject;
-            }
-        }
+        Destroy(this.gameObject);
     }
 }

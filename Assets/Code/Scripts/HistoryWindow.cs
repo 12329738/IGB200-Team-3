@@ -36,7 +36,7 @@ public class HistoryWindow : MonoBehaviour
         if (closing && !closeAnimation.IsPlaying)
         {
             Destroy(this.gameObject);
-            MapUI.instance.blocker.SetActive(false);
+            //MapUI.instance.blocker.SetActive(false);
         }
         
     }

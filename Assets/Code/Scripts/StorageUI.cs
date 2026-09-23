@@ -9,20 +9,19 @@ public class StorageUI : MonoBehaviour
     public GameObject StorageIconPrefab;
     public GameObject storageCounter;
     public TextMeshProUGUI text;
-
+    LitMotionAnimation animation;
 
     void Start()
     {
         storageCounter = Instantiate(StorageIconPrefab, StorageUi.transform);
         text = storageCounter.GetComponentInChildren<TextMeshProUGUI>();
         text.text = $"{GameManager.instance.currentRecycledWaste}";
+        animation = text.gameObject.GetComponent<LitMotionAnimation>();
 
-        
     }
 
     public void ChangeStorageAmount()
     {
-        LitMotionAnimation animation = text.gameObject.GetComponent<LitMotionAnimation>();
         animation.Stop();
         animation.Play();
         text.text = $"{GameManager.instance.currentRecycledWaste}";

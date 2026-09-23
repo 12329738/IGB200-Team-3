@@ -21,7 +21,7 @@ public class ObjectSelectScreen : MonoBehaviour
             objectSelectItem.mapObject = mapObject.Name;
             if (mapObject.RequiredStoredMaterial != null)
             {
-                objectSelectItem.text.text += $"\n Requires {mapObject.RequiredStoredMaterialAmount} recycled waste";
+                objectSelectItem.text.text += $"\n Requires {mapObject.RequiredStoredMaterialAmount} <sprite name=\"Waste edit\">";
                 if (mapObject.RequiredStoredMaterialAmount > GameManager.instance.currentRecycledWaste)
                      objectSelectItem.button.interactable = false;
             }

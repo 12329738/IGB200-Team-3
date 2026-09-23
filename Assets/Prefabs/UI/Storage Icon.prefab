@@ -93,10 +93,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 25
   m_fontStyle: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
         target: {fileID: 8246773132792149638}
         settings:
           startValue: {x: 1, y: 1, z: 1}
-          endValue: {x: 10, y: 10, z: 1}
+          endValue: {x: 3, y: 3, z: 1}
           duration: 0.25
           ease: 22
           customEaseCurve:
@@ -210,7 +210,7 @@ MonoBehaviour:
         enabled: 1
         target: {fileID: 8246773132792149638}
         settings:
-          startValue: {x: 10, y: 10, z: 1}
+          startValue: {x: 3, y: 3, z: 1}
           endValue: {x: 1, y: 1, z: 1}
           duration: 0.5
           ease: 23
