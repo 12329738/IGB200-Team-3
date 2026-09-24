@@ -38,6 +38,7 @@ public class FinalFormUi : MonoBehaviour
     public void MarkItemAsComplete(string name)
     {
         finalFormButtonDictionary[name].SetComplete();
+
     }
 
     public void OnClick()
@@ -45,17 +46,12 @@ public class FinalFormUi : MonoBehaviour
           
         if (expanded)
         {
-            retractAnimation.Stop();
-            retractAnimation.Play();
-            expanded = false;
+            Retract();
         }
             
         else
         {
-            retractAnimation.Stop();
-            expandAnimation.Stop();
-            expandAnimation.Play();
-            expanded = true;
+            Expand();
         }                   
     }
 
@@ -68,6 +64,21 @@ public class FinalFormUi : MonoBehaviour
     public void OnMouseExit()
     {
         
+    }
+
+    public void Expand()
+    {
+        retractAnimation.Stop();
+        expandAnimation.Stop();
+        expandAnimation.Play();
+        expanded = true;
+    }
+
+    public void Retract()
+    {
+        retractAnimation.Stop();
+        retractAnimation.Play();
+        expanded = false;
     }
 
     //public void OnPointerEnter(PointerEventData eventData)

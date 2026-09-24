@@ -10,6 +10,7 @@ public class GoalItemUI : MonoBehaviour
     public int itemNumber = 2;
     public Dictionary<string, FinalFormButton> finalFormButtons;
     public TextMeshProUGUI text;
+    public FinalFormUi finalFormUi;
     void Start()
     {
         
@@ -65,6 +66,7 @@ public class GoalItemUI : MonoBehaviour
     }
     public void CreateFinalItems()
     {
+        finalFormUi.Expand();
         Destroy(this.gameObject);
     }
 }

@@ -19,6 +19,7 @@ public class Zone : MonoBehaviour
     private bool isHovering;
     public Color hoverColour;
     private AudioHandle creationSoundHandle;
+    public GameObject redZone;
 
 
     private void Start()
@@ -146,13 +147,18 @@ public class Zone : MonoBehaviour
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
         CreateWaste(mapObject);
+        if (MapUI.instance.historyWindow != null)
+            MapUI.instance.historyWindow.UpdateWindow();
+
+
+
 
     }
 
     private void CreateWaste(MapObject mapObject)
     {
         
-        if (mapObject.RequiredMapObject != null)
+        if (mapObject.RequiredMapObject != null && !mapObject.isFinalForm)
              ZoneManager.instance.PlaceItemOnIsland(MapObjectDatabase.instance.waste);     
     }
 
@@ -166,10 +172,8 @@ public class Zone : MonoBehaviour
             return;
         }
 
-        currentMapObjectSprite = Instantiate(
-            mapObjectPrefab,
-            transform
-        );
+        currentMapObjectSprite = Instantiate(mapObjectPrefab, transform);
+        currentMapObjectSprite.transform.position = new Vector3(currentMapObjectSprite.transform.position.x, currentMapObjectSprite.transform.position.y - 0.5f, currentMapObjectSprite.transform.position.z);
         
     }
 
@@ -185,26 +189,10 @@ public class Zone : MonoBehaviour
 
     private void DiscoverMapObject(MapObject mapObject)
     {
-        mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.Name, mapObject);
         ZoneManager.instance.MarkItemAsBuilt(mapObject.Name);
-
-        if (mapObject.RequiredAction != null)
-        {
-            mapObjectDatabase.KnownRecipeDictionary.TryAdd(mapObject.RequiredAction.Name,mapObject.RequiredAction);
-            
-        }
-
-        if (mapObject.createdFrom == null)
-            return;
-
-        foreach (HistoryItem historyItem in mapObject.createdFrom)
-        {
-            if (historyItem == null)
-                continue;
-
-            mapObjectDatabase.KnownRecipeDictionary.TryAdd(historyItem.Name, historyItem);
-        }
+        mapObjectDatabase.DiscoverMapObject(mapObject.Name);
     }
+
     private void CheckGoalItem(MapObject mapObject)
     {
         if (gameManager.goalItemsFinished)
