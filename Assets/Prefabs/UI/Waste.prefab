@@ -512,12 +512,19 @@ PrefabInstance:
       propertyPath: historyAnimation
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: recycleAnimation
+      value: 
+      objectReference: {fileID: 5380287012771266623}
     m_RemovedComponents:
     - {fileID: 7966514499735956442, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
     - {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5380287012771266623}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
 --- !u!114 &1962267432593792244 stripped
 MonoBehaviour:
@@ -535,8 +542,82 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3228342473264007994, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
   m_PrefabInstance: {fileID: 7946328254872258096}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7526937962031447371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+  m_PrefabInstance: {fileID: 7946328254872258096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5380287012771266623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526937962031447371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
+  playOnAwake: 1
+  animationMode: 0
+  components:
+  - rid: 7970485387106713668
+  references:
+    version: 2
+    RefIds:
+    - rid: 7970485387106713668
+      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Scale
+        enabled: 1
+        target: {fileID: 9077849739543032323}
+        settings:
+          startValue: {x: 0.25, y: 0.25, z: 0.25}
+          endValue: {x: 1, y: 1, z: 1}
+          duration: 0.5
+          ease: 14
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0
+          delayType: 0
+          loops: 1
+          loopType: 0
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 1
+        relative: 0
 --- !u!224 &8567854311739035089 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1774459383515614177, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+  m_PrefabInstance: {fileID: 7946328254872258096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &9077849739543032323 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1422019620870173747, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
   m_PrefabInstance: {fileID: 7946328254872258096}
   m_PrefabAsset: {fileID: 0}

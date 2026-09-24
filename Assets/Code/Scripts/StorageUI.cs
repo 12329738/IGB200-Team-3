@@ -22,8 +22,6 @@ public class StorageUI : MonoBehaviour
 
     public void ChangeStorageAmount()
     {
-        animation.Stop();
-        animation.Play();
         text.text = $"{GameManager.instance.currentRecycledWaste}";
     }
 

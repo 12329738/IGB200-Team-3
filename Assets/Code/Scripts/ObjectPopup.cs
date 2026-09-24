@@ -10,6 +10,7 @@ public class ObjectPopup : MonoBehaviour
     public GameObject action;
     public LitMotionAnimation historyAnimation;
     public LitMotionAnimation actionAnimation;
+    public LitMotionAnimation recycleAnimation;
 
     private System.Action onHistory;
     private System.Action onAction;
@@ -37,8 +38,23 @@ public class ObjectPopup : MonoBehaviour
         {
             action.SetActive(false);
         }
-        historyAnimation.Restart();
-        actionAnimation.Restart();
+        if (historyAnimation != null)
+        {
+            historyAnimation.Stop();
+            historyAnimation.Play();
+        }
+        if (actionAnimation != null)
+        {
+            actionAnimation.Stop();
+            actionAnimation.Play();
+        }
+
+        if (recycleAnimation != null)
+        {
+            recycleAnimation.Stop();
+            recycleAnimation.Play();
+        }
+
 
     }
 
