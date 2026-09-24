@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4746859858784275437}
   - component: {fileID: 7755317427680937641}
   - component: {fileID: 2977066722216189832}
+  - component: {fileID: 5850569740846076072}
   - component: {fileID: 1703738821133180225}
   m_Layer: 0
   m_Name: Map Object
@@ -149,10 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
   playOnAwake: 1
-  animationMode: 1
+  animationMode: 0
   components:
   - rid: 7970485387106713668
-  - rid: 7970485472784547905
   references:
     version: 2
     RefIds:
@@ -201,6 +201,25 @@ MonoBehaviour:
           schedulerType: 0
           additionalSettings: 1
         relative: 0
+--- !u!114 &5850569740846076072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189570919954901242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
+  playOnAwake: 1
+  animationMode: 0
+  components:
+  - rid: 7970485472784547905
+  references:
+    version: 2
+    RefIds:
     - rid: 7970485472784547905
       type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
       data:
