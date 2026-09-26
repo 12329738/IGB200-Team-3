@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RecycleItem(Material material, GameObject gameObject)
+    public void RecycleItem(GameObject gameObject)
     {
         TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 <sprite name=\"Waste edit\">");
         ChangeStoredMaterialAmount(1);     

@@ -19,6 +19,7 @@ public class SpriteScript : MonoBehaviour
     RectTransform destination;
     float moveSpeed = 15;
     private float startingDistance;
+    public GameObject particleSystem;
 
     private void Awake()
     {
@@ -171,10 +172,7 @@ public class SpriteScript : MonoBehaviour
                 transform.position = targetPosition;
                 transform.localScale = Vector3.zero;
 
-                GameManager.instance.RecycleItem(
-                    mapObject.HarvestedMaterial,
-                    gameObject
-                );
+                GameManager.instance.RecycleItem(gameObject);
 
                 ObjectPool.instance.ReturnObject(gameObject);
             }
@@ -184,7 +182,7 @@ public class SpriteScript : MonoBehaviour
 
     public void SetDestination()
     {
-        destination = GameManager.instance.storageUi.GetMaterialUILocation(mapObject.HarvestedMaterial.Name);
+        destination = GameManager.instance.storageUi.GetMaterialUILocation();
         Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, destination.position);
 
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);

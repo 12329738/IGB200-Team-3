@@ -124,6 +124,7 @@ public class Zone : MonoBehaviour
         if (mapObject == null)
             return;
 
+        currentObject = mapObject;
         EnsureMapObjectSpriteExists();
 
         if (currentObject != null)
@@ -132,7 +133,7 @@ public class Zone : MonoBehaviour
         Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
         SetMapObjectVisual(mapObject);
         ZoneManager.instance.PlayCreationSound(mapObject);
-        currentObject = mapObject;
+        
 
         gameManager.ResetCurrentAction();
 
@@ -175,6 +176,7 @@ public class Zone : MonoBehaviour
         currentMapObjectSprite = Instantiate(mapObjectPrefab, transform);
         currentMapObjectSprite.transform.position = new Vector3(currentMapObjectSprite.transform.position.x, currentMapObjectSprite.transform.position.y - 0.5f, currentMapObjectSprite.transform.position.z);
         
+        
     }
 
 
@@ -185,6 +187,12 @@ public class Zone : MonoBehaviour
 
         currentMapObjectSprite.image.sprite = mapObject.image;
         currentMapObjectSprite.mapObject = mapObject;
+
+        Destroy(currentMapObjectSprite.particleSystem);
+        if (currentObject.particleSystem != null)
+        {
+            currentMapObjectSprite.particleSystem = Instantiate(currentObject.particleSystem, currentMapObjectSprite.transform);
+        }
     }
 
     private void DiscoverMapObject(MapObject mapObject)

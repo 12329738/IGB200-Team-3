@@ -57,6 +57,7 @@ MonoBehaviour:
   creationAnimation: {fileID: 2977066722216189832}
   idleAnimation: {fileID: 0}
   zone: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!114 &306392403913135869
 MonoBehaviour:
   m_ObjectHideFlags: 0
