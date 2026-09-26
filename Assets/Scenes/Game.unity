@@ -3486,7 +3486,7 @@ MonoBehaviour:
       type: {class: TMPTextColorAlphaAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
       data:
         displayName: Color (Alpha)
-        enabled: 1
+        enabled: 0
         target: {fileID: 0}
         settings:
           startValue: 0
