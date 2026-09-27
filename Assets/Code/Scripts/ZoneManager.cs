@@ -72,4 +72,12 @@ public class ZoneManager : MonoBehaviour
     {
         finalFormUi.MarkItemAsComplete(name);
     }
+
+    public void ToggleRedZones(bool enabled)
+    {
+        foreach (Zone zone in zones)
+        {
+            zone.redZone.SetActive(enabled);
+        }
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MapObjectDatabase : MonoBehaviour
 {
     public static MapObjectDatabase instance;
@@ -10,7 +11,7 @@ public class MapObjectDatabase : MonoBehaviour
     public Dictionary<(string, string), List<MapObject>> ActionsDictionary;
     public MapObject waste;
     public Dictionary<string, MapObject> BasicDictionary;
-    public Dictionary<string, HistoryItem> KnownRecipeDictionary;
+    public Dictionary<string, bool> discoveredMapObjects = new();
     void Awake()
     {
         if (instance == null)
@@ -37,10 +38,12 @@ public class MapObjectDatabase : MonoBehaviour
         CreateCombinationDictionary(mapObjects);
         CreateActionsDictionary(mapObjects);
         CreateBasicDictionary(mapObjects);
-        CreateKnownRecipeDictionary(mapObjects);
     }
 
-
+    public void DiscoverMapObject(string name)
+    {
+        discoveredMapObjects[name] = true;
+    }
 
     private void CreateBasicDictionary(MapObject[] mapObjects)
     {
@@ -51,16 +54,7 @@ public class MapObjectDatabase : MonoBehaviour
                 BasicDictionary.TryAdd(obj.RequiredMaterial.Name, obj);
             if (obj.Name.Contains("Waste"))
                 waste = obj;
-        }
-    }
-
-    private void CreateKnownRecipeDictionary(MapObject[] mapObjects)
-    {
-        KnownRecipeDictionary = new();
-        foreach (MapObject obj in mapObjects)
-        {
-            if (obj.isFinalForm)
-                KnownRecipeDictionary.TryAdd(obj.Name, obj);
+            discoveredMapObjects[obj.Name] = false;
         }
     }
 
@@ -105,13 +99,6 @@ public class MapObjectDatabase : MonoBehaviour
 
 
             }
-            if (obj.HarvestedMaterial != null)
-            {
-                objects = new();
-                objects.Add(obj);
-                ActionsDictionary.TryAdd(("Recycle", obj.Name), objects);
-            }
-
         }
     }
     public string GetActionForCurrentObject(string name)

@@ -1,5 +1,4 @@
 using LitMotion.Animation;
-using Unity.ProjectAuditor.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,6 @@ public class MapDecoration : MonoBehaviour
     public SpriteRenderer image;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
-    //public LitMotionAnimation lmAnimation;
     [SerializeField] private InputAction mouseClick;
     [HideInInspector] public bool IsMoving = false;
     public LayerMask obstacleLayer;
@@ -95,17 +93,17 @@ public class MapDecoration : MonoBehaviour
     {
         if (movable)
         {
-            Ray ray = Camera.main.ScreenPointToRay(
-            Mouse.current.position.ReadValue()
-        );
+            
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.TryGetComponent(out MapDecoration knob))
+                if (hit.collider.TryGetComponent(out MapDecoration mapDecoration))
                 {
-                    mouseOffset = knob.transform.position - GetMousePosition();
+                    ZoneManager.instance.ToggleRedZones(true);
+                    mouseOffset = mapDecoration.transform.position - GetMousePosition();
 
-                    knob.IsMoving = true;
+                    mapDecoration.IsMoving = true;
                 }
             }
         }
@@ -115,6 +113,7 @@ public class MapDecoration : MonoBehaviour
     private void MouseReleaseAction(InputAction.CallbackContext context)
     {
         IsMoving = false;
+        ZoneManager.instance.ToggleRedZones(false);
     }
 
     private void Move()
