@@ -18,7 +18,7 @@ public class Menus : MonoBehaviour
     [Header("SCENES")]
     public string gameScene = "Game";
     public string mainMenuScene = "MainMenu";
-    public string galleryScene = "Gallery";
+    public string tutorialScene = "Tutorial";
 
     void Awake()
     {
@@ -78,11 +78,11 @@ public class Menus : MonoBehaviour
         SceneManager.LoadScene(gameScene);
     }
 
-    public void StartGallery()
+    public void StartTutorial()
     {
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(galleryScene);
+        SceneManager.LoadScene(tutorialScene);
     }
 
     public void QuitGame()
