@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class TutorialPromptManager : MonoBehaviour
@@ -41,7 +40,6 @@ public class TutorialPromptManager : MonoBehaviour
     private readonly Queue<TutorialPrompt> promptQueue = new();
 
     private bool isDisplayingPrompt;
-    private bool promptsAllowed;
 
     private void Awake()
     {
@@ -56,11 +54,6 @@ public class TutorialPromptManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        promptsAllowed =
-            SceneManager.GetActiveScene().name == "Game";
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
         // Start hidden.
         if (promptCanvasGroup != null)
         {
@@ -70,12 +63,7 @@ public class TutorialPromptManager : MonoBehaviour
         }
 
         //Display first tutorial prompt when the game loads
-        if (promptsAllowed)
-        {
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.GameLoaded
-            );
-        }
+        TutorialPromptManager.ShowOnce(TutorialPromptId.GameLoaded);
     }
 
 
@@ -97,11 +85,6 @@ public class TutorialPromptManager : MonoBehaviour
 
     private void TryQueuePrompt(TutorialPromptId id)
     {
-        if (!promptsAllowed)
-        {
-            return;
-        }
-
         // Already triggered during this session.
         if (triggeredPrompts.Contains(id))
         {
@@ -188,32 +171,6 @@ public class TutorialPromptManager : MonoBehaviour
         promptCanvasGroup.alpha = endAlpha;
     }
 
-    private void OnSceneLoaded(
-    Scene scene,
-    LoadSceneMode mode)
-    {
-        promptsAllowed =
-            scene.name == "Game";
-
-        if (!promptsAllowed)
-        {
-            // Stop any prompt that was still displaying
-            // when the player left the Game scene.
-            StopAllCoroutines();
-
-            promptQueue.Clear();
-
-            isDisplayingPrompt = false;
-
-            if (promptCanvasGroup != null)
-            {
-                promptCanvasGroup.alpha = 0f;
-                promptCanvasGroup.interactable = false;
-                promptCanvasGroup.blocksRaycasts = false;
-            }
-        }
-    }
-
     // Clears all tutorial progress for the current session.
     [ContextMenu("Reset Tutorial Session")]
     public void ResetTutorialSession()
@@ -233,18 +190,11 @@ public class TutorialPromptManager : MonoBehaviour
         Debug.Log("[TUTORIAL] Tutorial session reset.");
     }
 
-    private void OnDestroy()
-    {
-        if (Instance != this)
-        {
-            return;
-        }
-
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     public bool HasPromptTriggered(TutorialPromptId id)
     {
-        return triggeredPrompts.Contains(id);
+        if (triggeredPrompts.Contains(id))
+            return true;
+        else
+            return false;
     }
 }
