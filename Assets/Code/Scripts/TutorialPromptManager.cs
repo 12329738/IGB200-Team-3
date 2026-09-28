@@ -189,4 +189,12 @@ public class TutorialPromptManager : MonoBehaviour
 
         Debug.Log("[TUTORIAL] Tutorial session reset.");
     }
+
+    public bool HasPromptTriggered(TutorialPromptId id)
+    {
+        if (triggeredPrompts.Contains(id))
+            return true;
+        else
+            return false;
+    }
 }

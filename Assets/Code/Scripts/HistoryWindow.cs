@@ -21,9 +21,9 @@ public class HistoryWindow : MonoBehaviour
     public LitMotionAnimation closeAnimation;
     private readonly Dictionary<HistoryItem, HistoryEntry> historyEntries = new();
     bool closing = false;
-    MapObject targetMapObject;
+    public MapObject targetMapObject;
 
-    public void OnClick()
+    public void CloseWindow()
     {
         if (!closing)
         {

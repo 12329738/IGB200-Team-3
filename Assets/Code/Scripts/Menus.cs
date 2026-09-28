@@ -14,6 +14,7 @@ public class Menus : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject gameMenu;
 
+
     [Header("SCENES")]
     public string gameScene = "Game";
     public string mainMenuScene = "MainMenu";
