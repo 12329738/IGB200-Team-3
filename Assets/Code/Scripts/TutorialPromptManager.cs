@@ -242,4 +242,9 @@ public class TutorialPromptManager : MonoBehaviour
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+    public bool HasPromptTriggered(TutorialPromptId id)
+    {
+        return triggeredPrompts.Contains(id);
+    }
 }

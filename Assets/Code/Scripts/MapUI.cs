@@ -8,8 +8,7 @@ public class MapUI : MonoBehaviour
     public HistoryWindow historyWindow;
     public GameObject optionsMenu;
     public ObjectSelectScreen objectSelectScreen;
-    public GameObject finalFormWindow;
-    bool finalFormWindowActive = false;
+    public FinalFormUi finalFormWindow;
     public static MapUI instance;
     public GameObject blocker;
     public Canvas canvas;
@@ -32,7 +31,6 @@ public class MapUI : MonoBehaviour
     {
         if (historyWindow != null)
             Destroy(historyWindow.gameObject);
-        //blocker.SetActive(true);
         historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
         historyWindow.CreateHistory(mapObject);
     }
@@ -46,28 +44,12 @@ public class MapUI : MonoBehaviour
 
     public void DisplayFinalFormWindow()
     {
-        if (finalFormWindowActive == false)
-        {
-            finalFormWindowActive = true;
-            finalFormWindow.SetActive(true);
-
-        }
+        finalFormWindow.Show();
         
     }
     public void DisplayOptionsMenu()
     {
         blocker.SetActive(true);
         optionsMenu.SetActive(true);
-    }
-    public void HideFinalFormWindow()
-    {
-        if (finalFormWindowActive == true)
-        {
-            finalFormWindowActive = false;
-            finalFormWindow.SetActive(false);
-
-        }
-        
-
     }
 }

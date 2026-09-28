@@ -38,9 +38,14 @@ public class Zone : MonoBehaviour
 
         if (!mapObjectDatabase.BasicDictionary.TryGetValue(material.Name, out MapObject mapObject))    
             return;
-        
+
+        if (!TutorialPromptManager.Instance.HasPromptTriggered(TutorialPromptId.FirstMaterialPlaced))
+        {
+            MapUI.instance.DisplayFinalFormWindow();
+        }
         ChangeMapObject(mapObject);
 
+        
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialPlaced);
     }
 
@@ -127,8 +132,6 @@ public class Zone : MonoBehaviour
         currentObject = mapObject;
         EnsureMapObjectSpriteExists();
 
-        if (currentObject != null)
-            gameManager.objectHistory.Push((currentObject, this));
 
         Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
         SetMapObjectVisual(mapObject);
@@ -140,7 +143,7 @@ public class Zone : MonoBehaviour
         UnHighlightObject();
 
         DiscoverMapObject(mapObject);
-        CheckGoalItem(mapObject);
+        //CheckGoalItem(mapObject);
 
         currentMapObjectSprite.popup.Disable();
         currentMapObjectSprite.creationAnimation.Restart();

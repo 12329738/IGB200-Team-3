@@ -16,10 +16,11 @@ public class FinalFormUi : MonoBehaviour
     public LitMotionAnimation expandAnimation;
     public LitMotionAnimation retractAnimation;
     public LitMotionAnimation hoverExpandAnimation;
+    public GameObject[] arrows;
 
-    void Start()
+    void Awake()
     {
-        //gameObject.SetActive(false);
+        
         finalFormButtonDictionary = new();
         foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
@@ -28,13 +29,18 @@ public class FinalFormUi : MonoBehaviour
             FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
             button.image.sprite = mapObject.image;
             TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-            //text.text = mapObject.Name;
             button.mapObject = mapObject;
             finalFormButtonDictionary.Add(mapObject.Name, button);
                       
         }
+        //gameObject.SetActive(false);
     }
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        Expand();
+    }
     public void MarkItemAsComplete(string name)
     {
         finalFormButtonDictionary[name].SetComplete();
@@ -55,16 +61,6 @@ public class FinalFormUi : MonoBehaviour
         }                   
     }
 
-    public void OnMouseEnter()
-    {
-        
-
-    }
-
-    public void OnMouseExit()
-    {
-        
-    }
 
     public void Expand()
     {
@@ -72,6 +68,13 @@ public class FinalFormUi : MonoBehaviour
         expandAnimation.Stop();
         expandAnimation.Play();
         expanded = true;
+        foreach (GameObject obj in arrows)
+        {
+            Vector3 rotation = obj.transform.eulerAngles;
+            rotation.z = 90;
+            obj.transform.eulerAngles = rotation;
+
+        }
     }
 
     public void Retract()
@@ -79,30 +82,14 @@ public class FinalFormUi : MonoBehaviour
         retractAnimation.Stop();
         retractAnimation.Play();
         expanded = false;
+        foreach (GameObject obj in arrows)
+        {
+            Vector3 rotation = obj.transform.eulerAngles;
+            rotation.z = 270;
+            obj.transform.eulerAngles = rotation;
+
+        }
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    hovering = true;
-    //    if (!expanded)
-    //    {
-    //        retractAnimation.Stop();
-    //        expandAnimation.Stop();
-    //        expandAnimation.Play();
-    //        expanded = true;
-    //    }
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    hovering = false;
-
-    //    if (expanded)
-    //    {
-    //        retractAnimation.Stop();
-    //        retractAnimation.Play();
-    //        expanded = false;
-    //    }
-    //}
 }
 

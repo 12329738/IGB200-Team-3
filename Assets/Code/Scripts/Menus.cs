@@ -13,6 +13,7 @@ public class Menus : MonoBehaviour
     public GameObject helpMenu;
     public GameObject optionsMenu;
     public GameObject gameMenu;
+    public GameObject restartMenu;
 
     [Header("SCENES")]
     public string gameScene = "Game";
@@ -116,6 +117,20 @@ public class Menus : MonoBehaviour
     public void CloseHelpMenu()
     {
         helpMenu.SetActive(false);
+    }
+
+    // =========================================================
+    // RESTART MENU
+    // =========================================================
+
+    public void OpenRestartMenu()
+    {
+        restartMenu.SetActive(true);
+    }
+
+    public void CloseRestartMenu()
+    {
+        restartMenu.SetActive(false);
     }
 
     // =========================================================
