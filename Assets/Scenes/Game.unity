@@ -2514,6 +2514,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739808156}
+    - target: {fileID: 1626590293233761478, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 2525791806936384647, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -2629,6 +2637,14 @@ PrefabInstance:
     - target: {fileID: 6403835570630476830, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -185
+      objectReference: {fileID: 0}
+    - target: {fileID: 9181722029185252165, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739808156}
+    - target: {fileID: 9181722029185252165, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 9211761869183703973, guid: d7154c5b26fd5cf42b4d1d1cde36d7bc, type: 3}
       propertyPath: m_AnchorMax.y
