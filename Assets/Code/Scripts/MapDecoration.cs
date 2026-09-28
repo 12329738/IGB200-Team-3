@@ -12,6 +12,7 @@ public class MapDecoration : MonoBehaviour
     public LayerMask obstacleLayer;
     public PolygonCollider2D decorationArea;
     public bool movable = true;
+    public MapObject mapObject;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
