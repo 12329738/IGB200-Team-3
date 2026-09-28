@@ -24,7 +24,8 @@ public class IslandDecorate : MonoBehaviour
     
         MapDecoration decoration = obj.GetComponent<MapDecoration>();
         decoration.decorationArea = area;
-
+        
+        decoration.mapObject = mapObject;
 
         decoration.image.sprite = mapObject.image;
 
