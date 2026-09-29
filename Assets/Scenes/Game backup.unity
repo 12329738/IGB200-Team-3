@@ -633,6 +633,7 @@ MonoBehaviour:
   expandAnimation: {fileID: 1612229439}
   retractAnimation: {fileID: 1612229440}
   hoverExpandAnimation: {fileID: 0}
+  arrows: []
 --- !u!114 &137932390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4316,7 +4317,6 @@ PrefabInstance:
       value: 38
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5250889893052677195, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
     - {fileID: 5033429805838729717, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6806711860545160127, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
@@ -4612,6 +4612,7 @@ MonoBehaviour:
   helpMenu: {fileID: 0}
   optionsMenu: {fileID: 358726846}
   gameMenu: {fileID: 500683895748697633}
+  restartMenu: {fileID: 0}
   gameScene: Game
   mainMenuScene: MainMenu
   galleryScene: Gallery
@@ -9344,7 +9345,7 @@ MonoBehaviour:
   historyWindow: {fileID: 0}
   optionsMenu: {fileID: 0}
   objectSelectScreen: {fileID: 5250889893052677195, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
-  finalFormWindow: {fileID: 137932387}
+  finalFormWindow: {fileID: 137932389}
   blocker: {fileID: 517739325}
   canvas: {fileID: 739808154}
   historyWindowPrefab: {fileID: 5447990238995787474, guid: f15e5b30eacfa7b4fbf964451d2aae0b, type: 3}

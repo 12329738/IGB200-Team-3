@@ -2013,6 +2013,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 37517f9b50a60ae4b9126b255690d41f, type: 3}
   currentMusic: {fileID: 370782137}
   audioSourcePrefab: {fileID: 7078633981754635083, guid: 42b173ac52e8ddb408e3b47d536d4a12, type: 3}
+  musicVolume: 1
+  sfxVolume: 1
 --- !u!4 &370782136
 Transform:
   m_ObjectHideFlags: 0
@@ -3494,6 +3496,7 @@ MonoBehaviour:
   helpMenu: {fileID: 0}
   optionsMenu: {fileID: 0}
   gameMenu: {fileID: 1712083260}
+  restartMenu: {fileID: 0}
   gameScene: Game
   mainMenuScene: MainMenu
   galleryScene: Gallery
