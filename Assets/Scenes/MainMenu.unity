@@ -1247,7 +1247,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9015080491068188918}
         m_TargetAssemblyTypeName: Menus, Assembly-CSharp
-        m_MethodName: StartTutorial
+        m_MethodName: StartGallery
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3501,9 +3501,10 @@ MonoBehaviour:
   helpMenu: {fileID: 0}
   optionsMenu: {fileID: 0}
   gameMenu: {fileID: 0}
+  restartMenu: {fileID: 0}
   gameScene: Game
   mainMenuScene: MainMenu
-  tutorialScene: Tutorial
+  galleryScene: Gallery
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

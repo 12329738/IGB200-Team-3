@@ -30,7 +30,7 @@ public class MovingSky : MonoBehaviour
 
     private void CheckPosition(float XPosition)
     {
-        Debug.Log(Screen.width);
+        //Debug.Log(Screen.width);
         if (XPosition >= 22f)
         {
             Flip();
