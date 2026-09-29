@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using LitMotion.Animation;
 
 public class Menus : MonoBehaviour
 {
@@ -75,12 +76,16 @@ public class Menus : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        StopLitMotionAnimations();
+
         SceneManager.LoadScene(gameScene);
     }
 
     public void StartGallery()
     {
         Time.timeScale = 1f;
+
+        StopLitMotionAnimations();
 
         SceneManager.LoadScene(galleryScene);
     }
@@ -155,6 +160,8 @@ public class Menus : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        StopLitMotionAnimations();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
@@ -162,6 +169,8 @@ public class Menus : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+
+        StopLitMotionAnimations();
 
         SceneManager.LoadScene(mainMenuScene);
     }
@@ -176,5 +185,22 @@ public class Menus : MonoBehaviour
     void OnDestroy()
     {
         Time.timeScale = 1f;
+    }
+
+    private void StopLitMotionAnimations()
+    {
+        LitMotionAnimation[] animations =
+            FindObjectsByType<LitMotionAnimation>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+
+        foreach (LitMotionAnimation animation in animations)
+        {
+            if (animation != null && animation.IsPlaying)
+            {
+                animation.Stop();
+            }
+        }
     }
 }

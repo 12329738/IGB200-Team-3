@@ -32,8 +32,21 @@ public class SpriteScript : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!popupOpen && GameManager.instance.CurrentMaterial == null && !Mouse.current.leftButton.isPressed)
-          OpenObjectPopup();
+        if (!CanUseObjectPopup())
+            return;
+
+        if (GameManager.instance == null ||
+            Mouse.current == null)
+        {
+            return;
+        }
+
+        if (!popupOpen &&
+            GameManager.instance.CurrentMaterial == null &&
+            !Mouse.current.leftButton.isPressed)
+        {
+            OpenObjectPopup();
+        }
     }
 
     private void Update()
@@ -54,25 +67,47 @@ public class SpriteScript : MonoBehaviour
         }
     }
 
-
-
     private void OnMouseDown()
     {
-        if (!popupOpen && GameManager.instance.CurrentMaterial == null)
+        if (!CanUseObjectPopup())
+            return;
+
+        if (!popupOpen &&
+            GameManager.instance != null &&
+            GameManager.instance.CurrentMaterial == null)
+        {
             OpenObjectPopup();
-        else
+        }
+        else if (zone != null &&
+                zone.selection != null)
+        {
             zone.selection.OnMouseDown();
+        }
     }
+
     private void OpenObjectPopup()
     {
+        if (!CanUseObjectPopup())
+            return;
+
+        string action =
+            MapObjectDatabase.instance
+                .GetActionForCurrentObject(mapObject.Name);
+
+        // Only mark it open AFTER we know the popup
+        // can actually be used.
         popupOpen = true;
+
         TutorialPromptManager.ShowOnce(
             TutorialPromptId.FirstObjectOpened
         );
 
-        string action = MapObjectDatabase.instance.GetActionForCurrentObject(mapObject.Name);
-
-        popup.Initialize(action, () => MapUI.instance.DisplayHistoryWindow(mapObject), () => PerformActionOnMapObject(action), () => RecycleMapObject(action));
+        popup.Initialize(
+            action,
+            () => MapUI.instance.DisplayHistoryWindow(mapObject),
+            () => PerformActionOnMapObject(action),
+            () => RecycleMapObject(action)
+        );
     }
 
     private void RecycleMapObject(string action)
@@ -94,11 +129,21 @@ public class SpriteScript : MonoBehaviour
     private void ClosePopup()
     {
         popupOpen = false;
-        popup.Disable();
+
+        if (popup != null)
+        {
+            popup.Disable();
+        }
     }
 
     private bool IsPointerOverPopup()
     {
+        if (popup == null ||
+            EventSystem.current == null)
+        {
+            return false;
+        }
+
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Input.mousePosition
@@ -179,7 +224,6 @@ public class SpriteScript : MonoBehaviour
         }
     }
 
-
     public void SetDestination()
     {
         destination = GameManager.instance.storageUi.GetMaterialUILocation();
@@ -196,5 +240,27 @@ public class SpriteScript : MonoBehaviour
             startingDistance = Vector3.Distance(transform.position, targetPosition);
         }
 
+    }
+
+    private bool CanUseObjectPopup()
+    {
+        if (popup == null)
+            return false;
+
+        if (mapObject == null)
+            return false;
+
+        // Normal objects placed inside Zones can use the popup.
+        if (zone != null)
+            return true;
+
+        // Waste is placed freely on the island but still needs
+        // its popup so the player can recycle it.
+        if (mapObject.Name.Contains("Waste"))
+            return true;
+
+        // Other finished decorations are display/movement objects,
+        // not normal interactable Zone objects.
+        return false;
     }
 }
