@@ -63,6 +63,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         ApplyMusicVolume();
+
+        ChangeMusic(
+            SceneManager.GetActiveScene()
+        );
     }
 
 
@@ -101,7 +105,8 @@ public class AudioManager : MonoBehaviour
             currentMusicList = mainMenuMusic;
             PlayMusic(0);
         }
-        else if (scene.name == "Game")
+        else if (scene.name == "Game" ||
+                 scene.name == "Gallery")
         {
             currentMusicList = gameMusic;
             PlayMusic(0);

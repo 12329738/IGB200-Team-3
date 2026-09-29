@@ -39,10 +39,11 @@ public class GameManager : MonoBehaviour
 
 
     }
+    
     void Start()
     {
-        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene());
     }
+
     void Update()
     {
         if (inputTracker.TimeSinceLastInput > inputTracker.ResetTimer)
