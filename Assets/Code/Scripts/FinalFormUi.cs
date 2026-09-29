@@ -20,20 +20,43 @@ public class FinalFormUi : MonoBehaviour
 
     void Awake()
     {
-        
+        EnsureInitialized();
+    }
+
+    private void EnsureInitialized()
+    {
+        // Prevent duplicate initialization.
+        if (finalFormButtonDictionary != null)
+            return;
+
         finalFormButtonDictionary = new();
-        foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
+
+        foreach (MapObject mapObject
+            in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
             if (mapObject == MapObjectDatabase.instance.waste)
                 continue;
-            FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
-            button.image.sprite = mapObject.image;
-            TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-            button.mapObject = mapObject;
-            finalFormButtonDictionary.Add(mapObject.Name, button);
-                      
+
+            FinalFormButton button =
+                Instantiate(
+                    FinalFormIconPrefab,
+                    FinalFormUI.transform
+                );
+
+            button.image.sprite =
+                mapObject.image;
+
+            TextMeshProUGUI text =
+                button.GetComponentInChildren<TextMeshProUGUI>();
+
+            button.mapObject =
+                mapObject;
+
+            finalFormButtonDictionary.Add(
+                mapObject.Name,
+                button
+            );
         }
-        //gameObject.SetActive(false);
     }
 
     public void Show()
@@ -41,10 +64,27 @@ public class FinalFormUi : MonoBehaviour
         gameObject.SetActive(true);
         Expand();
     }
+
     public void MarkItemAsComplete(string name)
     {
-        finalFormButtonDictionary[name].SetComplete();
+        EnsureInitialized();
 
+        if (finalFormButtonDictionary.TryGetValue(
+            name,
+            out FinalFormButton button))
+        {
+            if (button != null)
+            {
+                button.SetComplete();
+            }
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"[FINAL FORM UI] Could not find '{name}' " +
+                "in the final form button dictionary."
+            );
+        }
     }
 
     public void OnClick()

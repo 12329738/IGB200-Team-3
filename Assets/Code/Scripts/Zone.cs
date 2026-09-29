@@ -36,17 +36,22 @@ public class Zone : MonoBehaviour
         if (material == null)
             return;
 
-        if (!mapObjectDatabase.BasicDictionary.TryGetValue(material.Name, out MapObject mapObject))    
-            return;
-
-        if (!TutorialPromptManager.Instance.HasPromptTriggered(TutorialPromptId.FirstMaterialPlaced))
+        if (!mapObjectDatabase.BasicDictionary.TryGetValue(
+            material.Name,
+            out MapObject mapObject))
         {
-            MapUI.instance.DisplayFinalFormWindow();
+            return;
         }
+
+        // Normal gameplay UI: should open each time the player starts creating.
+        MapUI.instance.DisplayFinalFormWindow();
+
         ChangeMapObject(mapObject);
 
-        
-        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialPlaced);
+        // Tutorial prompt: still appears only once per application session.
+        TutorialPromptManager.ShowOnce(
+            TutorialPromptId.FirstMaterialPlaced
+        );
     }
 
     public void CombineMapObjectWithMaterial()
