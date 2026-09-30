@@ -5153,6 +5153,7 @@ MonoBehaviour:
   goalItemsFinished: 0
   goalItemUI: {fileID: 0}
   menuOpen: 0
+  wasteWeight: 50
   mouseClick:
     m_Name: Mouse Click
     m_Type: 0

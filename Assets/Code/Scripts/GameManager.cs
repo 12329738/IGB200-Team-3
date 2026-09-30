@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool goalItemsFinished = false;
     public GoalItemUI goalItemUI;
     public bool menuOpen = false;
+    public float wasteWeight = 50;
 
     [SerializeField] private InputAction mouseClick;
     [HideInInspector] public bool IsMoving = false;

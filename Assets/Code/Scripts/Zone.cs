@@ -149,14 +149,14 @@ public class Zone : MonoBehaviour
         UnHighlightObject();
 
         DiscoverMapObject(mapObject);
-        //CheckGoalItem(mapObject);
 
         currentMapObjectSprite.popup.Disable();
         currentMapObjectSprite.creationAnimation.Restart();
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
-        CreateWaste(mapObject);
+        if (UnityEngine.Random.Range(0,100) < gameManager.wasteWeight)
+            CreateWaste(mapObject);
         if (MapUI.instance.historyWindow != null)
             MapUI.instance.historyWindow.UpdateWindow();
 
