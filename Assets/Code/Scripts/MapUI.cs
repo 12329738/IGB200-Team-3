@@ -10,7 +10,6 @@ public class MapUI : MonoBehaviour
     public ObjectSelectScreen objectSelectScreen;
     public FinalFormUi finalFormWindow;
     public static MapUI instance;
-    public GameObject blocker;
     public Canvas canvas;
     public HistoryWindow historyWindowPrefab;
 
@@ -37,19 +36,14 @@ public class MapUI : MonoBehaviour
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)
     {
-        blocker.SetActive(true);
         ObjectSelectScreen window = Instantiate(objectSelectScreen, canvas.transform);
         window.DisplayObjectChoices(mapObjects, onSelected);
+        GameManager.instance.menuOpen = true;
     }
 
     public void DisplayFinalFormWindow()
     {
         finalFormWindow.Show();
         
-    }
-    public void DisplayOptionsMenu()
-    {
-        blocker.SetActive(true);
-        optionsMenu.SetActive(true);
     }
 }

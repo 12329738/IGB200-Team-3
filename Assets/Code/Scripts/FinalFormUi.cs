@@ -111,7 +111,7 @@ public class FinalFormUi : MonoBehaviour
         foreach (GameObject obj in arrows)
         {
             Vector3 rotation = obj.transform.eulerAngles;
-            rotation.z = 90;
+            rotation.z = 180;
             obj.transform.eulerAngles = rotation;
 
         }
@@ -125,7 +125,7 @@ public class FinalFormUi : MonoBehaviour
         foreach (GameObject obj in arrows)
         {
             Vector3 rotation = obj.transform.eulerAngles;
-            rotation.z = 270;
+            rotation.z = 0;
             obj.transform.eulerAngles = rotation;
 
         }

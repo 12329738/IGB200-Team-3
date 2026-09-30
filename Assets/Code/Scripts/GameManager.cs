@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public HashSet<string> completedGoalItems = new();
     public bool goalItemsFinished = false;
     public GoalItemUI goalItemUI;
+    public bool menuOpen = false;
 
     [SerializeField] private InputAction mouseClick;
     [HideInInspector] public bool IsMoving = false;

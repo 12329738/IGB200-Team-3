@@ -117,11 +117,13 @@ public class Menus : MonoBehaviour
     public void OpenHelpMenu()
     {
         helpMenu.SetActive(true);
+        GameManager.instance.menuOpen = true;
     }
 
     public void CloseHelpMenu()
     {
         helpMenu.SetActive(false);
+        GameManager.instance.menuOpen = false;
     }
 
     // =========================================================
@@ -131,11 +133,13 @@ public class Menus : MonoBehaviour
     public void OpenRestartMenu()
     {
         restartMenu.SetActive(true);
+        GameManager.instance.menuOpen = true;
     }
 
     public void CloseRestartMenu()
     {
         restartMenu.SetActive(false);
+        GameManager.instance.menuOpen = false;
     }
 
     // =========================================================

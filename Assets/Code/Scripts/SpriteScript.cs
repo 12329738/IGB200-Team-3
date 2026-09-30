@@ -26,8 +26,10 @@ public class SpriteScript : MonoBehaviour
         highlight = GetComponent<ImageHighlight>();
         zone = GetComponentInParent<Zone>();
         Canvas canvas = GetComponentInChildren<Canvas>();
+        image = GetComponent<SpriteRenderer>();
         if (canvas != null)
             canvas.worldCamera = Camera.main;
+        image.sortingOrder = (int)(-image.bounds.min.y *100);
     }
 
     private void OnMouseEnter()
@@ -36,7 +38,7 @@ public class SpriteScript : MonoBehaviour
             return;
 
         if (GameManager.instance == null ||
-            Mouse.current == null)
+            Mouse.current == null || GameManager.instance.menuOpen)
         {
             return;
         }
@@ -69,7 +71,7 @@ public class SpriteScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!CanUseObjectPopup())
+        if (!CanUseObjectPopup() || GameManager.instance.menuOpen)
             return;
 
         if (!popupOpen &&
@@ -94,8 +96,6 @@ public class SpriteScript : MonoBehaviour
             MapObjectDatabase.instance
                 .GetActionForCurrentObject(mapObject.Name);
 
-        // Only mark it open AFTER we know the popup
-        // can actually be used.
         popupOpen = true;
 
         TutorialPromptManager.ShowOnce(

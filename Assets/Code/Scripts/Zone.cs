@@ -44,7 +44,8 @@ public class Zone : MonoBehaviour
         }
 
         // Normal gameplay UI: should open each time the player starts creating.
-        MapUI.instance.DisplayFinalFormWindow();
+        if (!TutorialPromptManager.Instance.HasPromptTriggered(TutorialPromptId.FirstMaterialPlaced))
+            MapUI.instance.DisplayFinalFormWindow();
 
         ChangeMapObject(mapObject);
 
