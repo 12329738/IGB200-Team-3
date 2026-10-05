@@ -1533,7 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
+  playOnAwake: 0
   animationMode: 0
   components:
   - rid: 7938478467234922562
@@ -1583,7 +1583,7 @@ MonoBehaviour:
           skipValuesDuringDelay: 0
           immediateBind: 0
           schedulerType: 0
-          additionalSettings: 0
+          additionalSettings: 1
         relative: 0
         useWorldSpace: 0
 --- !u!114 &793702053
@@ -7073,6 +7073,7 @@ MonoBehaviour:
   gameMenu: {fileID: 0}
   restartMenu: {fileID: 0}
   creditsMenu: {fileID: 571915327}
+  creditsAnimation: {fileID: 793702052}
   gameScene: Game
   mainMenuScene: MainMenu
   galleryScene: Gallery

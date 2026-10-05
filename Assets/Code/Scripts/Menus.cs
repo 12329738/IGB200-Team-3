@@ -16,6 +16,7 @@ public class Menus : MonoBehaviour
     public GameObject gameMenu;
     public GameObject restartMenu;
     public GameObject creditsMenu;
+    public LitMotionAnimation creditsAnimation;
 
     [Header("SCENES")]
     public string gameScene = "Game";
@@ -164,6 +165,7 @@ public class Menus : MonoBehaviour
     public void OpenCreditsMenu()
     {
         creditsMenu.SetActive(true);
+        creditsAnimation.Restart();
     }
 
     public void CloseCreditsMenu()
