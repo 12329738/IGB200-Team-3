@@ -15,6 +15,7 @@ public class Menus : MonoBehaviour
     public GameObject optionsMenu;
     public GameObject gameMenu;
     public GameObject restartMenu;
+    public GameObject creditsMenu;
 
     [Header("SCENES")]
     public string gameScene = "Game";
@@ -157,6 +158,20 @@ public class Menus : MonoBehaviour
     }
 
     // =========================================================
+    // CREDITS MENU
+    // =========================================================
+
+    public void OpenCreditsMenu()
+    {
+        creditsMenu.SetActive(true);
+    }
+
+    public void CloseCreditsMenu()
+    {
+        creditsMenu.SetActive(false);
+    }
+
+    // =========================================================
     // UTIL
     // =========================================================
 
@@ -184,6 +199,7 @@ public class Menus : MonoBehaviour
         if (mainMenu != null) mainMenu.SetActive(false);
         if (helpMenu != null) helpMenu.SetActive(false);
         if (optionsMenu != null) optionsMenu.SetActive(false);
+        if (creditsMenu != null) creditsMenu.SetActive(false);
     }
 
     void OnDestroy()
