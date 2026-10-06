@@ -284,7 +284,7 @@ MonoBehaviour:
         enabled: 1
         target: {fileID: 4679307523171237192}
         settings:
-          startValue: {x: 1, y: 0.9, z: 1}
+          startValue: {x: 1, y: 1, z: 1}
           endValue: {x: 1, y: 1.1, z: 1}
           duration: 2
           ease: 6
@@ -320,7 +320,7 @@ MonoBehaviour:
           skipValuesDuringDelay: 0
           immediateBind: 0
           schedulerType: 0
-          additionalSettings: 0
+          additionalSettings: 1
         relative: 0
 --- !u!65 &1703738821133180225
 BoxCollider:
