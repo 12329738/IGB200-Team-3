@@ -13,6 +13,7 @@ public class SpriteScript : MonoBehaviour
     public ObjectPopup popup;
     public ImageHighlight highlight;
     public LitMotionAnimation creationAnimation;
+    public Animator poofAnimation;
     public LitMotionAnimation idleAnimation;
     public Zone zone;
     bool popupOpen;

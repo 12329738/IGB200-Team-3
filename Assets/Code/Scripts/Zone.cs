@@ -152,6 +152,8 @@ public class Zone : MonoBehaviour
 
         currentMapObjectSprite.popup.Disable();
         currentMapObjectSprite.creationAnimation.Restart();
+        currentMapObjectSprite.poofAnimation.ResetControllerState();
+        currentMapObjectSprite.poofAnimation.Play("Poof_Animation");
 
         if (mapObject.isFinalForm)
             MoveFinalForm(mapObject);
