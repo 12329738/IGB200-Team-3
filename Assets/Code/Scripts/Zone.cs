@@ -63,7 +63,9 @@ public class Zone : MonoBehaviour
             return;
 
         if (!mapObjectDatabase.CombinationDictionary.TryGetValue((material.Name, currentObject.Name), out MapObject mapObject))     
-            return;   
+            return;
+
+        DataLogging.currentLog.totalMerges++;   
 
         ChangeMapObject(mapObject);
 
@@ -80,7 +82,23 @@ public class Zone : MonoBehaviour
         
         if (mapObjects == null || mapObjects.Count == 0)
             return;
-
+        
+        switch (action.ToLower())
+        {
+            case "fold":
+                DataLogging.currentLog.timesFolded++;
+                break;
+            case "mould":
+                DataLogging.currentLog.timesMoulded++;
+                break;
+            case "shape":
+                DataLogging.currentLog.timesShaped++;
+                break;
+            case "smith":
+                DataLogging.currentLog.timesSmithed++;
+                break;
+        }
+    
         TutorialPromptManager.ShowOnce(TutorialPromptId.FirstActionUsed);
 
         if (mapObjects.Count == 1)

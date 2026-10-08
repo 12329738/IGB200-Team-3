@@ -114,7 +114,9 @@ public class SpriteScript : MonoBehaviour
     private void RecycleMapObject(string action)
     {
         if (mapObject.Name.Contains("Waste"))
-        {       
+        {   
+            DataLogging.currentLog.wasteCollected++;
+                
             TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
             SetDestination();
         }

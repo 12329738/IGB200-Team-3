@@ -75,6 +75,11 @@ public class FinalFormUi : MonoBehaviour
         {
             if (button != null)
             {
+                if (button.checkMark != null && !button.checkMark.activeSelf)
+            {
+                DataLogging.currentLog.finalFormsDiscovered++;
+            }
+            
                 button.SetComplete();
             }
         }
