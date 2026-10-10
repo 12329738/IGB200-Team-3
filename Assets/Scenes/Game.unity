@@ -14307,6 +14307,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wind_PS
       objectReference: {fileID: 0}
+    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
+      propertyPath: TrailModule.lifetime.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
+      propertyPath: TrailModule.inheritParticleColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minScalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.a
+      value: 0.25882354
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
