@@ -9097,7 +9097,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 698.7, y: -84.4}
-  m_SizeDelta: {x: 120, y: 120}
+  m_SizeDelta: {x: 131.2, y: 149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468232360
 MonoBehaviour:
@@ -9139,9 +9139,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4b591f3a844c81f41a072918dc6c1059, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5deb9b5927ecff045bf419ec4f1c3710, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468232358}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -11217,6 +11217,10 @@ PrefabInstance:
     - target: {fileID: 8662210053143179874, guid: e478e1c08408e9a48a9883daee276136, type: 3}
       propertyPath: ShapeModule.m_Rotation.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662210053143179874, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 8662210053143179874, guid: e478e1c08408e9a48a9883daee276136, type: 3}
       propertyPath: InitialModule.startSize.scalar
