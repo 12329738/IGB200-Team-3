@@ -13100,6 +13100,63 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &4176973342250679414
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280709440604147473, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5352080957828690082, guid: e478e1c08408e9a48a9883daee276136, type: 3}
+      propertyPath: m_Name
+      value: Wind_PS (Leaves)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e478e1c08408e9a48a9883daee276136, type: 3}
 --- !u!224 &4216316955031916919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14307,26 +14364,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wind_PS
       objectReference: {fileID: 0}
-    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
-      propertyPath: TrailModule.lifetime.scalar
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
-      propertyPath: TrailModule.inheritParticleColor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
-      propertyPath: EmissionModule.rateOverTime.minScalar
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6328192430875446833, guid: de9fc94d657ee844fbfece5a37ff8ad3, type: 3}
-      propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.a
-      value: 0.25882354
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14838,3 +14875,4 @@ SceneRoots:
   - {fileID: 479785853}
   - {fileID: 1924031988}
   - {fileID: 8049870340409509166}
+  - {fileID: 4176973342250679414}
