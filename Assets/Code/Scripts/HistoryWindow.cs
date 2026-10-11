@@ -18,7 +18,6 @@ public class HistoryWindow : MonoBehaviour
     public GameObject arrow;
     public GameObject historyBranch;
     public GameObject historyRow;
-    public LitMotionAnimation closeAnimation;
     private readonly Dictionary<HistoryItem, HistoryEntry> historyEntries = new();
     bool closing = false;
     public MapObject targetMapObject;
@@ -28,19 +27,12 @@ public class HistoryWindow : MonoBehaviour
         if (!closing)
         {
             closing = true;
-            closeAnimation.Play();
             
         }   
     }
-
-    public void Update()
+    void OnEnable()
     {
-        if (closing && !closeAnimation.IsPlaying)
-        {
-            Destroy(this.gameObject);
-            //MapUI.instance.blocker.SetActive(false);
-        }
-        
+        GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
     }
 
     internal void CreateHistory(MapObject mapObject)

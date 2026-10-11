@@ -12,7 +12,7 @@ public class Menus : MonoBehaviour
     [Header("MAIN MENUS")]
     public GameObject mainMenu;
     public GameObject helpMenu;
-    public GameObject optionsMenu;
+    public GameObject audioMenu;
     public GameObject gameMenu;
     public GameObject restartMenu;
     public GameObject creditsMenu;
@@ -63,9 +63,9 @@ public class Menus : MonoBehaviour
         }
 
         // Options closes second
-        if (optionsMenu.activeSelf)
+        if (audioMenu.activeSelf)
         {
-            CloseOptionsMenu();
+            CloseAudioMenu();
             return;
         }
     }
@@ -118,8 +118,13 @@ public class Menus : MonoBehaviour
 
     public void OpenHelpMenu()
     {
-        helpMenu.SetActive(true);
-        GameManager.instance.menuOpen = true;
+        if (!helpMenu.activeSelf)
+        {
+            helpMenu.SetActive(true);
+            GameManager.instance.menuOpen = true;
+            helpMenu.GetComponentInChildren<MenuOpenAnimation>().PlayOpenAnimation();
+        }
+        
     }
 
     public void CloseHelpMenu()
@@ -134,8 +139,13 @@ public class Menus : MonoBehaviour
 
     public void OpenRestartMenu()
     {
-        restartMenu.SetActive(true);
-        GameManager.instance.menuOpen = true;
+        if (!restartMenu.activeSelf)
+        {
+            restartMenu.SetActive(true);
+            GameManager.instance.menuOpen = true;
+            restartMenu.GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
+        }
+        
     }
 
     public void CloseRestartMenu()
@@ -148,14 +158,19 @@ public class Menus : MonoBehaviour
     // OPTIONS
     // =========================================================
 
-    public void OpenOptionsMenu()
+    public void OpenAudioMenu()
     {
-        optionsMenu.SetActive(true);
+        if (!audioMenu.activeSelf)
+        {
+            audioMenu.SetActive(true);
+            audioMenu.GetComponentInChildren<MenuOpenAnimation>().PlayOpenAnimation();
+        }
+        
     }
 
-    public void CloseOptionsMenu()
+    public void CloseAudioMenu()
     {
-        optionsMenu.SetActive(false);
+        audioMenu.SetActive(false);
     }
 
     // =========================================================
@@ -200,7 +215,7 @@ public class Menus : MonoBehaviour
     {
         if (mainMenu != null) mainMenu.SetActive(false);
         if (helpMenu != null) helpMenu.SetActive(false);
-        if (optionsMenu != null) optionsMenu.SetActive(false);
+        if (audioMenu != null) audioMenu.SetActive(false);
         if (creditsMenu != null) creditsMenu.SetActive(false);
     }
 
