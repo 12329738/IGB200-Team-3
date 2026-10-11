@@ -9,6 +9,12 @@ public class AudioManager : MonoBehaviour
 
     public List<AudioClip> mainMenuMusic;
     public List<AudioClip> gameMusic;
+    public List<AudioClip> ambienceList;
+    public AudioSource previousAmbience;
+    float nextAmbienceTime = 0;
+    public float minAmbienceInterval;
+    public float maxAmbienceInterval;
+
 
     private List<AudioClip> currentMusicList;
 
@@ -57,6 +63,9 @@ public class AudioManager : MonoBehaviour
         }
 
         LoadVolumeSettings();
+
+        nextAmbienceTime = Random.Range(minAmbienceInterval, maxAmbienceInterval);
+
     }
 
 
@@ -67,6 +76,8 @@ public class AudioManager : MonoBehaviour
         ChangeMusic(
             SceneManager.GetActiveScene()
         );
+
+        
     }
 
 
@@ -91,6 +102,26 @@ public class AudioManager : MonoBehaviour
 
             PlayMusic(currentTrack);
         }
+
+        if (Time.time >= nextAmbienceTime)
+        {
+            PlayAmbience();
+        }
+    }
+
+    private void PlayAmbience()
+    {
+        AudioClip ambience = ambienceList[Random.Range(0, ambienceList.Count - 1)];
+        if (previousAmbience != null && ambience == previousAmbience)
+        {
+            PlayAmbience();
+            return;
+        }
+        
+        previousAmbience.clip = ambience;
+        previousAmbience.Play();
+        nextAmbienceTime = Time.time + ambience.length + Random.Range(minAmbienceInterval, maxAmbienceInterval);
+        Debug.Log($"playing ambience {ambience.name}, length of {ambience.length}, next ambience playing at {nextAmbienceTime}");
     }
 
 
