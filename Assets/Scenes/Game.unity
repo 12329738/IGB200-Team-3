@@ -2486,7 +2486,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9505baeabf5a22943bb69f8f1221a9b9, type: 3}
   - {fileID: 8300000, guid: ba386a2fffa4879449c3df485c7eb411, type: 3}
   - {fileID: 8300000, guid: 8f3ec033e2f41d04bb6b73410f82d44a, type: 3}
-  - {fileID: 8300000, guid: 232a449ce9cf71843b90142975ba674f, type: 3}
+  - {fileID: 8300000, guid: 61ca584fcd40cc94d87d9d2d7c102ddc, type: 3}
   - {fileID: 8300000, guid: d8b20f9b954a5da47b178b77f6018777, type: 3}
   - {fileID: 8300000, guid: 1f411d2fb3eb8304db94d10102a66d5b, type: 3}
   - {fileID: 8300000, guid: 8779f97bc80f4c34ba560b28e389acfd, type: 3}
@@ -2498,8 +2498,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1ab86c37f2fd662458c145ad503c7246, type: 3}
   - {fileID: 8300000, guid: 6f37706cd053d6047a09be5e800bef23, type: 3}
   previousAmbience: {fileID: 370782138}
-  minAmbienceInterval: 5
-  maxAmbienceInterval: 15
+  minAmbienceInterval: 10
+  maxAmbienceInterval: 20
   currentMusic: {fileID: 370782137}
   audioSourcePrefab: {fileID: 7078633981754635083, guid: 42b173ac52e8ddb408e3b47d536d4a12, type: 3}
   musicVolume: 1
@@ -2635,7 +2635,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 79
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
