@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
-    public HistoryWindow historyWindow;
+    public HistoryWindow currentHistoryWindow;
     public GameObject optionsMenu;
     public ObjectSelectScreen objectSelectScreen;
     public FinalFormUi finalFormWindow;
     public static MapUI instance;
     public Canvas canvas;
+    public GameObject historyWindowReference;
     public HistoryWindow historyWindowPrefab;
 
     void Awake()
@@ -28,10 +29,10 @@ public class MapUI : MonoBehaviour
     }
     public void DisplayHistoryWindow(MapObject mapObject)
     {
-        if (historyWindow != null)
-            Destroy(historyWindow.gameObject);
-        historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
-        historyWindow.CreateHistory(mapObject);
+        if (currentHistoryWindow != null)
+            Destroy(currentHistoryWindow.gameObject);
+        currentHistoryWindow = Instantiate(historyWindowPrefab, historyWindowReference.transform);
+        currentHistoryWindow.CreateHistory(mapObject);
     }
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)

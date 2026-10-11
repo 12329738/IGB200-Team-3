@@ -177,8 +177,8 @@ public class Zone : MonoBehaviour
             MoveFinalForm(mapObject);
         if (UnityEngine.Random.Range(0,100) < gameManager.wasteWeight)
             CreateWaste(mapObject);
-        if (MapUI.instance.historyWindow != null)
-            MapUI.instance.historyWindow.UpdateWindow();
+        if (MapUI.instance.currentHistoryWindow != null)
+            MapUI.instance.currentHistoryWindow.UpdateWindow();
 
 
 
@@ -230,19 +230,6 @@ public class Zone : MonoBehaviour
         mapObjectDatabase.DiscoverMapObject(mapObject.Name);
     }
 
-    private void CheckGoalItem(MapObject mapObject)
-    {
-        if (gameManager.goalItemsFinished)
-            return;
-
-        if (!gameManager.goalItems.Contains(mapObject.Name))
-            return;
-
-        if (gameManager.completedGoalItems.Contains(mapObject.Name))
-            return;
-
-        gameManager.AddCompletedItem(mapObject.Name);
-    }
 
     private void MoveFinalForm(MapObject mapObject)
     {
@@ -253,21 +240,6 @@ public class Zone : MonoBehaviour
 
     }
 
-    public void Undo(MapObject mapObject)
-    {
-        if (mapObject == null)
-        {
-            Destroy(currentMapObjectSprite);
-            currentObject = null;
-        }
-        else
-        {
-            currentMapObjectSprite.image.sprite = mapObject.image;
-            currentObject = mapObject;
-
-        }
-
-    }
 
     public void HighlightObject(Material material, Action action)
     {

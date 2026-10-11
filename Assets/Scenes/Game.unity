@@ -355,9 +355,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1126954459
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 08b616352e1e74647b6bd10d66f445d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -1226,6 +1226,41 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &162395191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162395192}
+  m_Layer: 5
+  m_Name: HistoryWindow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &162395192
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162395191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 739808155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &193160485
 GameObject:
   m_ObjectHideFlags: 0
@@ -5537,6 +5572,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 162395192}
   - {fileID: 360629443}
   - {fileID: 1630047337}
   - {fileID: 137932388}
@@ -5686,9 +5722,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1126954459
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 08b616352e1e74647b6bd10d66f445d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
@@ -6239,8 +6275,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 37517f9b50a60ae4b9126b255690d41f, type: 3}
   - {fileID: 8300000, guid: 703afdf1c101c0e4d972a8a3ba505f85, type: 3}
   - {fileID: 8300000, guid: f25d374684e09bd4fa080effb54b6a62, type: 3}
-  goalItemsFinished: 0
-  goalItemUI: {fileID: 0}
   menuOpen: 0
   wasteWeight: 50
   mouseClick:
@@ -9627,8 +9661,8 @@ Canvas:
   m_GameObject: {fileID: 1592845151}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 330585545}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -9639,8 +9673,8 @@ Canvas:
   m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1126954459
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!1 &1612229432
 GameObject:
@@ -10914,11 +10948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a961e89e504a1a0418264cfee9b5ec8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  historyWindow: {fileID: 0}
+  currentHistoryWindow: {fileID: 0}
   optionsMenu: {fileID: 0}
   objectSelectScreen: {fileID: 5250889893052677195, guid: 519e819c42a2ed44bada067bd63c6979, type: 3}
   finalFormWindow: {fileID: 137932389}
   canvas: {fileID: 739808154}
+  historyWindowReference: {fileID: 162395191}
   historyWindowPrefab: {fileID: 5447990238995787474, guid: f15e5b30eacfa7b4fbf964451d2aae0b, type: 3}
 --- !u!224 &1860011441 stripped
 RectTransform:
@@ -12427,8 +12462,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3800867537435540434, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
-      propertyPath: m_SortingOrder
+      propertyPath: m_SortingLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800867537435540434, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800867537435540434, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1126954459
       objectReference: {fileID: 0}
     - target: {fileID: 4040382924736907617, guid: f9742dd35a927cb44804ff64a858672f, type: 3}
       propertyPath: m_LocalPosition.y

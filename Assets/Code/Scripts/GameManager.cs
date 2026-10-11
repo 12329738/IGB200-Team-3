@@ -15,14 +15,9 @@ public class GameManager : MonoBehaviour
     public int currentRecycledWaste;
     public StorageUI storageUi;
     public InputTracker inputTracker;
-    public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
     
     public List<AudioClip> gameMusic;
-    public HashSet<string> goalItems = new();
-    public HashSet<string> completedGoalItems = new();
-    public bool goalItemsFinished = false;
-    public GoalItemUI goalItemUI;
     public bool menuOpen = false;
     public float wasteWeight = 50;
 
@@ -108,20 +103,6 @@ public class GameManager : MonoBehaviour
         storageUi.ChangeStorageAmount();
     }
 
-    internal void AddCompletedItem(string name)
-    {
-        if (!completedGoalItems.Contains(name))
-        {
-            completedGoalItems.Add(name);
-            Destroy(goalItemUI.finalFormButtons[name].gameObject);
-            if (completedGoalItems.Count == goalItems.Count)
-            {
-                goalItemsFinished = true;
-                goalItemUI.CreateFinalItems();
-            }
-                
-        }
-    }
 
     public void RecycleItem(GameObject gameObject)
     {
