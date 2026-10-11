@@ -3465,7 +3465,7 @@ GameObject:
   - component: {fileID: 476118767}
   - component: {fileID: 476118769}
   m_Layer: 0
-  m_Name: Sky (1)
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11178,7 +11178,7 @@ GameObject:
   - component: {fileID: 2017655973}
   - component: {fileID: 2017655974}
   m_Layer: 0
-  m_Name: Sky
+  m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
