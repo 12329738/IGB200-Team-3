@@ -33,7 +33,7 @@ public class HistoryWindow : MonoBehaviour
     }
     void OnEnable()
     {
-        GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
+        //GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
     }
 
     internal void CreateHistory(MapObject mapObject)

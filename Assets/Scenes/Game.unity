@@ -4495,6 +4495,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0, y: 1, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 26
 --- !u!1 &599676874
 GameObject:
   m_ObjectHideFlags: 0
@@ -4838,6 +4842,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0, y: 1, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 26
 --- !u!1 &729069563
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,6 +5122,7 @@ MonoBehaviour:
   restartMenu: {fileID: 573545772}
   creditsMenu: {fileID: 0}
   creditsAnimation: {fileID: 0}
+  transitionEffect: {fileID: 0}
   gameScene: Game
   mainMenuScene: MainMenu
   galleryScene: Gallery
@@ -8333,6 +8342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0, y: 1, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 26
 --- !u!1 &1359855216
 GameObject:
   m_ObjectHideFlags: 0
@@ -11513,6 +11526,7 @@ GameObject:
   - component: {fileID: 3993713663913705085}
   - component: {fileID: 2525791807336034584}
   - component: {fileID: 6869465275579171211}
+  - component: {fileID: 6869465275579171213}
   m_Layer: 5
   m_Name: MainMenuButtons
   m_TagString: Untagged
@@ -13112,9 +13126,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: -348}
+  m_AnchoredPosition: {x: 5.999885, y: -97.99998}
   m_SizeDelta: {x: 300, y: 500}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &5318175060208376131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13504,6 +13518,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6869465275579171213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500683895748697633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 1, y: 0, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 26
 --- !u!1 &6917716018945573717
 GameObject:
   m_ObjectHideFlags: 0

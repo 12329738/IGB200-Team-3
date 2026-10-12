@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStartTransition : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class GameStartTransition : MonoBehaviour
 
             isAnimating = false;
             targetReached = true;
+            SceneManager.LoadScene("Game");
         }
     }
 

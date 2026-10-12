@@ -24,7 +24,7 @@ public class Menus : MonoBehaviour
     public string mainMenuScene = "MainMenu";
     public string galleryScene = "Gallery";
 
-    
+    int currentSceneIndex;
 
     void Awake()
     {
@@ -47,8 +47,7 @@ public class Menus : MonoBehaviour
     void Update()
     {
         HandleEscapeKey();
-        if (transitionEffect.transitionStarted && transitionEffect.targetReached)
-            SceneManager.LoadScene(gameScene);
+
     }
 
     // =========================================================
@@ -132,7 +131,6 @@ public class Menus : MonoBehaviour
         {
             helpMenu.SetActive(true);
             GameManager.instance.menuOpen = true;
-            helpMenu.GetComponentInChildren<MenuOpenAnimation>().PlayOpenAnimation();
         }
         
     }
@@ -153,7 +151,6 @@ public class Menus : MonoBehaviour
         {
             restartMenu.SetActive(true);
             GameManager.instance.menuOpen = true;
-            restartMenu.GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
         }
         
     }
@@ -173,7 +170,6 @@ public class Menus : MonoBehaviour
         if (!audioMenu.activeSelf)
         {
             audioMenu.SetActive(true);
-            audioMenu.GetComponentInChildren<MenuOpenAnimation>().PlayOpenAnimation();
         }
         
     }
