@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
             PlayMusic(currentTrack);
         }
 
-        if (Time.time >= nextAmbienceTime)
+        if (SceneManager.GetActiveScene().name == "Game" &&  Time.time >= nextAmbienceTime)
         {
             PlayAmbience();
         }

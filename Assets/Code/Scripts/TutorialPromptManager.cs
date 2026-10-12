@@ -211,6 +211,9 @@ public class TutorialPromptManager : MonoBehaviour
                 promptCanvasGroup.interactable = false;
                 promptCanvasGroup.blocksRaycasts = false;
             }
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.GameLoaded);
+
         }
     }
 
@@ -218,6 +221,7 @@ public class TutorialPromptManager : MonoBehaviour
     [ContextMenu("Reset Tutorial Session")]
     public void ResetTutorialSession()
     {
+ 
         triggeredPrompts.Clear();
         promptQueue.Clear();
 

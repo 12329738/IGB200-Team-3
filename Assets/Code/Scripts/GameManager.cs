@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetScene()
     {
+        TutorialPromptManager.Instance.ResetTutorialSession();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

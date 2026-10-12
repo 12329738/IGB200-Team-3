@@ -468,12 +468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfbdc45a24a9964abc3d6945e5d1069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectIcon: {fileID: 2702013613949639873, guid: 6f4a985935e353f49919304bcff2bcaa, type: 3}
+  historyItemPrefab: {fileID: 2702013613949639873, guid: 6f4a985935e353f49919304bcff2bcaa, type: 3}
   historyUI: {fileID: 8015597490890178603}
   arrow: {fileID: 2702013613949639873, guid: b3c50e853c4226d42ab9d233caace442, type: 3}
   historyBranch: {fileID: 151797809241941115, guid: 34d7c70145f95c54ea8a5e57d3cda4a8, type: 3}
   historyRow: {fileID: 151797809241941115, guid: 6e07c09992e02574698afa367ca4ea69, type: 3}
-  closeAnimation: {fileID: 0}
 --- !u!114 &8468441018670857682
 MonoBehaviour:
   m_ObjectHideFlags: 0
