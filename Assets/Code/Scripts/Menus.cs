@@ -17,11 +17,14 @@ public class Menus : MonoBehaviour
     public GameObject restartMenu;
     public GameObject creditsMenu;
     public LitMotionAnimation creditsAnimation;
+    public GameStartTransition transitionEffect;
 
     [Header("SCENES")]
     public string gameScene = "Game";
     public string mainMenuScene = "MainMenu";
     public string galleryScene = "Gallery";
+
+    
 
     void Awake()
     {
@@ -44,6 +47,8 @@ public class Menus : MonoBehaviour
     void Update()
     {
         HandleEscapeKey();
+        if (transitionEffect.transitionStarted && transitionEffect.targetReached)
+            SceneManager.LoadScene(gameScene);
     }
 
     // =========================================================
@@ -76,15 +81,20 @@ public class Menus : MonoBehaviour
 
     public void StartGame()
     {
+        if (transitionEffect.transitionStarted)
+            return;
         Time.timeScale = 1f;
 
         StopLitMotionAnimations();
-
-        SceneManager.LoadScene(gameScene);
+        transitionEffect.Animate();
+        
     }
 
     public void StartGallery()
     {
+        if (transitionEffect.transitionStarted)
+            return;
+
         Time.timeScale = 1f;
 
         StopLitMotionAnimations();
@@ -179,6 +189,9 @@ public class Menus : MonoBehaviour
 
     public void OpenCreditsMenu()
     {
+        if (transitionEffect.transitionStarted)
+            return;
+
         creditsMenu.SetActive(true);
         creditsAnimation.Restart();
     }
