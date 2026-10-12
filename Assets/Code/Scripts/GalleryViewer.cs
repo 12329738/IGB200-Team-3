@@ -128,13 +128,6 @@ public class GalleryViewer : MonoBehaviour
             counterText.text =
                 $"Island {currentIndex + 1} / {count}";
         }
-
-
-        Debug.Log(
-            $"[GALLERY] Displaying Island " +
-            $"{currentIndex + 1} / {count} | " +
-            $"ID: {island.islandId}"
-        );
     }
 
 
@@ -324,13 +317,6 @@ public class GalleryViewer : MonoBehaviour
             DisableSpriteInteraction(
                 visual
             );
-
-
-            Debug.Log(
-                $"[GALLERY] Restored Zone " +
-                $"{objectData.zone} -> " +
-                $"{objectData.objectId}"
-            );
         }
     }
 
@@ -460,6 +446,9 @@ public class GalleryViewer : MonoBehaviour
                 decoration.image.sprite =
                     mapObject.image;
 
+                // Gallery is display-only: remove the gameplay outline.
+                decoration.SetHighlight(false);
+
                 // Gallery objects are display-only.
                 decoration.movable =
                     false;
@@ -509,14 +498,6 @@ public class GalleryViewer : MonoBehaviour
                     sprite
                 );
             }
-
-
-            Debug.Log(
-                $"[GALLERY] Restored Decoration -> " +
-                $"{decorationData.objectId} | " +
-                $"Position: " +
-                $"{decorationData.localPosition}"
-            );
         }
     }
 
@@ -531,6 +512,11 @@ public class GalleryViewer : MonoBehaviour
         if (sprite == null)
             return;
 
+        // Remove any gameplay merge/action highlight.
+        if (sprite.highlight != null)
+        {
+            sprite.highlight.SetHighlight(false);
+        }
 
         // ---------------------------------------------
         // FORCE POPUP CLOSED
@@ -604,6 +590,14 @@ public class GalleryViewer : MonoBehaviour
 
         foreach (SelectionBox selectionBox in selectionBoxes)
         {
+            // Gallery is display-only, so remove the
+            // gameplay selection/highlight visuals.
+            if (selectionBox.highlight != null)
+            {
+                selectionBox.highlight.SetHighlight(false);
+                selectionBox.highlight.SetVisible(false);
+            }
+
             selectionBox.enabled = false;
 
 

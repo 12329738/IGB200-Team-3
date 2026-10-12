@@ -127,18 +127,31 @@ public class Menus : MonoBehaviour
 
     public void OpenHelpMenu()
     {
+        if (helpMenu == null)
+            return;
+
         if (!helpMenu.activeSelf)
         {
             helpMenu.SetActive(true);
-            GameManager.instance.menuOpen = true;
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.menuOpen = true;
+            }
         }
-        
     }
 
     public void CloseHelpMenu()
     {
+        if (helpMenu == null)
+            return;
+
         helpMenu.SetActive(false);
-        GameManager.instance.menuOpen = false;
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.menuOpen = false;
+        }
     }
 
     // =========================================================
