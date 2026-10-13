@@ -111,7 +111,7 @@ public class SpriteScript : MonoBehaviour
         );
     }
 
-    private void RecycleMapObject(string action)
+    public void RecycleMapObject(string action)
     {
         if (mapObject.Name.Contains("Waste"))
         {   

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -11,6 +12,7 @@ public class IslandDecorate : MonoBehaviour
     MapDecoration movingDecoration;
     Vector3 mouseOffset;
     [SerializeField] private InputAction mouseClick;
+    List<SpriteScript> wasteStack = new();
     public void PlaceItemOnIsland(MapObject mapObject)
 
     {
@@ -20,6 +22,7 @@ public class IslandDecorate : MonoBehaviour
             obj = Instantiate(wastePrefab);
             SpriteScript waste = obj.GetComponent<SpriteScript>();
             waste.mapObject = mapObject;
+            wasteStack.Add(waste);
         }
         else
             obj = Instantiate(decorationPrefab);
@@ -59,6 +62,7 @@ public class IslandDecorate : MonoBehaviour
             if (colliders.Length == 0)
             {
                 decoration.transform.position = position;
+
                 break;
             }
         }
@@ -150,6 +154,14 @@ public class IslandDecorate : MonoBehaviour
         return mouseInWorld;
     }
 
+    public void RecycleAllWaste()
+    {    
+        foreach (SpriteScript waste in wasteStack)  
+        {
+            waste.RecycleMapObject("Recycle");
+        }
+        wasteStack.Clear();
+    }
     private void OnEnable()
     {
         mouseClick.Enable();
