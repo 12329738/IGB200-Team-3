@@ -8608,7 +8608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1217380412
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10038,7 +10038,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1126954459
-  m_SortingOrder: 100
+  m_SortingOrder: 250
   m_TargetDisplay: 0
 --- !u!1 &1612229432
 GameObject:
