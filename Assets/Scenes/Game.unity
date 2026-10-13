@@ -2076,6 +2076,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2201,6 +2202,56 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f3cde6c8081b04ab7916b57b4ff5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  maxZoomOut: -10
+  maxZoomIn: -1
+  scrollIn:
+    m_Name: Scroll In
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1eb49181-a78b-4295-b3f6-c77ec80b38cb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1dcd78b5-e401-49c3-ae43-085422ae92cc
+      m_Path: <Mouse>/scroll/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Scroll In
+      m_Flags: 0
+    m_Flags: 0
+  scrollOut:
+    m_Name: Scroll Out
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c54c7835-5729-4d60-9b12-251d05ccb060
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9ab95f60-9f95-45cd-96a4-5dbdf154807c
+      m_Path: <Mouse>/scroll/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Scroll Out
+      m_Flags: 0
+    m_Flags: 0
+  mainCamera: {fileID: 330585545}
+  defaultCameraPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &360434872
 GameObject:
   m_ObjectHideFlags: 0
