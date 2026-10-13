@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class IslandDecorate : MonoBehaviour
@@ -7,8 +8,9 @@ public class IslandDecorate : MonoBehaviour
     public PolygonCollider2D area;
     public GameObject decorationPrefab;
     public GameObject wastePrefab;
-
-
+    MapDecoration movingDecoration;
+    Vector3 mouseOffset;
+    [SerializeField] private InputAction mouseClick;
     public void PlaceItemOnIsland(MapObject mapObject)
 
     {
@@ -99,24 +101,67 @@ public class IslandDecorate : MonoBehaviour
         return true;
 
 
-
-        //float radius = sphereCollider.radius;
-      
-        //float scale = Mathf.Max(
-        //    sphereCollider.transform.lossyScale.x,
-        //    sphereCollider.transform.lossyScale.y);
-
-        //radius *= scale;
-
-        //Vector2 center = new Vector2(position.x, position.y);
-
-        //const int pointCount = 16;
-
-        //if (!area.OverlapPoint(center))
-        //    return false;
-
-        //for (int i = 0; i < pointCount; i++)
-
-
     }
+
+    private void MouseClickAction(InputAction.CallbackContext context)
+    {
+
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.collider.TryGetComponent(out MapDecoration mapDecoration))
+            {
+                
+
+                if (mapDecoration.movable)
+                {
+                    ZoneManager.instance.ToggleRedZones(true);
+                    mouseOffset = mapDecoration.transform.position - GetMousePosition();
+                    mapDecoration.IsMoving = true;
+                    movingDecoration = mapDecoration;
+                    mapDecoration.mouseOffset = mouseOffset;
+                }
+                    
+                
+            }
+        }
+    }
+
+    private void MouseReleaseAction(InputAction.CallbackContext context)
+    {
+        if (movingDecoration != null)
+        {
+            movingDecoration.IsMoving = false;
+            movingDecoration = null;
+        }
+        ZoneManager.instance.ToggleRedZones(false);
+    }
+
+    private Vector3 GetMousePosition()
+    {
+        Vector3 mouseInput = Mouse.current.position.ReadValue();
+
+        mouseInput.z = transform.position.z -
+                       Camera.main.transform.position.z;
+
+        Vector3 mouseInWorld = Camera.main.ScreenToWorldPoint(mouseInput);
+
+        return mouseInWorld;
+    }
+
+    private void OnEnable()
+    {
+        mouseClick.Enable();
+        mouseClick.performed += MouseClickAction;
+        mouseClick.canceled += MouseReleaseAction;
+    }
+
+    private void OnDisable()
+    {
+        mouseClick.Disable();
+        mouseClick.performed -= MouseClickAction;
+        mouseClick.canceled -= MouseReleaseAction;
+    }
+
 }

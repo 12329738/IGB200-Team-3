@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2977066722216189832}
   - component: {fileID: 1204833170207334763}
   - component: {fileID: 8792507711200250197}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Map Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,6 +287,7 @@ MonoBehaviour:
   popup: {fileID: 0}
   highlight: {fileID: 0}
   creationAnimation: {fileID: 0}
+  poofAnimation: {fileID: 0}
   idleAnimation: {fileID: 0}
   zone: {fileID: 0}
   particleSystem: {fileID: 0}

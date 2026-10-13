@@ -7,7 +7,7 @@ public class MapDecoration : MonoBehaviour
     public SpriteRenderer image;
     private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propertyBlock;
-    [SerializeField] private InputAction mouseClick;
+    
     [HideInInspector] public bool IsMoving = false;
     public LayerMask obstacleLayer;
     public PolygonCollider2D decorationArea;
@@ -32,19 +32,7 @@ public class MapDecoration : MonoBehaviour
     {
         Move();
     }
-    private void OnEnable()
-    {
-        mouseClick.Enable();
-        mouseClick.performed += MouseClickAction;
-        mouseClick.canceled += MouseReleaseAction;
-    }
-
-    private void OnDisable()
-    {
-        mouseClick.Disable();
-        mouseClick.performed -= MouseClickAction;
-        mouseClick.canceled -= MouseReleaseAction;
-    }
+    
 
     public void SetHighlight(bool highlighted)
     {
@@ -79,7 +67,7 @@ public class MapDecoration : MonoBehaviour
         image.color = color;
     }
 
-    private Vector3 mouseOffset;
+    public Vector3 mouseOffset;
 
     private Vector3 GetMousePosition()
     {
@@ -93,32 +81,6 @@ public class MapDecoration : MonoBehaviour
         return mouseInWorld;
     }
 
-    private void MouseClickAction(InputAction.CallbackContext context)
-    {
-        if (movable)
-        {
-            
-            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                if (hit.collider.TryGetComponent(out MapDecoration mapDecoration))
-                {
-                    ZoneManager.instance.ToggleRedZones(true);
-                    mouseOffset = mapDecoration.transform.position - GetMousePosition();
-
-                    mapDecoration.IsMoving = true;
-                }
-            }
-        }
-        
-    }
-
-    private void MouseReleaseAction(InputAction.CallbackContext context)
-    {
-        IsMoving = false;
-        ZoneManager.instance.ToggleRedZones(false);
-    }
 
     private void Move()
     {
@@ -177,7 +139,6 @@ public class MapDecoration : MonoBehaviour
     {
         float radius = sphereCollider.radius;
 
-        // Account for the collider's transform scale.
         float scale = Mathf.Max(
             sphereCollider.transform.lossyScale.x,
             sphereCollider.transform.lossyScale.y);
@@ -186,7 +147,6 @@ public class MapDecoration : MonoBehaviour
 
         Vector2 center = new Vector2(position.x, position.y);
 
-        // Check the center and points around the circumference.
         const int pointCount = 16;
 
         if (!decorationArea.OverlapPoint(center))
