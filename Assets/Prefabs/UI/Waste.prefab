@@ -151,29 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapDecoration
   image: {fileID: 4746859858784275437}
-  mouseClick:
-    m_Name: Mouse Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e22884bd-f6d6-44ac-bc29-91c5e62b5a6a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 9ded7f56-a2ae-4c95-b3f0-6fa1be377078
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Mouse Click
-      m_Flags: 0
-    m_Flags: 0
   IsMoving: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
   decorationArea: {fileID: 0}
   movable: 0
+  mouseOffset: {x: 0, y: 0, z: 0}
 --- !u!135 &3990002807012098551
 SphereCollider:
   m_ObjectHideFlags: 0

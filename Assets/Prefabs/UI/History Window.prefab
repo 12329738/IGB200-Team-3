@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291814899
+  m_fontColor: {r: 0.9529412, g: 0.8980392, b: 0.8117647, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -485,3 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0, y: 1, z: 0}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 26
