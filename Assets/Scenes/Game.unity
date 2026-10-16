@@ -3799,6 +3799,7 @@ MonoBehaviour:
   - rid: 7938478628357275714
   - rid: 7938478628357275715
   - rid: 7938478628357275716
+  - rid: 7938478716351938560
   references:
     version: 2
     RefIds:
@@ -3937,6 +3938,52 @@ MonoBehaviour:
           schedulerType: 0
           additionalSettings: 0
         relative: 0
+    - rid: 7938478716351938560
+      type: {class: TransformPositionAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Position
+        enabled: 1
+        target: {fileID: 474627413}
+        settings:
+          startValue: {x: -26.91, y: -14.6, z: 0}
+          endValue: {x: -5000, y: -14.6, z: 0}
+          duration: 0.1
+          ease: 0
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0.3
+          delayType: 0
+          loops: 1
+          loopType: 0
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 0
+          schedulerType: 0
+          additionalSettings: 0
+        relative: 0
+        useWorldSpace: 0
 --- !u!1 &476118766
 GameObject:
   m_ObjectHideFlags: 0
