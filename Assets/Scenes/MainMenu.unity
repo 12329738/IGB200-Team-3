@@ -1017,7 +1017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &571915328
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1600,7 +1600,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=36>
+  m_text: '<size=56>By All-Nighter Games
+
+    </size>
+
+
+
+
+
+
+
+    <size=36>
 
     Music
 
@@ -1608,14 +1618,14 @@ MonoBehaviour:
 
     <align="left">
 
-    ghost house.wav
-    by WillieCombs -- https://freesound.org/s/535631/ -- License: Creative Commons
-    0
-
-
-
-    colost by Troyboy5 -- https://freesound.org/s/746783/ -- License: Creative
+    ghost
+    house.wav by WillieCombs -- https://freesound.org/s/535631/ -- License: Creative
     Commons 0
+
+
+
+    colost by Troyboy5 -- https://freesound.org/s/746783/ -- License:
+    Creative Commons 0
 
 
 
@@ -2451,14 +2461,14 @@ RectTransform:
   m_GameObject: {fileID: 979229324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7867, y: 1.7867, z: 1.7867}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1431070373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -225}
+  m_AnchoredPosition: {x: 0, y: -328}
   m_SizeDelta: {x: 614, y: 369}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &979229326
@@ -3460,7 +3470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: -878}
   m_SizeDelta: {x: 1212.35, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1431070374
@@ -3490,7 +3500,7 @@ MonoBehaviour:
         target: {fileID: 1431070373}
         settings:
           startValue: {x: 0, y: -635, z: 0}
-          endValue: {x: 0, y: 4760, z: 0}
+          endValue: {x: 0, y: 7000, z: 0}
           duration: 40
           ease: 0
           customEaseCurve:
@@ -6547,8 +6557,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 586348539}
-  - {fileID: 571915328}
   - {fileID: 495577021}
+  - {fileID: 571915328}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
