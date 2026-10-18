@@ -21,6 +21,7 @@ public class SpriteScript : MonoBehaviour
     float moveSpeed = 15;
     private float startingDistance;
     public GameObject particleSystem;
+    public event System.Action<SpriteScript> OnRecycle;
 
     private void Awake()
     {
@@ -119,6 +120,7 @@ public class SpriteScript : MonoBehaviour
                 
             TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
             SetDestination();
+            OnRecycle?.Invoke(this);
         }
         else
         zone.PerformActionOnMapObject(action);
@@ -220,7 +222,7 @@ public class SpriteScript : MonoBehaviour
                 transform.position = targetPosition;
                 transform.localScale = Vector3.zero;
 
-                GameManager.instance.RecycleItem(gameObject);
+                GameManager.instance.RecycleItem();
 
                 ObjectPool.instance.ReturnObject(gameObject);
             }

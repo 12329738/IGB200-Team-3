@@ -21,6 +21,7 @@ public class IslandDecorate : MonoBehaviour
         {
             obj = Instantiate(wastePrefab);
             SpriteScript waste = obj.GetComponent<SpriteScript>();
+            waste.OnRecycle += RecycleWaste;
             waste.mapObject = mapObject;
             wasteStack.Add(waste);
         }
@@ -155,12 +156,19 @@ public class IslandDecorate : MonoBehaviour
     }
 
     public void RecycleAllWaste()
-    {    
-        foreach (SpriteScript waste in wasteStack)  
+    {
+        SpriteScript[] w = wasteStack.ToArray();
+        foreach (SpriteScript waste in w)  
         {
             waste.RecycleMapObject("Recycle");
         }
         wasteStack.Clear();
+    }
+
+    public void RecycleWaste(SpriteScript waste)
+    {
+        wasteStack.Remove(waste);
+        waste.OnRecycle -= RecycleWaste;
     }
     private void OnEnable()
     {

@@ -42,18 +42,18 @@ public class Popup : MonoBehaviour
             }
         }
     }
-    public TextPopup ShowText(GameObject obj, string text)
+    public TextPopup ShowText(Vector3 position, string text)
     {
         if (activePopups.Count >= maxPopupInstances)
             return null;
 
         GameObject damageText = ObjectPool.instance.GetObject(textPopupPrefab.gameObject);
         TextPopup textPopup = damageText.GetComponent<TextPopup>();
-        Vector3 position = new Vector3(obj.transform.position.x, obj.transform.position.y + textHeightOffset, 0);
+        Vector3 spawnPosition = new Vector3(position.x, position.y + textHeightOffset, 0);
 
 
         float size = textSize;
-        textPopup.Setup(position, colour, size, fadeTime, floatSpeed);
+        textPopup.Setup(spawnPosition, colour, size, fadeTime, floatSpeed);
         textPopup.text.SetText(text);
         activePopups.Add(textPopup);
         return textPopup;

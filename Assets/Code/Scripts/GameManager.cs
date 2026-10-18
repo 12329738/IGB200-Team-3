@@ -101,13 +101,13 @@ public class GameManager : MonoBehaviour
     public void ChangeStoredMaterialAmount(int amount)
     {
         currentRecycledWaste += amount;
-        storageUi.ChangeStorageAmount();
+        storageUi.ChangeStorageAmount(amount);
     }
 
 
-    public void RecycleItem(GameObject gameObject)
+    public void RecycleItem()
     {
-        TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 <sprite name=\"Waste edit\">");
+        
         ChangeStoredMaterialAmount(1);     
     }
 }

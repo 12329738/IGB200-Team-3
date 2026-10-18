@@ -145,7 +145,7 @@ public class Zone : MonoBehaviour
         if (mapObject.RequiredStoredMaterialAmount == 0)
             return;
 
-        gameManager.ChangeStoredMaterialAmount(mapObject.RequiredStoredMaterialAmount);
+        gameManager.ChangeStoredMaterialAmount(-mapObject.RequiredStoredMaterialAmount);
     }
 
     private void ChangeMapObject(MapObject mapObject)
@@ -157,7 +157,7 @@ public class Zone : MonoBehaviour
         EnsureMapObjectSpriteExists();
 
 
-        Popup.instance.ShowText(currentMapObjectSprite.gameObject, mapObject.Name);
+        Popup.instance.ShowText(currentMapObjectSprite.gameObject.transform.position, mapObject.Name);
         SetMapObjectVisual(mapObject);
         ZoneManager.instance.PlayCreationSound(mapObject);
         
