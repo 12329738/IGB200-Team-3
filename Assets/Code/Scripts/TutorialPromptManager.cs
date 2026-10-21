@@ -69,13 +69,7 @@ public class TutorialPromptManager : MonoBehaviour
             promptCanvasGroup.blocksRaycasts = false;
         }
 
-        //Display first tutorial prompt when the game loads
-        if (promptsAllowed)
-        {
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.GameLoaded
-            );
-        }
+
     }
 
 
@@ -192,9 +186,16 @@ public class TutorialPromptManager : MonoBehaviour
     Scene scene,
     LoadSceneMode mode)
     {
-        promptsAllowed =
-            scene.name == "Game";
 
+        if (scene.name == "Game")
+        {
+            promptsAllowed = true;
+            TutorialPromptManager.Instance.ResetTutorialSession();
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.GameLoaded
+            );
+        }
+            
         if (!promptsAllowed)
         {
             // Stop any prompt that was still displaying
@@ -211,10 +212,11 @@ public class TutorialPromptManager : MonoBehaviour
                 promptCanvasGroup.interactable = false;
                 promptCanvasGroup.blocksRaycasts = false;
             }
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.GameLoaded);
+
 
         }
+
+        
     }
 
     // Clears all tutorial progress for the current session.
