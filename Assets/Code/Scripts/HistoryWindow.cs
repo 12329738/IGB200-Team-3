@@ -25,12 +25,25 @@ public class HistoryWindow : MonoBehaviour
 
     public void CloseWindow()
     {
-        if (!closing)
+        if (closing)
+            return;
+
+        closing = true;
+
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.HistoryWindowClosed
+        );
+
+        // Clear MapUI's reference immediately.
+        if (MapUI.instance != null &&
+            MapUI.instance.currentHistoryWindow == this)
         {
-            closing = true;
-            
-        }   
+            MapUI.instance.currentHistoryWindow = null;
+        }
+
+        Destroy(gameObject);
     }
+
     void OnEnable()
     {
         //GetComponent<MenuOpenAnimation>().PlayOpenAnimation();

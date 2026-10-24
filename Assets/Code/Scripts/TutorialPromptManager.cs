@@ -1,151 +1,650 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class TutorialPromptManager : MonoBehaviour
 {
-    public static TutorialPromptManager Instance { get; private set; }
-
-    [System.Serializable]
-    public class TutorialPrompt
+    public static TutorialPromptManager Instance
     {
-        public TutorialPromptId id;
-
-        [TextArea(2, 4)]
-        public string message;
-
-        [Min(0.1f)]
-        public float displayDuration = 5f;
+        get;
+        private set;
     }
 
+
+    [System.Serializable]
+    public class TutorialStep
+    {
+        public string stepName;
+
+        [TextArea(3, 7)]
+        public string message;
+
+        public TutorialEvent completionEvent;
+
+        public TutorialCondition condition =
+            TutorialCondition.Always;
+
+        public TutorialPromptLocation location;
+
+        [Tooltip(
+            "Optional. Flips only the speech bubble graphic, " +
+            "not the text."
+        )]
+        public bool flipBubble;
+    }
+
+
+    // =========================================================
+    // UI
+    // =========================================================
+
     [Header("Prompt UI")]
+
     [SerializeField]
     private CanvasGroup promptCanvasGroup;
 
     [SerializeField]
     private TMP_Text promptText;
 
+    [SerializeField]
+    private RectTransform promptRect;
+
+    [Tooltip(
+        "Optional. Assign only the speech-bubble graphic. " +
+        "Leave empty if flipping is not needed."
+    )]
+    [SerializeField]
+    private RectTransform bubbleVisual;
+
+
+    // =========================================================
+    // PROMPT LOCATIONS
+    // =========================================================
+
+    [Header("Prompt Locations")]
+
+    [SerializeField]
+    private RectTransform centerAnchor;
+
+    [SerializeField]
+    private RectTransform materialsAnchor;
+
+    [SerializeField]
+    private RectTransform finalFormsAnchor;
+
+    [SerializeField]
+    private RectTransform historyAnchor;
+
+    [SerializeField]
+    private RectTransform objectAnchor;
+
+    [SerializeField]
+    private RectTransform choicesAnchor;
+
+    [SerializeField]
+    private RectTransform galleryAnchor;
+
+    [SerializeField]
+    private RectTransform wasteAnchor;
+
+
+    // =========================================================
+    // PROMPTS
+    // =========================================================
+
+    [Header("Main Tutorial")]
+
+    [SerializeField]
+    private List<TutorialStep> mainSteps =
+        new();
+
+
+    [Header("Waste Side Tutorial")]
+
+    [SerializeField]
+    private TutorialStep wasteCreatedPrompt;
+
+    [SerializeField]
+    private TutorialStep wasteRecycledPrompt;
+
+
+    // =========================================================
+    // ANIMATION
+    // =========================================================
+
     [Header("Animation")]
+
     [SerializeField]
     [Min(0f)]
     private float fadeDuration = 0.25f;
 
-    [Header("Prompts")]
-    [SerializeField]
-    private List<TutorialPrompt> prompts = new();
 
-    private readonly HashSet<TutorialPromptId> triggeredPrompts = new();
+    // =========================================================
+    // STATE
+    // =========================================================
 
-    private readonly Queue<TutorialPrompt> promptQueue = new();
+    private int currentMainStep = -1;
 
-    private bool isDisplayingPrompt;
     private bool promptsAllowed;
+
+    private bool wasteTutorialActive;
+
+    private bool wasteTutorialCompleted;
+
+    private bool wasteWaitingForClick;
+
+    private Coroutine transitionRoutine;
+
+    private Vector3 bubbleOriginalScale;
+
+
+    // =========================================================
+    // UNITY
+    // =========================================================
 
     private void Awake()
     {
-        // Keep one manager alive for the entire application session.
-        if (Instance != null && Instance != this)
+        if (Instance != null &&
+            Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
+
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
 
-        promptsAllowed =
-            SceneManager.GetActiveScene().name == "Game";
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        // Start hidden.
-        if (promptCanvasGroup != null)
+        if (bubbleVisual != null)
         {
-            promptCanvasGroup.alpha = 0f;
-            promptCanvasGroup.interactable = false;
-            promptCanvasGroup.blocksRaycasts = false;
+            bubbleOriginalScale =
+                bubbleVisual.localScale;
         }
 
 
+        SceneManager.sceneLoaded +=
+            OnSceneLoaded;
+
+
+        promptsAllowed =
+            SceneManager.GetActiveScene().name ==
+            "Game";
+
+
+        HidePromptImmediate();
     }
 
 
-    // Attempts to show a tutorial prompt. Each TutorialPromptId can only be triggered once during the current application session.
-    public static void ShowOnce(TutorialPromptId id)
+    private void Start()
+    {
+        // Fallback in case the object begins life
+        // directly inside the Game scene.
+        if (promptsAllowed &&
+            currentMainStep < 0)
+        {
+            BeginTutorial();
+        }
+    }
+
+
+    private void OnDestroy()
+    {
+        if (Instance != this)
+            return;
+
+
+        SceneManager.sceneLoaded -=
+            OnSceneLoaded;
+    }
+
+
+    // =========================================================
+    // PUBLIC EVENT API
+    // =========================================================
+
+    public static void ReportEvent(
+        TutorialEvent tutorialEvent)
     {
         if (Instance == null)
-        {
-            Debug.LogWarning(
-                $"TutorialPromptManager does not exist. " +
-                $"Could not show prompt: {id}"
-            );
-
             return;
-        }
 
-        Instance.TryQueuePrompt(id);
+
+        Instance.HandleEvent(
+            tutorialEvent
+        );
     }
 
-    private void TryQueuePrompt(TutorialPromptId id)
+
+    public void OnPromptClicked()
+    {
+        ReportEvent(
+            TutorialEvent.PromptClicked
+        );
+    }
+
+
+    // =========================================================
+    // EVENT HANDLING
+    // =========================================================
+
+    private void HandleEvent(
+        TutorialEvent tutorialEvent)
     {
         if (!promptsAllowed)
+            return;
+
+
+        // ---------------------------------------------
+        // WASTE SIDE TUTORIAL
+        // ---------------------------------------------
+
+        if (tutorialEvent ==
+                TutorialEvent.WasteCreated &&
+            !wasteTutorialCompleted &&
+            !wasteTutorialActive)
+        {
+            StartWasteTutorial();
+            return;
+        }
+
+
+        if (wasteTutorialActive)
+        {
+            if (!wasteWaitingForClick &&
+                tutorialEvent ==
+                    TutorialEvent.WasteRecycled)
+            {
+                wasteWaitingForClick = true;
+
+                ShowStep(
+                    wasteRecycledPrompt
+                );
+
+                return;
+            }
+
+
+            if (wasteWaitingForClick &&
+                tutorialEvent ==
+                    TutorialEvent.PromptClicked)
+            {
+                wasteTutorialCompleted = true;
+                wasteTutorialActive = false;
+                wasteWaitingForClick = false;
+
+                ShowCurrentMainStep();
+
+                return;
+            }
+
+
+            return;
+        }
+
+
+        // ---------------------------------------------
+        // MAIN TUTORIAL
+        // ---------------------------------------------
+
+        TutorialStep step =
+            GetCurrentMainStep();
+
+
+        if (step == null)
+            return;
+
+
+        if (step.completionEvent !=
+            tutorialEvent)
         {
             return;
         }
 
-        // Already triggered during this session.
-        if (triggeredPrompts.Contains(id))
-        {
-            return;
-        }
 
-        TutorialPrompt prompt =
-            prompts.Find(prompt => prompt.id == id);
-
-        if (prompt == null)
-        {
-            Debug.LogWarning(
-                $"No tutorial prompt has been configured for {id}."
-            );
-
-            return;
-        }
-
-        // Mark immediately so repeated actions cannot add duplicates while the prompt is still waiting in the queue.
-        triggeredPrompts.Add(id);
-
-        promptQueue.Enqueue(prompt);
-
-        if (!isDisplayingPrompt)
-        {
-            StartCoroutine(DisplayPromptQueue());
-        }
+        AdvanceMainStep();
     }
 
-    private IEnumerator DisplayPromptQueue()
+
+    // =========================================================
+    // MAIN TUTORIAL
+    // =========================================================
+
+    private void BeginTutorial()
     {
-        isDisplayingPrompt = true;
+        currentMainStep = -1;
 
-        while (promptQueue.Count > 0)
+        AdvanceMainStep();
+    }
+
+
+    private void AdvanceMainStep()
+    {
+        currentMainStep++;
+
+
+        while (currentMainStep <
+               mainSteps.Count)
         {
-            TutorialPrompt prompt = promptQueue.Dequeue();
+            TutorialStep step =
+                mainSteps[
+                    currentMainStep
+                ];
 
-            promptText.text = prompt.message;
 
-            yield return FadeCanvasGroup(0f, 1f);
+            if (ConditionPasses(
+                step.condition))
+            {
+                ShowStep(step);
+                return;
+            }
 
-            yield return new WaitForSecondsRealtime(
-                prompt.displayDuration
-            );
 
-            yield return FadeCanvasGroup(1f, 0f);
+            currentMainStep++;
         }
 
-        isDisplayingPrompt = false;
+
+        HidePrompt();
     }
+
+
+    private TutorialStep
+        GetCurrentMainStep()
+    {
+        if (currentMainStep < 0 ||
+            currentMainStep >=
+                mainSteps.Count)
+        {
+            return null;
+        }
+
+
+        return mainSteps[
+            currentMainStep
+        ];
+    }
+
+
+    private void ShowCurrentMainStep()
+    {
+        TutorialStep step =
+            GetCurrentMainStep();
+
+
+        if (step != null)
+        {
+            ShowStep(step);
+        }
+        else
+        {
+            HidePrompt();
+        }
+    }
+
+
+    // =========================================================
+    // CONDITIONS
+    // =========================================================
+
+    private bool ConditionPasses(
+        TutorialCondition condition)
+    {
+        switch (condition)
+        {
+            case TutorialCondition.HasRecycling:
+
+                return
+                    GameManager.instance != null &&
+                    GameManager.instance
+                        .currentRecycledWaste > 0;
+
+
+            case TutorialCondition.NoRecycling:
+
+                return
+                    GameManager.instance == null ||
+                    GameManager.instance
+                        .currentRecycledWaste <= 0;
+
+
+            default:
+
+                return true;
+        }
+    }
+
+
+    // =========================================================
+    // WASTE SIDE TUTORIAL
+    // =========================================================
+
+    private void StartWasteTutorial()
+    {
+        if (wasteCreatedPrompt == null ||
+            string.IsNullOrWhiteSpace(
+                wasteCreatedPrompt.message))
+        {
+            return;
+        }
+
+
+        wasteTutorialActive = true;
+
+        wasteWaitingForClick = false;
+
+
+        ShowStep(
+            wasteCreatedPrompt
+        );
+    }
+
+
+    // =========================================================
+    // DISPLAY
+    // =========================================================
+
+    private void ShowStep(
+        TutorialStep step)
+    {
+        if (step == null)
+            return;
+
+
+        if (transitionRoutine != null)
+        {
+            StopCoroutine(
+                transitionRoutine
+            );
+        }
+
+
+        transitionRoutine =
+            StartCoroutine(
+                TransitionToStep(step)
+            );
+    }
+
+
+    private IEnumerator TransitionToStep(
+        TutorialStep step)
+    {
+        if (promptCanvasGroup != null &&
+            promptCanvasGroup.alpha > 0f)
+        {
+            yield return FadeCanvasGroup(
+                promptCanvasGroup.alpha,
+                0f
+            );
+        }
+
+
+        ApplyStep(step);
+
+
+        yield return FadeCanvasGroup(
+            0f,
+            1f
+        );
+
+
+        transitionRoutine = null;
+    }
+
+
+    private void ApplyStep(
+        TutorialStep step)
+    {
+        if (promptText != null)
+        {
+            promptText.text =
+                step.message;
+        }
+
+
+        RectTransform anchor =
+            GetAnchor(
+                step.location
+            );
+
+
+        if (anchor != null &&
+            promptRect != null)
+        {
+            promptRect.position =
+                anchor.position;
+        }
+
+
+        ApplyBubbleFlip(
+            step.flipBubble
+        );
+
+
+        bool clickable =
+            step.completionEvent ==
+            TutorialEvent.PromptClicked;
+
+
+        if (promptCanvasGroup != null)
+        {
+            promptCanvasGroup.interactable =
+                clickable;
+
+            promptCanvasGroup.blocksRaycasts =
+                clickable;
+        }
+    }
+
+
+    private RectTransform GetAnchor(
+        TutorialPromptLocation location)
+    {
+        switch (location)
+        {
+            case TutorialPromptLocation.Materials:
+                return materialsAnchor;
+
+            case TutorialPromptLocation.FinalForms:
+                return finalFormsAnchor;
+
+            case TutorialPromptLocation.History:
+                return historyAnchor;
+
+            case TutorialPromptLocation.Object:
+                return objectAnchor;
+
+            case TutorialPromptLocation.Choices:
+                return choicesAnchor;
+
+            case TutorialPromptLocation.Gallery:
+                return galleryAnchor;
+
+            case TutorialPromptLocation.Waste:
+                return wasteAnchor;
+
+            default:
+                return centerAnchor;
+        }
+    }
+
+
+    private void ApplyBubbleFlip(
+        bool flipped)
+    {
+        if (bubbleVisual == null)
+            return;
+
+
+        Vector3 scale =
+            bubbleOriginalScale;
+
+
+        scale.x =
+            Mathf.Abs(scale.x) *
+            (flipped ? -1f : 1f);
+
+
+        bubbleVisual.localScale =
+            scale;
+    }
+
+
+    // =========================================================
+    // HIDING / FADING
+    // =========================================================
+
+    private void HidePrompt()
+    {
+        if (transitionRoutine != null)
+        {
+            StopCoroutine(
+                transitionRoutine
+            );
+        }
+
+
+        transitionRoutine =
+            StartCoroutine(
+                HidePromptRoutine()
+            );
+    }
+
+
+    private IEnumerator
+        HidePromptRoutine()
+    {
+        if (promptCanvasGroup != null)
+        {
+            yield return FadeCanvasGroup(
+                promptCanvasGroup.alpha,
+                0f
+            );
+        }
+
+
+        transitionRoutine = null;
+    }
+
+
+    private void HidePromptImmediate()
+    {
+        if (promptCanvasGroup == null)
+            return;
+
+
+        promptCanvasGroup.alpha = 0f;
+
+        promptCanvasGroup.interactable =
+            false;
+
+        promptCanvasGroup.blocksRaycasts =
+            false;
+    }
+
 
     private IEnumerator FadeCanvasGroup(
         float startAlpha,
@@ -156,101 +655,102 @@ public class TutorialPromptManager : MonoBehaviour
             yield break;
         }
 
+
         if (fadeDuration <= 0f)
         {
-            promptCanvasGroup.alpha = endAlpha;
+            promptCanvasGroup.alpha =
+                endAlpha;
+
             yield break;
         }
 
+
         float elapsed = 0f;
 
-        promptCanvasGroup.alpha = startAlpha;
+        promptCanvasGroup.alpha =
+            startAlpha;
 
-        while (elapsed < fadeDuration)
+
+        while (elapsed <
+               fadeDuration)
         {
-            elapsed += Time.unscaledDeltaTime;
+            elapsed +=
+                Time.unscaledDeltaTime;
+
 
             float t =
-                Mathf.Clamp01(elapsed / fadeDuration);
+                Mathf.Clamp01(
+                    elapsed /
+                    fadeDuration
+                );
+
 
             promptCanvasGroup.alpha =
-                Mathf.Lerp(startAlpha, endAlpha, t);
+                Mathf.Lerp(
+                    startAlpha,
+                    endAlpha,
+                    t
+                );
+
 
             yield return null;
         }
 
-        promptCanvasGroup.alpha = endAlpha;
+
+        promptCanvasGroup.alpha =
+            endAlpha;
     }
+
+
+    // =========================================================
+    // SCENES / RESET
+    // =========================================================
 
     private void OnSceneLoaded(
-    Scene scene,
-    LoadSceneMode mode)
+        Scene scene,
+        LoadSceneMode mode)
     {
+        promptsAllowed =
+            scene.name == "Game";
 
-        if (scene.name == "Game")
+
+        ResetTutorialSession();
+
+
+        if (promptsAllowed)
         {
-            promptsAllowed = true;
-            TutorialPromptManager.Instance.ResetTutorialSession();
-            TutorialPromptManager.ShowOnce(
-                TutorialPromptId.GameLoaded
-            );
+            BeginTutorial();
         }
-            
-        if (!promptsAllowed)
-        {
-            // Stop any prompt that was still displaying
-            // when the player left the Game scene.
-            StopAllCoroutines();
-
-            promptQueue.Clear();
-
-            isDisplayingPrompt = false;
-
-            if (promptCanvasGroup != null)
-            {
-                promptCanvasGroup.alpha = 0f;
-                promptCanvasGroup.interactable = false;
-                promptCanvasGroup.blocksRaycasts = false;
-            }
-
-
-        }
-
-        
     }
 
-    // Clears all tutorial progress for the current session.
-    [ContextMenu("Reset Tutorial Session")]
+
+    [ContextMenu(
+        "Reset Tutorial Session"
+    )]
     public void ResetTutorialSession()
     {
- 
-        triggeredPrompts.Clear();
-        promptQueue.Clear();
+        currentMainStep = -1;
 
-        StopAllCoroutines();
+        wasteTutorialActive = false;
+        wasteTutorialCompleted = false;
+        wasteWaitingForClick = false;
 
-        isDisplayingPrompt = false;
 
-        if (promptCanvasGroup != null)
+        if (transitionRoutine != null)
         {
-            promptCanvasGroup.alpha = 0f;
+            StopCoroutine(
+                transitionRoutine
+            );
+
+            transitionRoutine = null;
         }
 
-        Debug.Log("[TUTORIAL] Tutorial session reset.");
-    }
 
-    private void OnDestroy()
-    {
-        if (Instance != this)
-        {
-            return;
-        }
+        HidePromptImmediate();
 
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
 
-    public bool HasPromptTriggered(TutorialPromptId id)
-    {
-        return triggeredPrompts.Contains(id);
+        Debug.Log(
+            "[TUTORIAL] Tutorial session reset."
+        );
     }
 }
