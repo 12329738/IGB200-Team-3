@@ -3157,7 +3157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 375, y: 308}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &431373901
@@ -11960,6 +11960,41 @@ MonoBehaviour:
     completionEvent: 4
     condition: 0
     location: 3
+    flipBubble: 0
+  - stepName: First Successful Merge
+    message: "Now try selecting another material and placing it on the object you
+      created earlier. It\u2019s okay if it doesn\u2019t work the first time \u2014
+      try a different material until you find a successful combination."
+    completionEvent: 5
+    condition: 0
+    location: 1
+    flipBubble: 0
+  - stepName: Second Successful Merge
+    message: Good job! Try merging another material with this new object.
+    completionEvent: 5
+    condition: 0
+    location: 4
+    flipBubble: 0
+  - stepName: Hover Over Object
+    message: 'Good job again!
+
+
+      Now hover over one of the objects you''ve created
+      to see what you can do with it.'
+    completionEvent: 6
+    condition: 0
+    location: 4
+    flipBubble: 0
+  - stepName: Use Object Action
+    message: 'You should now see options for the object.
+
+
+      History lets you
+      inspect what you''ve discovered. Try clicking the other action to continue
+      transforming the object.'
+    completionEvent: 7
+    condition: 0
+    location: 4
     flipBubble: 0
   wasteCreatedPrompt:
     stepName: 

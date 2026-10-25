@@ -80,6 +80,11 @@ public class Zone : MonoBehaviour
 
         ChangeMapObject(mapObject);
 
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.SuccessfulMerge,
+            this
+        );
+
     }
 
     public void PerformActionOnMapObject(string action)

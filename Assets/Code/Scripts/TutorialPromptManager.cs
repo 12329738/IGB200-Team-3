@@ -136,9 +136,14 @@ public class TutorialPromptManager : MonoBehaviour
 
     private bool wasteWaitingForClick;
 
+    private Zone firstMergeZone;
+
     private Coroutine transitionRoutine;
 
     private Vector3 bubbleOriginalScale;
+
+    private Dictionary<Zone, int> mergeCounts =
+        new Dictionary<Zone, int>();
 
 
     // =========================================================
@@ -208,14 +213,15 @@ public class TutorialPromptManager : MonoBehaviour
     // =========================================================
 
     public static void ReportEvent(
-        TutorialEvent tutorialEvent)
+        TutorialEvent tutorialEvent,
+        Zone sourceZone = null)
     {
         if (Instance == null)
             return;
 
-
         Instance.HandleEvent(
-            tutorialEvent
+            tutorialEvent,
+            sourceZone
         );
     }
 
@@ -233,7 +239,8 @@ public class TutorialPromptManager : MonoBehaviour
     // =========================================================
 
     private void HandleEvent(
-        TutorialEvent tutorialEvent)
+        TutorialEvent tutorialEvent,
+        Zone sourceZone = null)
     {
         if (!promptsAllowed)
             return;
@@ -282,6 +289,67 @@ public class TutorialPromptManager : MonoBehaviour
                 return;
             }
 
+
+            return;
+        }
+
+
+        // ---------------------------------------------
+        // SUCCESSFUL MERGES
+        // ---------------------------------------------
+
+        if (tutorialEvent ==
+            TutorialEvent.SuccessfulMerge)
+        {
+            if (sourceZone == null)
+                return;
+
+            // Track how many successful merges
+            // this particular Zone has received.
+            if (!mergeCounts.ContainsKey(sourceZone))
+            {
+                mergeCounts[sourceZone] = 0;
+            }
+
+            mergeCounts[sourceZone]++;
+
+            int mergeCount =
+                mergeCounts[sourceZone];
+
+            TutorialStep currentStep =
+                GetCurrentMainStep();
+
+            if (currentStep == null ||
+                currentStep.completionEvent !=
+                    TutorialEvent.SuccessfulMerge)
+            {
+                return;
+            }
+
+            // First merge tutorial:
+            // any object's FIRST successful merge counts.
+            if (currentMainStep == 4)
+            {
+                if (mergeCount >= 1)
+                {
+                    AdvanceMainStep();
+                }
+
+                return;
+            }
+
+            // Second merge tutorial:
+            // only an object receiving its SECOND
+            // successful merge can complete this step.
+            if (currentMainStep == 5)
+            {
+                if (mergeCount >= 2)
+                {
+                    AdvanceMainStep();
+                }
+
+                return;
+            }
 
             return;
         }
@@ -730,6 +798,8 @@ public class TutorialPromptManager : MonoBehaviour
     public void ResetTutorialSession()
     {
         currentMainStep = -1;
+
+        mergeCounts.Clear();
 
         wasteTutorialActive = false;
         wasteTutorialCompleted = false;

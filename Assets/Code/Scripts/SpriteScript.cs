@@ -100,6 +100,13 @@ public class SpriteScript : MonoBehaviour
 
         popupOpen = true;
 
+        if (mapObject != null &&
+            !mapObject.Name.Contains("Waste"))
+        {
+            TutorialPromptManager.ReportEvent(
+                TutorialEvent.ObjectHovered
+            );
+        }
 
         popup.Initialize(
             action,
