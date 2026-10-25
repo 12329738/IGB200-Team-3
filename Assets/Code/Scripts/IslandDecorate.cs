@@ -11,6 +11,7 @@ public class IslandDecorate : MonoBehaviour
     public GameObject wastePrefab;
     MapDecoration movingDecoration;
     Vector3 mouseOffset;
+    Vector3 movingDecorationStartPosition;
     [SerializeField] private InputAction mouseClick;
     List<SpriteScript> wasteStack = new();
     public void PlaceItemOnIsland(MapObject mapObject)
@@ -122,6 +123,7 @@ public class IslandDecorate : MonoBehaviour
                 if (mapDecoration.movable)
                 {
                     ZoneManager.instance.ToggleRedZones(true);
+                    movingDecorationStartPosition = mapDecoration.transform.position;
                     mouseOffset = mapDecoration.transform.position - GetMousePosition();
                     mapDecoration.IsMoving = true;
                     movingDecoration = mapDecoration;
@@ -133,13 +135,29 @@ public class IslandDecorate : MonoBehaviour
         }
     }
 
-    private void MouseReleaseAction(InputAction.CallbackContext context)
+    private void MouseReleaseAction(
+        InputAction.CallbackContext context)
     {
         if (movingDecoration != null)
         {
             movingDecoration.IsMoving = false;
+
+            float movedDistance =
+                Vector3.Distance(
+                    movingDecorationStartPosition,
+                    movingDecoration.transform.position
+                );
+
+            if (movedDistance > 0.01f)
+            {
+                TutorialPromptManager.ReportEvent(
+                    TutorialEvent.DecorationMoved
+                );
+            }
+
             movingDecoration = null;
         }
+
         ZoneManager.instance.ToggleRedZones(false);
     }
 

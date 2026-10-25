@@ -136,6 +136,8 @@ public class TutorialPromptManager : MonoBehaviour
 
     private bool wasteWaitingForClick;
 
+    private bool? choiceHadRecycling = null;
+
     private Zone firstMergeZone;
 
     private Coroutine transitionRoutine;
@@ -304,8 +306,6 @@ public class TutorialPromptManager : MonoBehaviour
             if (sourceZone == null)
                 return;
 
-            // Track how many successful merges
-            // this particular Zone has received.
             if (!mergeCounts.ContainsKey(sourceZone))
             {
                 mergeCounts[sourceZone] = 0;
@@ -326,8 +326,6 @@ public class TutorialPromptManager : MonoBehaviour
                 return;
             }
 
-            // First merge tutorial:
-            // any object's FIRST successful merge counts.
             if (currentMainStep == 4)
             {
                 if (mergeCount >= 1)
@@ -338,9 +336,6 @@ public class TutorialPromptManager : MonoBehaviour
                 return;
             }
 
-            // Second merge tutorial:
-            // only an object receiving its SECOND
-            // successful merge can complete this step.
             if (currentMainStep == 5)
             {
                 if (mergeCount >= 2)
@@ -352,6 +347,19 @@ public class TutorialPromptManager : MonoBehaviour
             }
 
             return;
+        }
+
+
+        // ---------------------------------------------
+        // FINAL CHOICE RECYCLING SNAPSHOT
+        // ---------------------------------------------
+
+        if (tutorialEvent ==
+            TutorialEvent.ActionClicked)
+        {
+            choiceHadRecycling =
+                GameManager.instance != null &&
+                GameManager.instance.currentRecycledWaste > 0;
         }
 
 
@@ -374,7 +382,22 @@ public class TutorialPromptManager : MonoBehaviour
         }
 
 
+        bool finishedChoiceBranch =
+            tutorialEvent ==
+                TutorialEvent.OptionChosen &&
+            (step.condition ==
+                TutorialCondition.HasRecycling ||
+            step.condition ==
+                TutorialCondition.NoRecycling);
+
+
         AdvanceMainStep();
+
+
+        if (finishedChoiceBranch)
+        {
+            choiceHadRecycling = null;
+        }
     }
 
 
@@ -463,26 +486,25 @@ public class TutorialPromptManager : MonoBehaviour
     {
         switch (condition)
         {
+            case TutorialCondition.Always:
+                return true;
+
             case TutorialCondition.HasRecycling:
+                if (choiceHadRecycling.HasValue)
+                    return choiceHadRecycling.Value;
 
-                return
-                    GameManager.instance != null &&
-                    GameManager.instance
-                        .currentRecycledWaste > 0;
-
+                return GameManager.instance != null &&
+                    GameManager.instance.currentRecycledWaste > 0;
 
             case TutorialCondition.NoRecycling:
+                if (choiceHadRecycling.HasValue)
+                    return !choiceHadRecycling.Value;
 
-                return
-                    GameManager.instance == null ||
-                    GameManager.instance
-                        .currentRecycledWaste <= 0;
-
-
-            default:
-
-                return true;
+                return GameManager.instance == null ||
+                    GameManager.instance.currentRecycledWaste <= 0;
         }
+
+        return true;
     }
 
 
@@ -800,6 +822,8 @@ public class TutorialPromptManager : MonoBehaviour
         currentMainStep = -1;
 
         mergeCounts.Clear();
+
+        choiceHadRecycling = null;
 
         wasteTutorialActive = false;
         wasteTutorialCompleted = false;
