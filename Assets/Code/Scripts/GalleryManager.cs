@@ -304,6 +304,10 @@ public class GalleryManager : MonoBehaviour
 
         SaveGallery();
 
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.GallerySaved
+        );
+
 
         Debug.Log(
             $"[GALLERY] Added island to gallery. " +

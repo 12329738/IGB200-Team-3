@@ -31,7 +31,13 @@ public class ObjectSelectScreen : MonoBehaviour
     private void SelectObject(string objectName)
     {
         onSelected?.Invoke(objectName);
+
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.OptionChosen
+        );
+
         GameManager.instance.menuOpen = false;
+
         Destroy(this.gameObject);
     }
 

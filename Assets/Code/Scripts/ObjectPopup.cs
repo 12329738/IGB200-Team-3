@@ -51,6 +51,11 @@ public class ObjectPopup : MonoBehaviour
     public void OnActionClick()
     {
         onAction?.Invoke();
+
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.ActionClicked
+        );
+
         Disable();
     }
 
