@@ -130,6 +130,8 @@ public class TutorialPromptManager : MonoBehaviour
 
     private bool promptsAllowed;
 
+    private bool tutorialStartedThisSession = false;
+
     private bool wasteTutorialActive;
 
     private bool wasteTutorialCompleted;
@@ -137,6 +139,8 @@ public class TutorialPromptManager : MonoBehaviour
     private bool wasteWaitingForClick;
 
     private bool? choiceHadRecycling = null;
+
+    private bool hiddenForMenu = false;
 
     private Zone firstMergeZone;
 
@@ -189,8 +193,7 @@ public class TutorialPromptManager : MonoBehaviour
 
     private void Start()
     {
-        // Fallback in case the object begins life
-        // directly inside the Game scene.
+        // Fallback in case the object begins life directly inside the Game scene.
         if (promptsAllowed &&
             currentMainStep < 0)
         {
@@ -407,6 +410,14 @@ public class TutorialPromptManager : MonoBehaviour
 
     private void BeginTutorial()
     {
+        if (tutorialStartedThisSession)
+        {
+            HidePromptImmediate();
+            return;
+        }
+
+        tutorialStartedThisSession = true;
+
         currentMainStep = -1;
 
         AdvanceMainStep();
@@ -462,6 +473,12 @@ public class TutorialPromptManager : MonoBehaviour
 
     private void ShowCurrentMainStep()
     {
+        if (hiddenForMenu)
+        {
+            HidePromptImmediate();
+            return;
+        }
+        
         TutorialStep step =
             GetCurrentMainStep();
 
@@ -803,13 +820,20 @@ public class TutorialPromptManager : MonoBehaviour
         promptsAllowed =
             scene.name == "Game";
 
-
-        ResetTutorialSession();
-
-
-        if (promptsAllowed)
+        if (!promptsAllowed)
         {
+            HidePromptImmediate();
+            return;
+        }
+
+        if (!tutorialStartedThisSession)
+        {
+            ResetTutorialSession();
             BeginTutorial();
+        }
+        else
+        {
+            HidePromptImmediate();
         }
     }
 
@@ -846,5 +870,21 @@ public class TutorialPromptManager : MonoBehaviour
         Debug.Log(
             "[TUTORIAL] Tutorial session reset."
         );
+    }
+
+    public void HideForMenu()
+    {
+        hiddenForMenu = true;
+        HidePromptImmediate();
+    }
+
+    public void RestoreAfterMenu()
+    {
+        hiddenForMenu = false;
+
+        if (!promptsAllowed)
+            return;
+
+        ShowCurrentMainStep();
     }
 }
