@@ -31,28 +31,39 @@ public class Zone : MonoBehaviour
 
     public void CreateMapObject()
     {
-        Material material = gameManager.CurrentMaterial;
+        Material material =
+            gameManager.CurrentMaterial;
+
 
         if (material == null)
             return;
 
-        if (!mapObjectDatabase.BasicDictionary.TryGetValue(
-            material.Name,
-            out MapObject mapObject))
+
+        if (!mapObjectDatabase
+            .BasicDictionary
+            .TryGetValue(
+                material.Name,
+                out MapObject mapObject))
         {
             return;
         }
 
-        // Normal gameplay UI: should open each time the player starts creating.
-        if (!TutorialPromptManager.Instance.HasPromptTriggered(TutorialPromptId.FirstMaterialPlaced))
-            MapUI.instance.DisplayFinalFormWindow();
 
-        ChangeMapObject(mapObject);
+        // Normal gameplay UI.
+        // This must not depend on tutorial progress.
+        MapUI.instance
+            .DisplayFinalFormWindow();
 
-        // Tutorial prompt: still appears only once per application session.
-        TutorialPromptManager.ShowOnce(
-            TutorialPromptId.FirstMaterialPlaced
+
+        ChangeMapObject(
+            mapObject
         );
+
+
+        TutorialPromptManager
+            .ReportEvent(
+                TutorialEvent.MaterialPlaced
+            );
     }
 
     public void CombineMapObjectWithMaterial()
@@ -69,7 +80,11 @@ public class Zone : MonoBehaviour
 
         ChangeMapObject(mapObject);
 
-        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstMaterialCombined);
+        TutorialPromptManager.ReportEvent(
+            TutorialEvent.SuccessfulMerge,
+            this
+        );
+
     }
 
     public void PerformActionOnMapObject(string action)
@@ -99,7 +114,6 @@ public class Zone : MonoBehaviour
                 break;
         }
     
-        TutorialPromptManager.ShowOnce(TutorialPromptId.FirstActionUsed);
 
         if (mapObjects.Count == 1)
         {

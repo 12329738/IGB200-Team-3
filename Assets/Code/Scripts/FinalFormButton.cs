@@ -23,14 +23,37 @@ public class FinalFormButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnClick()
     {
         hovering = false;
-        if (MapUI.instance.currentHistoryWindow != null && MapUI.instance.currentHistoryWindow.targetMapObject == mapObject)
-            MapUI.instance.currentHistoryWindow.CloseWindow();
+
+
+        if (MapUI.instance
+                .currentHistoryWindow != null &&
+            MapUI.instance
+                .currentHistoryWindow
+                .targetMapObject ==
+            mapObject)
+        {
+            MapUI.instance
+                .currentHistoryWindow
+                .CloseWindow();
+        }
         else
         {
-            MapUI.instance.DisplayHistoryWindow(mapObject);
-            hoverPopup.SetActive(false);
+            MapUI.instance
+                .DisplayHistoryWindow(
+                    mapObject
+                );
+
+            hoverPopup.SetActive(
+                false
+            );
         }
-        
+
+
+        TutorialPromptManager
+            .ReportEvent(
+                TutorialEvent
+                    .FinalFormIconClicked
+            );
     }
 
     public void SetComplete()

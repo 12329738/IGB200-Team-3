@@ -138,6 +138,11 @@ public class Menus : MonoBehaviour
             {
                 GameManager.instance.menuOpen = true;
             }
+
+            if (TutorialPromptManager.Instance != null)
+            {
+                TutorialPromptManager.Instance.HideForMenu();
+            }
         }
     }
 
@@ -151,6 +156,11 @@ public class Menus : MonoBehaviour
         if (GameManager.instance != null)
         {
             GameManager.instance.menuOpen = false;
+        }
+
+        if (TutorialPromptManager.Instance != null)
+        {
+            TutorialPromptManager.Instance.RestoreAfterMenu();
         }
     }
 
@@ -180,16 +190,31 @@ public class Menus : MonoBehaviour
 
     public void OpenAudioMenu()
     {
+        if (audioMenu == null)
+            return;
+
         if (!audioMenu.activeSelf)
         {
             audioMenu.SetActive(true);
+
+            if (TutorialPromptManager.Instance != null)
+            {
+                TutorialPromptManager.Instance.HideForMenu();
+            }
         }
-        
     }
 
     public void CloseAudioMenu()
     {
+        if (audioMenu == null)
+            return;
+
         audioMenu.SetActive(false);
+
+        if (TutorialPromptManager.Instance != null)
+        {
+            TutorialPromptManager.Instance.RestoreAfterMenu();
+        }
     }
 
     // =========================================================

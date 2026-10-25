@@ -100,9 +100,13 @@ public class SpriteScript : MonoBehaviour
 
         popupOpen = true;
 
-        TutorialPromptManager.ShowOnce(
-            TutorialPromptId.FirstObjectOpened
-        );
+        if (mapObject != null &&
+            !mapObject.Name.Contains("Waste"))
+        {
+            TutorialPromptManager.ReportEvent(
+                TutorialEvent.ObjectHovered
+            );
+        }
 
         popup.Initialize(
             action,
@@ -118,7 +122,6 @@ public class SpriteScript : MonoBehaviour
         {   
             DataLogging.currentLog.wasteCollected++;
                 
-            TutorialPromptManager.ShowOnce(TutorialPromptId.FirstRecycle);
             SetDestination();
             OnRecycle?.Invoke(this);
         }
